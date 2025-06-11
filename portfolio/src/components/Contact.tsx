@@ -32,7 +32,7 @@ const Contact = () => {
   return (
     <section id="contact" className="section-padding">
       <div className="container-custom">
-        <h2 className="heading-primary text-3xl md:text-4xl mb-8">
+        <h2 className="heading-primary text-3xl md:text-4xl mb-8 text-center">
           Get In Touch
         </h2>
         <div className="max-w-2xl mx-auto">
@@ -74,12 +74,14 @@ const Contact = () => {
                 required
               ></textarea>
             </div>
-            <button
-              type="submit"
-              className="w-full bg-transparent border-2 border-secondary text-secondary px-8 py-3 rounded hover:bg-secondary/10 transition-colors"
-            >
-              Send Message
-            </button>
+            <div className="flex justify-center">
+              <button
+                type="submit"
+                className="inline-block bg-transparent border-2 border-secondary text-secondary px-8 py-3 rounded hover:bg-secondary/10 transition-colors"
+              >
+                Send Message
+              </button>
+            </div>
           </form>
           <div className="mt-12 flex justify-center space-x-6">
             {socialLinks.map((link) => (
