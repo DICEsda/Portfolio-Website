@@ -1,3 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-primary text-light min-h-screen;
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply py-16 px-4 md:px-8 lg:px-16;
+  }
+  
+  .container-custom {
+    @apply max-w-7xl mx-auto w-full;
+  }
+  
+  .heading-primary {
+    @apply text-4xl md:text-5xl font-bold mb-6;
+  }
+  
+  .heading-secondary {
+    @apply text-2xl md:text-3xl font-semibold mb-4;
+  }
+}
+
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Ensure full width and proper layout */
+#root {
+  @apply w-full min-h-screen;
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
