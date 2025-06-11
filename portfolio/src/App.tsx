@@ -10,9 +10,9 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
-    <div className="flex flex-col min-h-screen bg-primary">
+    <div className="min-h-screen bg-primary">
       <Navbar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-      <main className="flex-grow">
+      <main>
         <Hero />
         <About />
         <Projects />
