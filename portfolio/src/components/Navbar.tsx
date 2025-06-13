@@ -24,8 +24,8 @@ const Navbar = ({ isMenuOpen, setIsMenuOpen }: NavbarProps) => {
   ]
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-primary/90 backdrop-blur-sm' : 'bg-transparent'
+    <nav className={`fixed shadow-2xl w-full z-50 transition-all duration-300 ${
+      isScrolled ? 'bg-primary/90  backdrop-blur-sm' : 'bg-transparent'
     }`}>
       <div className="container-custom flex justify-between items-center h-16">
         <a href="#home" className="text-2xl font-bold text-secondary">

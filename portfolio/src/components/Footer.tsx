@@ -8,13 +8,10 @@ const Footer = () => {
             href="https://github.com/username"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-secondary hover:underline"
+            className="text-secondary hover:animate-pulse"
           >
-            Your Name
+            Jahye Ali
           </a>
-        </p>
-        <p className="mt-2 text-sm">
-          © {new Date().getFullYear()} All rights reserved.
         </p>
       </div>
     </footer>

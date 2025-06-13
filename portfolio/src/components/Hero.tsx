@@ -4,8 +4,8 @@ const Hero = () => {
       <div className="container-custom">
         <div className="max-w-3xl mx-auto">
           <p className="text-secondary mb-4">Hi, my name is</p>
-          <h1 className="heading-primary text-5xl md:text-7xl">
-            John Doe.
+          <h1 className="heading-primary text-5xl md:text-7xl md:animate-none mb-3 ">
+            Jahye Ali.
           </h1>
           <h2 className="heading-primary text-4xl md:text-6xl text-tertiary">
             I build things for the web.
