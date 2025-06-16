@@ -13,22 +13,22 @@ const About = () => {
   return (
     <section id="about" className="section-padding">
       <div className="container-custom">
-        <h2 className="heading-primary text-3xl md:text-4xl mb-8">
+        <h2 className="heading-primary text-3xl ml-2 md:text-4xl mb-8">
           About Me
         </h2>
         <div className="grid md:grid-cols-2 gap-12">
           <div>
-            <p className="text-tertiary mb-4">
+            <p className="text-tertiary mb-4 ml-2">
               Hello! I'm a passionate software developer with a strong foundation in web development.
               My journey in tech began with a curiosity about how things work on the internet,
               which led me to dive deep into programming and software development.
             </p>
-            <p className="text-tertiary mb-4">
+            <p className="text-tertiary mb-4 ml-2">
               I enjoy creating software that solves real-world problems and provides
               exceptional user experiences. My approach combines technical expertise
               with creative problem-solving to deliver efficient and scalable solutions.
             </p>
-            <p className="text-tertiary">
+            <p className="text-tertiary ml-2 mb-6">
               When I'm not coding, you can find me exploring new technologies,
               contributing to open-source projects, or sharing my knowledge through
               technical writing and mentoring.

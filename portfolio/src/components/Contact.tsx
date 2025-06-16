@@ -11,34 +11,38 @@ const Contact = () => {
     },
     {
       name: 'LinkedIn',
-      url: 'https://linkedin.com/in/username',
+      url: 'https://www.linkedin.com/in/jahye-ali-72267916b/',
       icon: (
         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
           <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
         </svg>
       ),
     },
+     
     {
-      name: 'Twitter',
-      url: 'https://twitter.com/username',
+      name: 'Facebook',
+      url: 'https://www.facebook.com/profile.php?id=100077495904298',
       icon: (
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+        <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0C5.37258 0 0 5.37258 0 12C0 18.0745 4.3888 23.093 10.125 23.9545V15.468H7.07812V12H10.125V9.35625C10.125 6.34875 11.9166 4.6875 14.6578 4.6875C15.9703 4.6875 17.3438 4.92188 17.3438 4.92188V7.875H15.8306C14.3397 7.875 13.875 8.80125 13.875 9.75V12H17.2031L16.6711 15.468H13.875V23.9545C19.6112 23.093 24 18.0745 24 12C24 5.37258 18.6274 0 12 0Z" />
         </svg>
       ),
-    },
+    }
+
+
+
   ]
 
   return (
     <section id="contact" className="section-padding">
       <div className="container-custom">
-        <h2 className="heading-primary text-3xl md:text-4xl mb-8 text-center">
+        <h2 className="heading-primary text-3xl mt-10 md:text-4xl mb-8 text-center">
           Get In Touch
         </h2>
         <div className="max-w-2xl mx-auto">
-          <p className="text-tertiary text-center mb-8">
+          <p className="text-pretty text-center mb-8">
             I'm currently looking for new opportunities. Whether you have a question
-            or just want to say hi. I'll try my best to get back to you!
+            or just want to say hello. I'll try my best to get back to you!
           </p>
           <form className="space-y-6">
             <div>
