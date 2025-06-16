@@ -8,7 +8,7 @@ const Hero = () => {
             Jahye Ali.
           </h1>
           <h2 className="heading-primary text-4xl md:text-6xl text-tertiary">
-            I build things for the web.
+            I build things, and create solutions!
           </h2>
           <p className="text-tertiary text-lg md:text-xl mt-6 max-w-2xl">
             I'm a software developer specializing in building exceptional digital experiences.

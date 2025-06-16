@@ -38,14 +38,14 @@ const Projects = () => {
   return (
     <section id="projects" className="section-padding">
       <div className="container-custom">
-        <h2 className="heading-primary text-3xl md:text-4xl mb-12">
+        <h2 className="heading-primary mt-12 text-3xl md:text-4xl mb-5 ml-2">
           Featured Projects
         </h2>
         <div className="space-y-24">
           {projects.map((project, index) => (
             <div
               key={project.title}
-              className={`grid md:grid-cols-2 gap-8 items-center ${
+              className={`grid md:grid-cols-2 ml-3 gap-1 items-end ${
                 index % 2 === 1 ? 'md:grid-flow-dense' : ''
               }`}
             >
@@ -71,7 +71,7 @@ const Projects = () => {
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-light hover:text-secondary transition-colors"
+                    className="text-light hover:text-secondary transition-colors hover:text- hover:animate-pulse"
                   >
                     GitHub
                   </a>
@@ -79,7 +79,7 @@ const Projects = () => {
                     href={project.live}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-light hover:text-secondary transition-colors"
+                    className="text-light hover:text-secondary transition-colors hover:animate-pulse"
                   >
                     Live Demo
                   </a>
