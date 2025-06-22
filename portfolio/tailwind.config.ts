@@ -8,6 +8,12 @@ export default {
         secondary: "#64ffda",
         tertiary: "#8892b0",
         light: "#ccd6f6",
+      },
+      maxWidth: {
+        'custom': '1200px',
+      },
+      padding: {
+        'section': '6rem 2rem',
       }
     },
   },

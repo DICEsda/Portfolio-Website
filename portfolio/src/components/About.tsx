@@ -11,7 +11,7 @@ const About = () => {
   ]
 
   return (
-    <section id="about" className="section-padding">
+    <section id="about" className="h-full flex items-center justify-center py-20">
       <div className="container-custom">
         <h2 className="heading-primary text-3xl ml-2 md:text-4xl mb-8">
           About Me
