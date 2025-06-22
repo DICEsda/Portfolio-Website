@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons'
 
@@ -8,16 +8,6 @@ interface NavbarProps {
 }
 
 const Navbar = ({ isMenuOpen, setIsMenuOpen }: NavbarProps) => {
-  const [isScrolled, setIsScrolled] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
-
   const navLinks = [
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
@@ -26,9 +16,7 @@ const Navbar = ({ isMenuOpen, setIsMenuOpen }: NavbarProps) => {
   ]
 
   return (
-    <nav className={`fixed shadow-xl w-full z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-primary/90  backdrop-blur-sm' : 'bg-transparent'
-    }`}>
+    <nav className="fixed shadow-xl w-full z-50 bg-primary/90 backdrop-blur-sm">
       <div className="container-custom flex justify-between items-center h-16">
         <a href="#home" className="text-2xl font-bold text-secondary ml-2">
           Portfolio

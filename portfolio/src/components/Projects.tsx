@@ -36,7 +36,7 @@ const Projects = () => {
   ]
 
   return (
-    <section id="projects" className="section-padding">
+    <section id="projects" className="h-full flex items-center justify-center py-32">
       <div className="container-custom">
         <h2 className="heading-primary mt-12 text-3xl md:text-4xl mb-5 ml-2">
           Featured Projects

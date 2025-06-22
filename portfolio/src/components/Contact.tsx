@@ -34,7 +34,7 @@ const Contact = () => {
   ]
 
   return (
-    <section id="contact" className="section-padding">
+    <section id="contact" className="h-full flex items-center justify-center py-20">
       <div className="container-custom">
         <h2 className="heading-primary text-3xl mt-10 md:text-4xl mb-8 text-center">
           Get In Touch
