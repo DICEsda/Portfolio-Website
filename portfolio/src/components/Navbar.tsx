@@ -51,7 +51,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="flex items-center justify-between h-16 md:h-20">
           <a href="#home" className="text-2xl md:text-3xl font-bold text-light hover:text-secondary transition-colors">
-            JA
+            YA
           </a>
 
           {/* Desktop Navigation */}

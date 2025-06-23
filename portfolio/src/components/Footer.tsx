@@ -10,7 +10,7 @@ const Footer = () => {
             rel="noopener noreferrer"
             className="text-secondary hover:text-secondary/80 transition-colors font-medium"
           >
-            Jahye Ali
+            Yahya Ali
           </a>
         </p>
       </div>
