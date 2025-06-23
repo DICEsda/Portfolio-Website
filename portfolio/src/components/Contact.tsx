@@ -1,10 +1,40 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const form = useRef<HTMLFormElement>(null);
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [statusMessage, setStatusMessage] = useState('');
+  const sectionRef = useRef<HTMLElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setInView(true);
+          } else {
+            setInView(false);
+          }
+        });
+      },
+      {
+        threshold: 0.3, // Trigger when 30% of the section is visible
+        rootMargin: '-50px 0px -50px 0px', // Add some margin for better trigger timing
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
 
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -51,7 +81,6 @@ const Contact = () => {
         </svg>
       ),
     },
-     
     {
       name: 'Facebook',
       url: 'https://www.facebook.com/profile.php?id=100077495904298',
@@ -61,112 +90,114 @@ const Contact = () => {
         </svg>
       ),
     }
-
-
-
   ]
 
   return (
-    <section id="contact" className="h-full flex items-center justify-center py-10 md:ml-16">
-      <div className="container-custom">
-        <h2 className="heading-primary text-3xl md:text-4xl mb-6 text-center text-light dark:text-dark-light">
+    <section id="contact" ref={sectionRef} className="min-h-screen flex items-center justify-center py-20">
+      <div className="container mx-auto px-4 max-w-3xl">
+        <h2 className={`text-3xl md:text-4xl font-bold mb-6 text-center transition-all duration-700 text-light ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
           Get In Touch
         </h2>
-        <div className="max-w-2xl mx-auto">
-          <p className="text-pretty text-center mb-6 text-tertiary dark:text-dark-tertiary">
+        <div className="max-w-xl mx-auto">
+          <p className={`text-center mb-6 text-tertiary leading-relaxed transition-all duration-700 delay-200 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
             I'm currently looking for new opportunities. Whether you have a question
             or just want to say hello. I'll try my best to get back to you!
           </p>
-          <div className="bg-card dark:bg-dark-card p-8 rounded-lg shadow-lg">
+          <div className={`bg-card p-6 rounded-lg shadow-lg transition-all duration-700 delay-300 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <form ref={form} onSubmit={sendEmail} className="space-y-4">
-              <div>
-                <label htmlFor="name" className="block text-light dark:text-dark-light mb-1">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  className="w-full px-4 py-2 bg-primary/50 dark:bg-dark-primary border border-tertiary dark:border-dark-tertiary rounded focus:outline-none focus:border-secondary dark:focus:border-dark-secondary text-light dark:text-dark-light"
-                  required
-                />
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className={`transition-all duration-700 delay-400 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+                  <label htmlFor="name" className="block text-light mb-1 font-medium text-sm">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    className="w-full px-3 py-2 bg-primary/50 border border-tertiary rounded-lg focus:outline-none focus:border-secondary text-light transition-colors text-sm"
+                    required
+                  />
+                </div>
+                <div className={`transition-all duration-700 delay-500 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+                  <label htmlFor="email" className="block text-light mb-1 font-medium text-sm">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    className="w-full px-3 py-2 bg-primary/50 border border-tertiary rounded-lg focus:outline-none focus:border-secondary text-light transition-colors text-sm"
+                    required
+                  />
+                </div>
               </div>
-              <div>
-                <label htmlFor="email" className="block text-light dark:text-dark-light mb-1">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  className="w-full px-4 py-2 bg-primary/50 dark:bg-dark-primary border border-tertiary dark:border-dark-tertiary rounded focus:outline-none focus:border-secondary dark:focus:border-dark-secondary text-light dark:text-dark-light"
-                  required
-                />
+              <div className="grid md:grid-cols-2 gap-4">
+                <div className={`transition-all duration-700 delay-600 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+                  <label htmlFor="company" className="block text-light mb-1 font-medium text-sm">
+                    Company (Optional)
+                  </label>
+                  <input
+                    type="text"
+                    id="company"
+                    name="company"
+                    className="w-full px-3 py-2 bg-primary/50 border border-tertiary rounded-lg focus:outline-none focus:border-secondary text-light transition-colors text-sm"
+                  />
+                </div>
+                <div className={`transition-all duration-700 delay-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+                  <label htmlFor="phone" className="block text-light mb-1 font-medium text-sm">
+                    Phone Number (Optional)
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    className="w-full px-3 py-2 bg-primary/50 border border-tertiary rounded-lg focus:outline-none focus:border-secondary text-light transition-colors text-sm"
+                  />
+                </div>
               </div>
-              <div>
-                <label htmlFor="company" className="block text-light dark:text-dark-light mb-1">
-                  Company (Optional)
-                </label>
-                <input
-                  type="text"
-                  id="company"
-                  name="company"
-                  className="w-full px-4 py-2 bg-primary/50 dark:bg-dark-primary border border-tertiary dark:border-dark-tertiary rounded focus:outline-none focus:border-secondary dark:focus:border-dark-secondary text-light dark:text-dark-light"
-                />
-              </div>
-              <div>
-                <label htmlFor="phone" className="block text-light dark:text-dark-light mb-1">
-                  Phone Number (Optional)
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  className="w-full px-4 py-2 bg-primary/50 dark:bg-dark-primary border border-tertiary dark:border-dark-tertiary rounded focus:outline-none focus:border-secondary dark:focus:border-dark-secondary text-light dark:text-dark-light"
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className="block text-light dark:text-dark-light mb-1">
+              <div className={`transition-all duration-700 delay-800 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+                <label htmlFor="message" className="block text-light mb-1 font-medium text-sm">
                   Message
                 </label>
                 <textarea
                   id="message"
                   name="message"
-                  rows={4}
-                  className="w-full px-4 py-2 bg-primary/50 dark:bg-dark-primary border border-tertiary dark:border-dark-tertiary rounded focus:outline-none focus:border-secondary dark:focus:border-dark-secondary text-light dark:text-dark-light"
+                  rows={3}
+                  className="w-full px-3 py-2 bg-primary/50 border border-tertiary rounded-lg focus:outline-none focus:border-secondary text-light transition-colors resize-none text-sm"
                   required
                 ></textarea>
               </div>
-              <div className="flex flex-col items-center">
+              <div className={`flex flex-col items-center transition-all duration-700 delay-900 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
                 <button
                   type="submit"
-                  className="inline-block bg-transparent border-2 border-secondary dark:border-dark-secondary text-secondary dark:text-dark-secondary px-8 py-3 rounded hover:bg-secondary/10 dark:hover:bg-dark-secondary/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="inline-block bg-transparent border-2 border-secondary text-secondary px-6 py-2 rounded-lg hover:bg-secondary/10 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-medium text-sm"
                   disabled={status === 'sending'}
                 >
                   {status === 'sending' ? 'Sending...' : 'Send Message'}
                 </button>
                 {status === 'success' && (
-                  <p className="text-green-500 mt-2 text-sm">
+                  <p className="text-green-500 mt-2 text-xs">
                     Message sent successfully!
                   </p>
                 )}
                 {status === 'error' && (
-                  <p className="text-red-500 mt-2 text-sm">
+                  <p className="text-red-500 mt-2 text-xs">
                     {statusMessage}
                   </p>
                 )}
               </div>
             </form>
           </div>
-          <div className="mt-8 flex justify-center space-x-6">
-            {socialLinks.map((link) => (
+          <div className={`mt-8 flex justify-center space-x-6 transition-all duration-700 delay-1000 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+            {socialLinks.map((link, index) => (
               <a
                 key={link.name}
                 href={link.url}
-                target="yahya24680@gmail.com"
+                target="_blank"
                 rel="noopener noreferrer"
-                className="text-tertiary dark:text-dark-tertiary hover:text-secondary dark:hover:text-dark-secondary transition-colors"
+                className="text-tertiary hover:text-secondary transition-colors p-2 hover:scale-110"
                 aria-label={link.name}
+                style={{ transitionDelay: `${1100 + index * 100}ms` }}
               >
                 {link.icon}
               </a>
