@@ -7,8 +7,6 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 
 function App() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-
   useEffect(() => {
     const mainElement = document.querySelector('main')
     if (!mainElement) return
@@ -76,8 +74,8 @@ function App() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-primary dark:bg-dark-primary">
-      <Navbar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+    <div className="min-h-screen bg-primary">
+      <Navbar />
       <main className="snap-y snap-mandatory h-screen overflow-y-scroll">
         <div className="snap-start h-screen">
           <Hero />

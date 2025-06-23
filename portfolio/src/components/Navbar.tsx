@@ -1,101 +1,161 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useTheme } from '../context/ThemeContext'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons'
-import { FaSun, FaMoon } from 'react-icons/fa'
 
-interface NavbarProps {
-  isMenuOpen: boolean
-  setIsMenuOpen: (isOpen: boolean) => void
-}
-
-const Navbar = ({ isMenuOpen, setIsMenuOpen }: NavbarProps) => {
+const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
   const { theme, toggleTheme } = useTheme()
-  const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Contact', href: '#contact' },
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as Element
+      if (isMenuOpen && !target.closest('nav')) {
+        setIsMenuOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [isMenuOpen])
+
+  const navItems = [
+    { href: '#home', label: 'Home' },
+    { href: '#about', label: 'About' },
+    { href: '#projects', label: 'Projects' },
+    { href: '#contact', label: 'Contact', isCTA: true },
   ]
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault()
+    const element = document.querySelector(href)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+    setIsMenuOpen(false)
+  }
+
   return (
-    <nav className="fixed shadow-xl w-full z-50 bg-primary/90 dark:bg-dark-primary/90 backdrop-blur-sm">
-      <div className="container-custom flex justify-between items-center h-16">
-        <a href="#home" className="text-2xl font-bold text-secondary dark:text-dark-secondary ml-2">
-          Portfolio
-        </a>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      isScrolled ? 'bg-primary/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'
+    }`}>
+      <div className="container mx-auto px-4 max-w-6xl">
+        <div className="flex items-center justify-between h-16 md:h-20">
+          <a href="#home" className="text-2xl md:text-3xl font-bold text-light hover:text-secondary transition-colors">
+            JA
+          </a>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-8">
-          {navLinks.map((link) => (
-            link.name === 'Contact' ? (
-              <a
-                key={link.name}
-                href={link.href}
-                className="bg-secondary text-primary dark:bg-dark-secondary dark:text-dark-primary px-4 py-1.5 rounded-md hover:bg-secondary/80 transition-colors text-sm font-bold"
-              >
-                {link.name}
-              </a>
-            ) : (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-light hover:text-secondary dark:text-dark-light dark:hover:text-dark-secondary transition-colors"
-              >
-                {link.name}
-              </a>
-            )
-          ))}
-        </div>
-
-        {/* Theme Toggle Button */}
-        <button onClick={toggleTheme} className="text-light dark:text-dark-light mr-2">
-          {theme === 'light' ? <FaMoon /> : <FaSun />}
-        </button>
-
-        {/* Mobile Navigation Button */}
-        <button
-          className="md:hidden text-light dark:text-dark-light"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-        >
-          <FontAwesomeIcon 
-            icon={isMenuOpen ? faTimes : faBars} 
-            className="w-6 h-6"
-          />
-        </button>
-      </div>
-
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="md:hidden bg-primary/95 dark:bg-dark-primary/95 backdrop-blur-sm">
-          <div className="container-custom py-4 space-y-4">
-            {navLinks.map((link) => (
-              link.name === 'Contact' ? (
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            {navItems.map((item) => (
+              item.isCTA ? (
                 <a
-                  key={link.name}
-                  href={link.href}
-                  className="block bg-secondary text-primary dark:bg-dark-secondary dark:text-dark-primary px-4 py-1.5 rounded-md hover:bg-secondary/80 transition-colors text-center text-sm font-bold"
-                  onClick={() => setIsMenuOpen(false)}
+                  key={item.href}
+                  href={item.href}
+                  onClick={(e) => handleNavClick(e, item.href)}
+                  className="bg-secondary text-white px-4 py-2 rounded-lg font-medium hover:bg-secondary/90 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
                 >
-                  {link.name}
+                  {item.label}
                 </a>
               ) : (
                 <a
-                  key={link.name}
-                  href={link.href}
-                  className="block text-light hover:text-secondary dark:text-dark-light dark:hover:text-dark-secondary transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
+                  key={item.href}
+                  href={item.href}
+                  onClick={(e) => handleNavClick(e, item.href)}
+                  className="text-tertiary hover:text-secondary transition-colors font-medium"
                 >
-                  {link.name}
+                  {item.label}
                 </a>
               )
             ))}
-            <button onClick={toggleTheme} className="w-full text-light dark:text-dark-light flex justify-center py-2">
-              {theme === 'light' ? <FaMoon size={20} /> : <FaSun size={20} />}
+            <button
+              onClick={toggleTheme}
+              className="p-2 text-tertiary hover:text-secondary transition-colors"
+              aria-label="Toggle theme"
+            >
+              {theme === 'light' ? (
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
+                </svg>
+              )}
+            </button>
+          </div>
+
+          {/* Mobile menu button */}
+          <div className="md:hidden flex items-center space-x-3">
+            <button
+              onClick={toggleTheme}
+              className="p-3 text-tertiary hover:text-secondary transition-colors touch-manipulation"
+              aria-label="Toggle theme"
+            >
+              {theme === 'light' ? (
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                </svg>
+              ) : (
+                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
+                </svg>
+              )}
+            </button>
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="p-3 text-tertiary hover:text-secondary transition-colors touch-manipulation"
+              aria-label="Toggle menu"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {isMenuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
             </button>
           </div>
         </div>
-      )}
+
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <div className="md:hidden bg-primary/95 backdrop-blur-sm border-t border-tertiary/20 shadow-lg">
+            <div className="px-4 py-4 space-y-3">
+              {navItems.map((item) => (
+                item.isCTA ? (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    onClick={(e) => handleNavClick(e, item.href)}
+                    className="block px-4 py-4 bg-secondary text-white rounded-lg font-medium hover:bg-secondary/90 transition-all duration-300 shadow-lg text-center touch-manipulation active:scale-95"
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    onClick={(e) => handleNavClick(e, item.href)}
+                    className="block px-4 py-4 text-tertiary hover:text-secondary transition-colors font-medium touch-manipulation active:scale-95 border-b border-tertiary/10 last:border-b-0"
+                  >
+                    {item.label}
+                  </a>
+                )
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
     </nav>
   )
 }

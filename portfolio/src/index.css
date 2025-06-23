@@ -1,59 +1,101 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-  html {
-    @apply scroll-smooth;
-  }
-
-  body {
-    @apply bg-primary text-light;
-    @apply dark:bg-dark-primary dark:text-dark-light;
-    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
-    font-weight: 400;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    margin: 0;
-    overflow-x: hidden;
-  }
-
-  /* Hide scrollbar for Chrome, Safari and Opera */
-  .overflow-y-scroll::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Hide scrollbar for IE, Edge and Firefox */
-  .overflow-y-scroll {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-  }
-
-  /* Smooth scrolling for the main container */
-  .snap-y {
-    scroll-behavior: smooth;
-    scroll-snap-type: y proximity;
-    scroll-snap-stop: always;
-  }
-
-  /* Add smooth transitions to sections */
-  .snap-start {
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  }
+:root {
+  /* Light mode colors */
+  --color-primary: #ffffff;
+  --color-secondary: #ff9966;
+  --color-tertiary: #555555;
+  --color-light: #333333;
+  --color-card: #f5f5f5;
 }
 
-@layer components {
-  .container-custom {
-    @apply container mx-auto px-4;
-  }
-
-  .heading-primary {
-    @apply font-bold tracking-tight;
-  }
-
-  .section-padding {
-    padding: 6rem 2rem;
-  }
+.dark {
+  /* Dark mode colors */
+  --color-primary: #272727;
+  --color-secondary: #FF6F61;
+  --color-tertiary: #8892b0;
+  --color-light: #ccd6f6;
+  --color-card: #3A3A3A;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-primary);
+  color: var(--color-light);
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.overflow-y-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.overflow-y-scroll {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Smooth scrolling for the main container */
+.snap-y {
+  scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
+  scroll-snap-stop: always;
+}
+
+/* Add smooth transitions to sections */
+.snap-start {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Custom color utility classes */
+.text-primary { color: var(--color-primary); }
+.text-secondary { color: var(--color-secondary); }
+.text-tertiary { color: var(--color-tertiary); }
+.text-light { color: var(--color-light); }
+
+.bg-primary { background-color: var(--color-primary); }
+.bg-secondary { background-color: var(--color-secondary); }
+.bg-tertiary { background-color: var(--color-tertiary); }
+.bg-light { background-color: var(--color-light); }
+.bg-card { background-color: var(--color-card); }
+
+.border-primary { border-color: var(--color-primary); }
+.border-secondary { border-color: var(--color-secondary); }
+.border-tertiary { border-color: var(--color-tertiary); }
+.border-light { border-color: var(--color-light); }
+
+/* Animation keyframes */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Hover states */
+.hover\:bg-secondary\/10:hover { background-color: rgba(255, 153, 102, 0.1); }
+.hover\:bg-secondary\/80:hover { background-color: rgba(255, 153, 102, 0.8); }
+.hover\:text-secondary:hover { color: var(--color-secondary); }
+.hover\:scale-105:hover { transform: scale(1.05); }
+.hover\:scale-110:hover { transform: scale(1.1); }
+
+/* Focus states */
+.focus\:outline-none:focus { outline: 2px solid transparent; outline-offset: 2px; }
+.focus\:border-secondary:focus { border-color: var(--color-secondary); }
+
+/* Disabled states */
+.disabled\:opacity-50:disabled { opacity: 0.5; }
+.disabled\:cursor-not-allowed:disabled { cursor: not-allowed; }

@@ -1,51 +1,100 @@
 import { useState, useEffect, useRef } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+  faCode, 
+  faEnvelope, 
+  faBolt, 
+  faDatabase, 
+  faComments,
+  faPalette,
+  faCogs,
+  faChevronLeft,
+  faChevronRight,
+  faAtom,
+  faServer,
+  faCloud,
+  faCreditCard,
+  faLayerGroup,
+  faSitemap
+} from '@fortawesome/free-solid-svg-icons';
 
 interface Project {
   title: string
   description: string
   technologies: string[]
-  github: string
   image: string
 }
 
+interface TechIcon {
+  name: string
+  icon: JSX.Element
+}
+
 const Projects = () => {
+  // Technology icons mapping with Font Awesome
+  const techIcons: { [key: string]: JSX.Element } = {
+    'React': <FontAwesomeIcon icon={faAtom} className="text-black" />,
+    'TypeScript': <FontAwesomeIcon icon={faCode} className="text-black" />,
+    'Tailwind CSS': <FontAwesomeIcon icon={faPalette} className="text-black" />,
+    'EmailJS': <FontAwesomeIcon icon={faEnvelope} className="text-black" />,
+    'Vite': <FontAwesomeIcon icon={faBolt} className="text-black" />,
+    'Node.js': <FontAwesomeIcon icon={faServer} className="text-black" />,
+    'MongoDB': <FontAwesomeIcon icon={faDatabase} className="text-black" />,
+    'Socket.io': <FontAwesomeIcon icon={faComments} className="text-black" />,
+    'Next.js': <FontAwesomeIcon icon={faCode} className="text-black" />,
+    'Stripe': <FontAwesomeIcon icon={faCreditCard} className="text-black" />,
+    'Firebase': <FontAwesomeIcon icon={faCloud} className="text-black" />,
+    'Material-UI': <FontAwesomeIcon icon={faLayerGroup} className="text-black" />,
+    'Redux': <FontAwesomeIcon icon={faSitemap} className="text-black" />
+  };
+
   const projects: Project[] = [
+    {
+      title: "Portfolio Website",
+      description: "A modern, responsive portfolio website built with React and TypeScript. Features include smooth scroll navigation, dark/light mode toggle, animated sections, and a functional contact form with EmailJS integration. The design emphasizes clean aesthetics with custom color schemes and smooth transitions.",
+      technologies: ["React", "TypeScript", "Tailwind CSS", "EmailJS", "Vite"],
+      image: "https://via.placeholder.com/600x400"
+    },
     {
       title: "Project One",
       description: "A full-stack web application built with React and Node.js. Features include user authentication, real-time updates, and responsive design.",
       technologies: ["React", "Node.js", "MongoDB", "Socket.io"],
-      github: "https://github.com/username/project-one",
       image: "https://via.placeholder.com/600x400"
     },
     {
       title: "Project Two",
       description: "An e-commerce platform with features like product search, cart management, and secure payment processing.",
       technologies: ["Next.js", "TypeScript", "Stripe", "Tailwind CSS"],
-      github: "https://github.com/username/project-two",
       image: "https://via.placeholder.com/600x400"
     },
     {
       title: "Project Three",
       description: "A task management application with drag-and-drop functionality, team collaboration, and progress tracking.",
       technologies: ["React", "Firebase", "Material-UI", "Redux"],
-      github: "https://github.com/username/project-three",
       image: "https://via.placeholder.com/600x400"
     }
   ]
 
+  const [currentProject, setCurrentProject] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [nextProjectIndex, setNextProjectIndex] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
   const [inView, setInView] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true);
-          observer.disconnect();
-        }
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setInView(true);
+          } else {
+            setInView(false);
+          }
+        });
       },
       {
-        threshold: 0.1,
+        threshold: 0.2,
+        rootMargin: '-50px 0px -50px 0px',
       }
     );
 
@@ -60,58 +109,158 @@ const Projects = () => {
     };
   }, []);
 
+  const nextProject = () => {
+    if (!isAnimating) {
+      setIsAnimating(true);
+      const nextIndex = (currentProject + 1) % projects.length;
+      setNextProjectIndex(nextIndex);
+      
+      setTimeout(() => {
+        setCurrentProject(nextIndex);
+        setIsAnimating(false);
+      }, 250);
+    }
+  };
+
+  const prevProject = () => {
+    if (!isAnimating) {
+      setIsAnimating(true);
+      const nextIndex = (currentProject - 1 + projects.length) % projects.length;
+      setNextProjectIndex(nextIndex);
+      
+      setTimeout(() => {
+        setCurrentProject(nextIndex);
+        setIsAnimating(false);
+      }, 250);
+    }
+  };
+
+  const goToProject = (index: number) => {
+    if (!isAnimating && index !== currentProject) {
+      setIsAnimating(true);
+      setNextProjectIndex(index);
+      
+      setTimeout(() => {
+        setCurrentProject(index);
+        setIsAnimating(false);
+      }, 250);
+    }
+  };
+
+  const currentProjectData = projects[currentProject];
+
   return (
-    <section id="projects" ref={sectionRef} className="h-full flex items-center justify-center py-32">
-      <div className="container-custom">
-        <h2 className={`heading-primary mt-12 text-3xl md:text-4xl mb-5 ml-2 transition-all duration-700 text-light dark:text-dark-light ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+    <section id="projects" ref={sectionRef} className="min-h-screen flex items-center justify-center py-20">
+      <div className="container mx-auto px-4 max-w-6xl">
+        <h2 className={`text-3xl md:text-4xl font-bold mb-12 text-center transition-all duration-700 text-light ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
           Featured Projects
         </h2>
-        <div className="space-y-20">
-          {projects.map((project, index) => (
-            <div
-              key={project.title}
-              className={`grid md:grid-cols-2 gap-12 items-center transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-              style={{ transitionDelay: `${200 + index * 200}ms` }}
-            >
-              <div className={`${index % 2 === 1 ? 'md:col-start-2' : ''} ${index % 2 === 1 ? 'md:text-right' : 'md:text-left'}`}>
-                <h3 className="text-2xl font-semibold text-light dark:text-dark-light mb-4">
-                  {project.title}
+        
+        <div className="relative">
+          {/* Navigation Arrows */}
+          <button
+            onClick={prevProject}
+            className="absolute left-2 md:-left-24 top-1/2 transform -translate-y-1/2 z-10 bg-primary/80 backdrop-blur-sm border border-tertiary/20 rounded-full p-2 md:p-3 text-tertiary hover:text-secondary transition-all duration-300 hover:scale-110"
+            aria-label="Previous project"
+          >
+            <FontAwesomeIcon icon={faChevronLeft} className="w-4 h-4 md:w-6 md:h-6" />
+          </button>
+          
+          <button
+            onClick={nextProject}
+            className="absolute right-2 md:-right-24 top-1/2 transform -translate-y-1/2 z-10 bg-primary/80 backdrop-blur-sm border border-tertiary/20 rounded-full p-2 md:p-3 text-tertiary hover:text-secondary transition-all duration-300 hover:scale-110"
+            aria-label="Next project"
+          >
+            <FontAwesomeIcon icon={faChevronRight} className="w-4 h-4 md:w-6 md:h-6" />
+          </button>
+
+          {/* Project Content */}
+          <div className={`transition-all duration-500 ${isAnimating ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
+            {currentProject === 0 ? (
+              // Centered layout for portfolio project
+              <div className="max-w-4xl mx-auto text-center">
+                <h3 className="text-2xl font-semibold text-light mb-4">
+                  {currentProjectData.title}
                 </h3>
-                <div className="bg-card dark:bg-dark-card p-6 rounded-lg mb-4 shadow-lg">
-                  <p className="text-tertiary dark:text-dark-tertiary">{project.description}</p>
+                <div className="bg-card p-6 rounded-lg mb-6 shadow-lg">
+                  <p className="text-tertiary leading-relaxed">{currentProjectData.description}</p>
                 </div>
-                <div className={`flex flex-wrap gap-x-4 gap-y-2 mb-4 ${index % 2 === 1 ? 'md:justify-end' : 'md:justify-start'}`}>
-                  {project.technologies.map((tech) => (
+                <div className="flex flex-wrap justify-center gap-4 mb-6">
+                  {currentProjectData.technologies.map((tech) => (
                     <span
                       key={tech}
-                      className="flex items-center gap-2 text-sm text-secondary dark:text-dark-secondary"
+                      className="text-sm text-secondary bg-secondary/10 px-3 py-2 rounded-full flex items-center gap-2"
                     >
+                      {techIcons[tech] && techIcons[tech]}
                       {tech}
                     </span>
                   ))}
                 </div>
-                <div className={`flex gap-4 ${index % 2 === 1 ? 'md:justify-end' : 'md:justify-start'}`}>
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-light hover:text-secondary transition-colors"
-                  >
-                    GitHub
-                  </a>
-                </div>
-              </div>
-              <div className={`${index % 2 === 1 ? 'md:col-start-1' : ''}`}>
-                <div className="relative overflow-hidden rounded-lg shadow-lg">
+                <div className="relative overflow-hidden rounded-lg shadow-lg max-w-2xl mx-auto">
                   <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-auto"
+                    src={currentProjectData.image}
+                    alt={currentProjectData.title}
+                    className="w-full h-auto hover:scale-105 transition-transform duration-300"
                   />
                 </div>
               </div>
-            </div>
-          ))}
+            ) : (
+              // Alternating layout for other projects
+              <div className="grid md:grid-cols-2 gap-12 items-center">
+                <div className="md:text-left">
+                  <h3 className="text-2xl font-semibold text-light mb-4">
+                    {currentProjectData.title}
+                  </h3>
+                  <div className="bg-card p-6 rounded-lg mb-6 shadow-lg">
+                    <p className="text-tertiary leading-relaxed">{currentProjectData.description}</p>
+                  </div>
+                  <div className="flex flex-wrap gap-4 mb-6">
+                    {currentProjectData.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="text-sm text-secondary bg-secondary/10 px-3 py-2 rounded-full flex items-center gap-2"
+                      >
+                        {techIcons[tech] && techIcons[tech]}
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <div className="relative overflow-hidden rounded-lg shadow-lg">
+                    <img
+                      src={currentProjectData.image}
+                      alt={currentProjectData.title}
+                      className="w-full h-auto hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Dots Indicator */}
+          <div className="flex justify-center mt-8 space-x-2">
+            {projects.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => goToProject(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  index === currentProject 
+                    ? 'bg-secondary scale-125' 
+                    : 'bg-tertiary/30 hover:bg-tertiary/50'
+                }`}
+                aria-label={`Go to project ${index + 1}`}
+              />
+            ))}
+          </div>
+
+          {/* Project Counter */}
+          <div className="text-center mt-4">
+            <span className="text-tertiary text-sm">
+              {currentProject + 1} / {projects.length}
+            </span>
+          </div>
         </div>
       </div>
     </section>
