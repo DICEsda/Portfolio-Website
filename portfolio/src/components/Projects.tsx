@@ -1,22 +1,23 @@
 import { useState, useEffect, useRef } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
-  faCode, 
-  faEnvelope, 
-  faBolt, 
-  faDatabase, 
-  faComments,
-  faPalette,
-  faCogs,
-  faChevronLeft,
-  faChevronRight,
-  faAtom,
-  faServer,
-  faCloud,
-  faCreditCard,
-  faLayerGroup,
-  faSitemap
-} from '@fortawesome/free-solid-svg-icons';
+  FaReact, 
+  FaNodeJs, 
+  FaDatabase,
+  FaCode,
+  FaEnvelope,
+  FaBolt,
+  FaComments,
+  FaPalette,
+  FaCogs,
+  FaChevronLeft,
+  FaChevronRight,
+  FaAtom,
+  FaServer,
+  FaCloud,
+  FaCreditCard,
+  FaLayerGroup,
+  FaSitemap
+} from 'react-icons/fa';
 
 interface Project {
   title: string
@@ -31,21 +32,21 @@ interface TechIcon {
 }
 
 const Projects = () => {
-  // Technology icons mapping with Font Awesome
+  // Technology icons mapping with React Icons
   const techIcons: { [key: string]: JSX.Element } = {
-    'React': <FontAwesomeIcon icon={faAtom} className="text-black" />,
-    'TypeScript': <FontAwesomeIcon icon={faCode} className="text-black" />,
-    'Tailwind CSS': <FontAwesomeIcon icon={faPalette} className="text-black" />,
-    'EmailJS': <FontAwesomeIcon icon={faEnvelope} className="text-black" />,
-    'Vite': <FontAwesomeIcon icon={faBolt} className="text-black" />,
-    'Node.js': <FontAwesomeIcon icon={faServer} className="text-black" />,
-    'MongoDB': <FontAwesomeIcon icon={faDatabase} className="text-black" />,
-    'Socket.io': <FontAwesomeIcon icon={faComments} className="text-black" />,
-    'Next.js': <FontAwesomeIcon icon={faCode} className="text-black" />,
-    'Stripe': <FontAwesomeIcon icon={faCreditCard} className="text-black" />,
-    'Firebase': <FontAwesomeIcon icon={faCloud} className="text-black" />,
-    'Material-UI': <FontAwesomeIcon icon={faLayerGroup} className="text-black" />,
-    'Redux': <FontAwesomeIcon icon={faSitemap} className="text-black" />
+    'React': <FaReact className="text-current" />,
+    'TypeScript': <FaCode className="text-current" />,
+    'Tailwind CSS': <FaPalette className="text-current" />,
+    'EmailJS': <FaEnvelope className="text-current" />,
+    'Vite': <FaBolt className="text-current" />,
+    'Node.js': <FaNodeJs className="text-current" />,
+    'MongoDB': <FaDatabase className="text-current" />,
+    'Socket.io': <FaComments className="text-current" />,
+    'Next.js': <FaCode className="text-current" />,
+    'Stripe': <FaCreditCard className="text-current" />,
+    'Firebase': <FaCloud className="text-current" />,
+    'Material-UI': <FaLayerGroup className="text-current" />,
+    'Redux': <FaSitemap className="text-current" />
   };
 
   const projects: Project[] = [
@@ -80,6 +81,16 @@ const Projects = () => {
   const [nextProjectIndex, setNextProjectIndex] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
   const [inView, setInView] = useState(false);
+  const [initialLoad, setInitialLoad] = useState(true);
+
+  useEffect(() => {
+    // Initial animation on component mount
+    const timer = setTimeout(() => {
+      setInitialLoad(false);
+    }, 100);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -152,18 +163,24 @@ const Projects = () => {
   return (
     <section id="projects" ref={sectionRef} className="min-h-screen flex items-center justify-center py-20">
       <div className="container mx-auto px-4 max-w-6xl">
-        <h2 className={`text-3xl md:text-4xl font-bold mb-12 text-center transition-all duration-700 text-light ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+        <h2 className={`text-3xl md:text-4xl font-bold mb-12 text-center transition-all duration-1000 text-light ${
+          initialLoad ? 'opacity-0 scale-75' : 
+          inView ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-5 scale-95'
+        }`}>
           Featured Projects
         </h2>
         
-        <div className="relative">
+        <div className={`relative transition-all duration-1000 delay-300 ${
+          initialLoad ? 'opacity-0 translate-y-10' : 
+          inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+        }`}>
           {/* Navigation Arrows */}
           <button
             onClick={prevProject}
             className="absolute left-2 md:-left-24 top-1/2 transform -translate-y-1/2 z-10 bg-primary/80 backdrop-blur-sm border border-tertiary/20 rounded-full p-2 md:p-3 text-tertiary hover:text-secondary transition-all duration-300 hover:scale-110"
             aria-label="Previous project"
           >
-            <FontAwesomeIcon icon={faChevronLeft} className="w-4 h-4 md:w-6 md:h-6" />
+            <FaChevronLeft className="w-4 h-4 md:w-6 md:h-6" />
           </button>
           
           <button
@@ -171,7 +188,7 @@ const Projects = () => {
             className="absolute right-2 md:-right-24 top-1/2 transform -translate-y-1/2 z-10 bg-primary/80 backdrop-blur-sm border border-tertiary/20 rounded-full p-2 md:p-3 text-tertiary hover:text-secondary transition-all duration-300 hover:scale-110"
             aria-label="Next project"
           >
-            <FontAwesomeIcon icon={faChevronRight} className="w-4 h-4 md:w-6 md:h-6" />
+            <FaChevronRight className="w-4 h-4 md:w-6 md:h-6" />
           </button>
 
           {/* Project Content */}
