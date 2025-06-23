@@ -64,8 +64,8 @@ function App() {
       
       const targetScrollTop = targetSection * windowHeight
       
-      // Use custom smooth scroll with softer easing
-      smoothScrollTo(mainElement, targetScrollTop, 1500) // 1.5 seconds duration
+      // Use custom smooth scroll with softer easing and faster duration
+      smoothScrollTo(mainElement, targetScrollTop, 800)
     }
 
     mainElement.addEventListener('wheel', handleWheel, { passive: false })
@@ -76,9 +76,9 @@ function App() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-primary">
+    <div className="min-h-screen bg-primary dark:bg-dark-primary">
       <Navbar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-      <main className="snap-y snap-mandatory h-screen overflow-y-scroll scroll-smooth">
+      <main className="snap-y snap-mandatory h-screen overflow-y-scroll">
         <div className="snap-start h-screen">
           <Hero />
         </div>
