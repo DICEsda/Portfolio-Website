@@ -8,7 +8,7 @@ const Hero = () => {
           <div className="max-w-3xl">
             <p className="text-secondary mb-4">Hi, my name is</p>
             <h1 className="text-5xl md:text-7xl font-bold mb-3 text-light leading-tight">
-              Jahye Ali.
+              Yahya Ali.
             </h1>
             <h2 className="text-4xl md:text-6xl font-bold text-tertiary mb-6 leading-tight">
               I build things, and create solutions!
@@ -29,7 +29,7 @@ const Hero = () => {
           <div className="flex justify-center md:justify-end">
             <img 
               src={heroImage} 
-              alt="Jahye Ali" 
+              alt="Yahya Ali" 
               className="w-full max-w-sm rounded-lg shadow-2xl animate-fade-in"
             />
           </div>

@@ -49,7 +49,7 @@ const About = () => {
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-light">About Me</h2>
             <p className="text-tertiary mb-4 leading-relaxed">
-              Hello! I'm Jahye, a passionate software developer with a knack for creating dynamic and user-friendly web applications. My journey into the world of programming started with a simple curiosity for how things work, and it has since grown into a full-fledged passion for building elegant and efficient solutions.
+              Hello! I'm Yahya, a passionate software developer with a knack for creating dynamic and user-friendly web applications. My journey into the world of programming started with a simple curiosity for how things work, and it has since grown into a full-fledged passion for building elegant and efficient solutions.
             </p>
             <p className="text-tertiary leading-relaxed">
               I have experience working with a variety of technologies and I'm always eager to learn more. I thrive in collaborative environments and I'm dedicated to writing clean, maintainable code.

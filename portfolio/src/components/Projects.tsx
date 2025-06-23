@@ -2,17 +2,14 @@ import { useState, useEffect, useRef } from 'react';
 import { 
   FaReact, 
   FaNodeJs, 
-  FaDatabase,
   FaCode,
   FaEnvelope,
   FaBolt,
+  FaDatabase,
   FaComments,
   FaPalette,
-  FaCogs,
   FaChevronLeft,
   FaChevronRight,
-  FaAtom,
-  FaServer,
   FaCloud,
   FaCreditCard,
   FaLayerGroup,
@@ -24,11 +21,6 @@ interface Project {
   description: string
   technologies: string[]
   image: string
-}
-
-interface TechIcon {
-  name: string
-  icon: JSX.Element
 }
 
 const Projects = () => {
@@ -78,7 +70,6 @@ const Projects = () => {
 
   const [currentProject, setCurrentProject] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [nextProjectIndex, setNextProjectIndex] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
   const [inView, setInView] = useState(false);
   const [initialLoad, setInitialLoad] = useState(true);
@@ -124,7 +115,6 @@ const Projects = () => {
     if (!isAnimating) {
       setIsAnimating(true);
       const nextIndex = (currentProject + 1) % projects.length;
-      setNextProjectIndex(nextIndex);
       
       setTimeout(() => {
         setCurrentProject(nextIndex);
@@ -137,7 +127,6 @@ const Projects = () => {
     if (!isAnimating) {
       setIsAnimating(true);
       const nextIndex = (currentProject - 1 + projects.length) % projects.length;
-      setNextProjectIndex(nextIndex);
       
       setTimeout(() => {
         setCurrentProject(nextIndex);
@@ -149,7 +138,6 @@ const Projects = () => {
   const goToProject = (index: number) => {
     if (!isAnimating && index !== currentProject) {
       setIsAnimating(true);
-      setNextProjectIndex(index);
       
       setTimeout(() => {
         setCurrentProject(index);
