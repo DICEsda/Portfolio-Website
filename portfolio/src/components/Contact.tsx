@@ -1,4 +1,37 @@
+import { useRef, useState } from 'react';
+import emailjs from '@emailjs/browser';
+
 const Contact = () => {
+  const form = useRef<HTMLFormElement>(null);
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [statusMessage, setStatusMessage] = useState('');
+
+  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!form.current) return;
+
+    setStatus('sending');
+    setStatusMessage('Sending...');
+
+    emailjs
+      .sendForm('service_zcxdb79', 'template_f1ovonq', form.current, {
+        publicKey: 'K-s_xFAcbcC3jPeW2',
+      })
+      .then(
+        () => {
+          setStatus('success');
+          setStatusMessage('Message sent successfully!');
+          form.current?.reset();
+        },
+        (error) => {
+          setStatus('error');
+          setStatusMessage('Failed to send message. Please try again.');
+          console.log('FAILED...', error.text);
+        },
+      );
+  };
+
   const socialLinks = [
     {
       name: 'GitHub',
@@ -34,67 +67,105 @@ const Contact = () => {
   ]
 
   return (
-    <section id="contact" className="h-full flex items-center justify-center py-20">
+    <section id="contact" className="h-full flex items-center justify-center py-10 md:ml-16">
       <div className="container-custom">
-        <h2 className="heading-primary text-3xl mt-10 md:text-4xl mb-8 text-center">
+        <h2 className="heading-primary text-3xl md:text-4xl mb-6 text-center text-light dark:text-dark-light">
           Get In Touch
         </h2>
         <div className="max-w-2xl mx-auto">
-          <p className="text-pretty text-center mb-8">
+          <p className="text-pretty text-center mb-6 text-tertiary dark:text-dark-tertiary">
             I'm currently looking for new opportunities. Whether you have a question
             or just want to say hello. I'll try my best to get back to you!
           </p>
-          <form className="space-y-6">
-            <div>
-              <label htmlFor="name" className="block text-light mb-2">
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                className="w-full px-4 py-2 bg-primary/50 border border-tertiary rounded focus:outline-none focus:border-secondary text-light"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="email" className="block text-light mb-2">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                className="w-full px-4 py-2 bg-primary/50 border border-tertiary rounded focus:outline-none focus:border-secondary text-light"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="message" className="block text-light mb-2">
-                Message
-              </label>
-              <textarea
-                id="message"
-                rows={6}
-                className="w-full px-4 py-2 bg-primary/50 border border-tertiary rounded focus:outline-none focus:border-secondary text-light"
-                required
-              ></textarea>
-            </div>
-            <div className="flex justify-center">
-              <button
-                type="submit"
-                className="inline-block bg-transparent border-2 border-secondary text-secondary px-8 py-3 rounded hover:bg-secondary/10 transition-colors"
-              >
-                Send Message
-              </button>
-            </div>
-          </form>
-          <div className="mt-12 flex justify-center space-x-6">
+          <div className="bg-card dark:bg-dark-card p-8 rounded-lg shadow-lg">
+            <form ref={form} onSubmit={sendEmail} className="space-y-4">
+              <div>
+                <label htmlFor="name" className="block text-light dark:text-dark-light mb-1">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  className="w-full px-4 py-2 bg-primary/50 dark:bg-dark-primary border border-tertiary dark:border-dark-tertiary rounded focus:outline-none focus:border-secondary dark:focus:border-dark-secondary text-light dark:text-dark-light"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className="block text-light dark:text-dark-light mb-1">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  className="w-full px-4 py-2 bg-primary/50 dark:bg-dark-primary border border-tertiary dark:border-dark-tertiary rounded focus:outline-none focus:border-secondary dark:focus:border-dark-secondary text-light dark:text-dark-light"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="company" className="block text-light dark:text-dark-light mb-1">
+                  Company (Optional)
+                </label>
+                <input
+                  type="text"
+                  id="company"
+                  name="company"
+                  className="w-full px-4 py-2 bg-primary/50 dark:bg-dark-primary border border-tertiary dark:border-dark-tertiary rounded focus:outline-none focus:border-secondary dark:focus:border-dark-secondary text-light dark:text-dark-light"
+                />
+              </div>
+              <div>
+                <label htmlFor="phone" className="block text-light dark:text-dark-light mb-1">
+                  Phone Number (Optional)
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  className="w-full px-4 py-2 bg-primary/50 dark:bg-dark-primary border border-tertiary dark:border-dark-tertiary rounded focus:outline-none focus:border-secondary dark:focus:border-dark-secondary text-light dark:text-dark-light"
+                />
+              </div>
+              <div>
+                <label htmlFor="message" className="block text-light dark:text-dark-light mb-1">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={4}
+                  className="w-full px-4 py-2 bg-primary/50 dark:bg-dark-primary border border-tertiary dark:border-dark-tertiary rounded focus:outline-none focus:border-secondary dark:focus:border-dark-secondary text-light dark:text-dark-light"
+                  required
+                ></textarea>
+              </div>
+              <div className="flex flex-col items-center">
+                <button
+                  type="submit"
+                  className="inline-block bg-transparent border-2 border-secondary dark:border-dark-secondary text-secondary dark:text-dark-secondary px-8 py-3 rounded hover:bg-secondary/10 dark:hover:bg-dark-secondary/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={status === 'sending'}
+                >
+                  {status === 'sending' ? 'Sending...' : 'Send Message'}
+                </button>
+                {status === 'success' && (
+                  <p className="text-green-500 mt-2 text-sm">
+                    Message sent successfully!
+                  </p>
+                )}
+                {status === 'error' && (
+                  <p className="text-red-500 mt-2 text-sm">
+                    {statusMessage}
+                  </p>
+                )}
+              </div>
+            </form>
+          </div>
+          <div className="mt-8 flex justify-center space-x-6">
             {socialLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.url}
                 target="yahya24680@gmail.com"
                 rel="noopener noreferrer"
-                className="text-tertiary hover:text-secondary transition-colors"
+                className="text-tertiary dark:text-dark-tertiary hover:text-secondary dark:hover:text-dark-secondary transition-colors"
                 aria-label={link.name}
               >
                 {link.icon}
