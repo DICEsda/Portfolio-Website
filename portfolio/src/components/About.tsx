@@ -20,7 +20,8 @@ const About = () => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setInView(true);
-          observer.disconnect();
+        } else {
+          setInView(false);
         }
       },
       {
