@@ -45,9 +45,9 @@ const About = () => {
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div 
-            className={`transition-all duration-700 ${inView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}
+            className={`scroll-animate transition-all duration-700 ${inView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-light">About Me</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-light scroll-animate">About Me</h2>
             <p className="text-tertiary mb-4 leading-relaxed">
               Hello! I'm Yahya, a passionate software developer with a knack for creating dynamic and user-friendly web applications. My journey into the world of programming started with a simple curiosity for how things work, and it has since grown into a full-fledged passion for building elegant and efficient solutions.
             </p>

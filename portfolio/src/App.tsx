@@ -5,92 +5,68 @@ import About from './components/About'
 import Projects from './components/Projects'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import { useTheme } from './context/ThemeContext'
 
 function App() {
+  const { theme } = useTheme()
+
+  useEffect(() => {
+    // Add observer for scroll animations
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view')
+          }
+        })
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '0px'
+      }
+    )
+
+    // Observe all elements with scroll-animate class
+    document.querySelectorAll('.scroll-animate').forEach((el) => {
+      observer.observe(el)
+    })
+
+    return () => observer.disconnect()
+  }, [])
+
   useEffect(() => {
     const mainElement = document.querySelector('main')
     if (!mainElement) return
 
-    let isScrolling = false
-
-    const easeInOutCubic = (t: number): number => {
-      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2
-    }
-
-    const smoothScrollTo = (element: Element, target: number, duration: number) => {
-      const start = element.scrollTop
-      const change = target - start
-      const startTime = performance.now()
-
-      const animateScroll = (currentTime: number) => {
-        const elapsed = currentTime - startTime
-        const progress = Math.min(elapsed / duration, 1)
-        const easedProgress = easeInOutCubic(progress)
-        
-        element.scrollTop = start + change * easedProgress
-
-        if (progress < 1) {
-          requestAnimationFrame(animateScroll)
-        } else {
-          isScrolling = false
+    const handleScroll = () => {
+      const sections = mainElement.querySelectorAll('section')
+      sections.forEach((section) => {
+        const rect = section.getBoundingClientRect()
+        if (rect.top >= 0 && rect.top <= window.innerHeight / 2) {
+          section.classList.add('in-view')
         }
-      }
-
-      requestAnimationFrame(animateScroll)
+      })
     }
 
-    const handleWheel = (e: WheelEvent) => {
-      e.preventDefault()
-      
-      if (isScrolling) return
-      
-      isScrolling = true
-      
-      const currentScrollTop = mainElement.scrollTop
-      const windowHeight = window.innerHeight
-      const currentSection = Math.round(currentScrollTop / windowHeight)
-      
-      let targetSection: number
-      
-      if (e.deltaY > 0) {
-        // Scrolling down
-        targetSection = Math.min(currentSection + 1, 3) // 4 sections total (0-3)
-      } else {
-        // Scrolling up
-        targetSection = Math.max(currentSection - 1, 0)
-      }
-      
-      const targetScrollTop = targetSection * windowHeight
-      
-      // Use custom smooth scroll with softer easing and faster duration
-      smoothScrollTo(mainElement, targetScrollTop, 800)
-    }
+    mainElement.addEventListener('scroll', handleScroll, { passive: true })
+    // Initial check
+    handleScroll()
 
-    mainElement.addEventListener('wheel', handleWheel, { passive: false })
-    
     return () => {
-      mainElement.removeEventListener('wheel', handleWheel)
+      mainElement.removeEventListener('scroll', handleScroll)
     }
   }, [])
 
   return (
-    <div className="min-h-screen bg-primary">
-      <Navbar />
-      <main className="snap-y snap-mandatory h-screen overflow-y-scroll">
-        <div className="snap-start h-screen">
-          <Hero />
-        </div>
-        <div className="snap-start h-screen">
-          <About />
-        </div>
-        <div className="snap-start h-screen">
-          <Projects />
-        </div>
-        <div className="snap-start h-screen">
-          <Contact />
-        </div>
+    <div className={`${theme} bg-primary min-h-screen`}>
+      <main className="scroll-container">
+        <Navbar />
+        <Hero />
+        <About />
+        <Projects />
+        <Contact />
+        <Footer />
       </main>
-      <Footer />
     </div>
   )
 }

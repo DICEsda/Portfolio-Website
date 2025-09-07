@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useTheme } from '../context/ThemeContext'
+import { useSmoothScroll } from '../hooks/useSmoothScroll'
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -35,12 +36,12 @@ const Navbar = () => {
     { href: '#contact', label: 'Contact', isCTA: true },
   ]
 
+  const scrollToSection = useSmoothScroll()
+
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault()
-    const element = document.querySelector(href)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
+    const sectionId = href.replace('#', '')
+    scrollToSection(sectionId)
     setIsMenuOpen(false)
   }
 
