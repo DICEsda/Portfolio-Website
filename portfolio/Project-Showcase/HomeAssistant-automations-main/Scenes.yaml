@@ -1,0 +1,91 @@
+scene:
+  - name: Good Morning
+    entities:
+      switch.desk_plug: on
+      light.tradfri_bedroom:
+        state: on
+        brightness: 255
+        rgb_color: [255, 244, 229]
+      light.tradfri_desk:
+        state: on
+        brightness: 200
+        rgb_color: [255, 223, 100]   # warm desk light
+      light.wled_desk:
+        state: on
+        brightness: 180
+        effect: "Breathe"
+        rgb_color: [255, 223, 100]
+
+
+scene:
+  - name: Goodnight
+    entities:
+      switch.livingroom_plug: off
+      switch.desk_plug: off
+      switch.tv_plug: off
+      light.tradfri_livingroom: off
+      light.tradfri_hall: off
+      light.tradfri_desk: off          # desk Zigbee light, if you have one
+      light.wled_desk: off             # fully off at night
+      light.wled_bedroom:
+        state: on
+        brightness: 30
+        rgb_color: [255, 180, 100]
+        effect: "Solid"
+
+
+scene:
+  - name: Movie
+    entities:
+      switch.tv_plug: on
+      light.tradfri_livingroom:
+        state: on
+        brightness: 50
+        rgb_color: [255, 180, 100]
+      light.wled_shelf:
+        state: on
+        brightness: 100
+        effect: "Solid"
+        rgb_color: [0, 0, 255]   # blue accent
+      light.wled_desk: off
+
+scene:
+  - name: Relax
+    entities:
+      light.tradfri_livingroom:
+        state: on
+        brightness: 80
+        rgb_color: [255, 160, 100]
+      light.tradfri_desk:
+        state: on
+        brightness: 120
+        rgb_color: [255, 200, 150]
+      light.wled_desk:
+        state: on
+        brightness: 80
+        effect: "Breathe"
+        rgb_color: [100, 150, 255]
+      light.wled_shelf:
+        state: on
+        brightness: 60
+        effect: "Breathe"
+        rgb_color: [100, 150, 255]
+      switch.tv_plug: on
+
+
+scene:
+  - name: Movie Time
+    entities:
+      switch.tv_plug: on
+      light.tradfri_livingroom:
+        state: on
+        brightness: 50
+        rgb_color: [255, 180, 100]
+      light.tradfri_desk: off
+      light.wled_desk: off
+      light.wled_shelf:
+        state: on
+        brightness: 100
+        effect: "Solid"
+        rgb_color: [0, 0, 255]
+

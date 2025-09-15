@@ -13,7 +13,10 @@ export const useSmoothScroll = () => {
       t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2,
     
     easeOutExpo: (t: number): number => 
-      t === 1 ? 1 : 1 - Math.pow(2, -10 * t)
+      t === 1 ? 1 : 1 - Math.pow(2, -10 * t),
+      
+    easeInOutQuint: (t: number): number =>
+      t < 0.5 ? 16 * t * t * t * t * t : 1 - Math.pow(-2 * t + 2, 5) / 2
   };
 
   // Handle intersection observer for scroll animations

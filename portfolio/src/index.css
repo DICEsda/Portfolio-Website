@@ -18,8 +18,23 @@
   --color-card: #3A3A3A;
 }
 
+/* Theme transition */
+* {
+  transition: background-color 0.5s ease, 
+              color 0.5s ease,
+              border-color 0.5s ease,
+              box-shadow 0.5s ease;
+}
+
+/* Improved smooth scroll behavior with snap scrolling */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  height: 100%;
+}
+
+html.transitioning {
+  scroll-behavior: auto;
 }
 
 body {
@@ -32,7 +47,15 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   margin: 0;
+  height: 100vh;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
   overflow-x: hidden;
+}
+
+/* Scroll snap classes */
+.scroll-snap-align-start {
+  scroll-snap-align: start;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

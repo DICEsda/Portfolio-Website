@@ -1,0 +1,35 @@
+alias: "Leave Home - Power Down"
+description: "When I leave home with my iPhone, turn off all lights and plugs"
+mode: single
+
+trigger:
+  - platform: state
+    entity_id: device_tracker.my_iphone   # change to your actual iPhone entity
+    from: "home"
+    to: "not_home"
+
+condition: []
+
+action:
+  # Turn off all smart plugs
+  - service: switch.turn_off
+    target:
+      entity_id:
+        - switch.livingroom_plug
+        - switch.desk_plug
+        - switch.tv_plug
+
+  # Turn off WLED lights
+  - service: light.turn_off
+    target:
+      entity_id:
+        - light.wled_desk
+        - light.wled_shelf
+
+  # Turn off all Zigbee lights (IKEA Trådfri via coordinator)
+  - service: light.turn_off
+    target:
+      entity_id:
+        - light.tradfri_livingroom
+        - light.tradfri_bedroom
+        - light.tradfri_hall

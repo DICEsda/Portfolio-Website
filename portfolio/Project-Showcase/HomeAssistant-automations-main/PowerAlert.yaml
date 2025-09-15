@@ -1,0 +1,37 @@
+alias: "High Power Usage Alert"
+description: "Notify if a plug is using a lot of power"
+mode: restart
+
+trigger:
+  - platform: numeric_state  # must stay above 200W for 5 minutes
+    entity_id: sensor.desk_plug_power   # Replaced on my HA
+    above: 200
+    for: "00:05:00" 
+
+  - platform: numeric_state
+    entity_id: sensor.tv_plug_power
+    above: 200
+    for: "00:05:00"
+
+  - platform: numeric_state
+    entity_id: sensor.livingroom_plug_power
+    above: 200
+    for: "00:05:00"
+
+condition: []
+
+action:
+  - service: notify.mobile_app_my_iphone
+    data:
+      title: "⚡ High Power Alert"
+      message: >
+        {{ trigger.to_state.name }} is drawing {{ trigger.to_state.state }} W
+
+  pulse a desk light as visual warning once
+  - service: light.turn_on
+    target:
+      entity_id: light.wled_desk
+    data:
+      brightness: 255
+      effect: "Breathe"
+      rgb_color: [255, 0, 0]  # red pulse

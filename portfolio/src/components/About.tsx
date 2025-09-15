@@ -41,7 +41,7 @@ const About = () => {
   }, []);
 
   return (
-    <section id="about" ref={sectionRef} className="min-h-screen flex items-center justify-center py-20">
+    <section id="about" ref={sectionRef} className="h-[75vh] flex items-center justify-center py-8 scroll-snap-align-start">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div 

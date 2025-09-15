@@ -1,0 +1,36 @@
+alias: "Notify Call from Door (12345678)"
+description: "Pulse WLED desk light when incoming call from 12345678"
+mode: restart
+
+trigger:
+  - platform: event
+    event_type: ios.phone_call
+    event_data:
+      number: "12345678"
+
+condition: []
+
+action:
+  - choose:
+      # Incoming call → start pulsing
+      - conditions:
+          - condition: template
+            value_template: "{{ trigger.event.data.state == 'incoming' }}"
+        sequence:
+          - service: light.turn_on
+            target:
+              entity_id: light.wled_desk
+            data:
+              brightness: 255
+              effect: "Breathe"       # nice fade in/out effect
+              rgb_color: [0, 0, 255]  # blue, change if you like
+
+      # Call answered, missed, or ended → stop effect
+      - conditions:
+          - condition: template
+            value_template: >
+              {{ trigger.event.data.state in ['answered', 'missed', 'ended'] }}
+        sequence:
+          - service: light.turn_off
+            target:
+              entity_id: light.wled_desk

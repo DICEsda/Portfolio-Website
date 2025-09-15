@@ -1,0 +1,41 @@
+alias: "Good Morning Routine"
+description: "Wake-up lights and plugs"
+mode: single
+
+trigger:
+  - platform: time
+    at: "07:00"
+
+condition: []
+
+action:
+  # Fade in bedroom lights
+  - service: light.turn_on
+    target:
+      entity_id: light.tradfri_bedroom
+    data:
+      brightness: 1
+      transition: 1
+
+  - delay: "00:00:05"  # small gap
+
+  - service: light.turn_on
+    target:
+      entity_id: light.tradfri_bedroom
+    data:
+      brightness: 255
+      transition: 900  # fade in over 15 minutes
+
+  # Turn on desk plug (e.g. for PC or lamp)
+  - service: switch.turn_on
+    target:
+      entity_id: switch.desk_plug
+
+  # Brighten WLED with a cheerful color
+  - service: light.turn_on
+    target:
+      entity_id: light.wled_desk
+    data:
+      brightness: 180
+      effect: "Breathe"
+      rgb_color: [255, 223, 100]  # soft sunrise yellow
