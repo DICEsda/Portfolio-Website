@@ -12,6 +12,14 @@ const About = () => {
     'Python',
   ]
 
+  const favorites = [
+    'TypeScript + React',
+    'Clean UI with Tailwind',
+    'Real-time UX (Socket.io)',
+    'Automation & IoT tinkering',
+    'Performance & accessibility',
+  ]
+
   const sectionRef = useRef<HTMLElement>(null);
   const [inView, setInView] = useState(false);
 
@@ -41,34 +49,38 @@ const About = () => {
   }, []);
 
   return (
-    <section id="about" ref={sectionRef} className="h-[75vh] flex items-center justify-center py-8 scroll-snap-align-start">
-      <div className="container mx-auto px-4 max-w-6xl">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div 
-            className={`scroll-animate transition-all duration-700 ${inView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-light scroll-animate">About Me</h2>
-            <p className="text-tertiary mb-4 leading-relaxed">
-              Hello! I'm Yahya, a passionate software developer with a knack for creating dynamic and user-friendly web applications. My journey into the world of programming started with a simple curiosity for how things work, and it has since grown into a full-fledged passion for building elegant and efficient solutions.
-            </p>
-            <p className="text-tertiary leading-relaxed">
-              I have experience working with a variety of technologies and I'm always eager to learn more. I thrive in collaborative environments and I'm dedicated to writing clean, maintainable code.
-            </p>
+  <section id="about" ref={sectionRef} className="min-h-screen flex items-center justify-center py-0 scroll-snap-align-start">
+  <div className="container mx-auto px-6 sm:px-8 md:px-12 lg:px-16 md:pl-20 lg:pl-24 max-w-6xl transform -translate-y-10 md:-translate-y-16">
+        <div className={`text-center mb-10 transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
+          <h2 className="text-3xl md:text-4xl font-bold text-light">About Me</h2>
+          <p className="text-tertiary mt-3 max-w-3xl mx-auto leading-relaxed">
+            I love building clean, performant interfaces and practical solutions. I enjoy learning, collaborating, and turning ideas into reliable user experiences.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-6 md:gap-10 items-stretch">
+          <div className={`bg-card p-6 md:p-8 rounded-lg shadow-lg transition-all duration-700 will-change-transform ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
+            <h3 className="text-xl font-semibold text-light mb-6">Core Technologies</h3>
+            <ul className="grid grid-cols-2 gap-4 text-tertiary">
+              {skills.map((skill) => (
+                <li key={skill} className="flex items-center">
+                  <span className="text-secondary mr-3">▹</span>
+                  <span className="text-sm">{skill}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-          <div 
-            className={`transition-all duration-700 delay-200 ${inView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}
-          >
-            <div className="bg-card p-8 rounded-lg shadow-lg">
-              <h3 className="text-xl font-semibold text-light mb-6">Core Technologies</h3>
-              <ul className="grid grid-cols-2 gap-4 text-tertiary">
-                {skills.map((skill) => (
-                  <li key={skill} className="flex items-center">
-                    <span className="text-secondary mr-3">▹</span>
-                    <span className="text-sm">{skill}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+
+          <div className={`bg-card p-6 md:p-8 rounded-lg shadow-lg transition-all duration-700 delay-100 will-change-transform ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
+            <h3 className="text-xl font-semibold text-light mb-6">What I Like Working With</h3>
+            <ul className="grid grid-cols-1 gap-3 text-tertiary">
+              {favorites.map((item) => (
+                <li key={item} className="flex items-center">
+                  <span className="text-secondary mr-3">▹</span>
+                  <span className="text-sm">{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>

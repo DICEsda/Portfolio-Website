@@ -6,6 +6,7 @@ import Projects from './components/Projects'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import { useTheme } from './context/ThemeContext'
+import ProgressTimeline from './components/ProgressTimeline'
 
 function App() {
   const { theme } = useTheme()
@@ -59,6 +60,7 @@ function App() {
 
   return (
     <div className={`${theme} bg-primary min-h-screen`}>
+      <ProgressTimeline />
       <main className="scroll-container">
         <Navbar />
         <Hero />

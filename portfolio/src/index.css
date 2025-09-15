@@ -53,6 +53,15 @@ body {
   overflow-x: hidden;
 }
 
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* Scroll snap classes */
 .scroll-snap-align-start {
   scroll-snap-align: start;

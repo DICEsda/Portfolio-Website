@@ -178,6 +178,7 @@ function Projects() {
   const [currentProject, setCurrentProject] = useState(0);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [direction, setDirection] = useState<1 | -1>(1);
   const sectionRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
   const [initialLoad, setInitialLoad] = useState(true);
@@ -222,6 +223,7 @@ function Projects() {
   const nextProject = () => {
     if (!isAnimating) {
       setIsAnimating(true);
+  setDirection(1);
       const nextIndex = (currentProject + 1) % projects.length;
       
       setTimeout(() => {
@@ -234,6 +236,7 @@ function Projects() {
   const prevProject = () => {
     if (!isAnimating) {
       setIsAnimating(true);
+  setDirection(-1);
       const nextIndex = (currentProject - 1 + projects.length) % projects.length;
       
       setTimeout(() => {
@@ -256,12 +259,20 @@ function Projects() {
 
   const currentProjectData = projects[currentProject];
 
+  // Slide variants for project content based on navigation direction
+  const slideVariants = {
+    enter: (dir: number) => ({ opacity: 0, x: dir * 40, scale: 0.98 }),
+    center: { opacity: 1, x: 0, scale: 1 },
+    exit: (dir: number) => ({ opacity: 0, x: dir * -40, scale: 0.98 })
+  };
+
+
   return (
     <>
       <motion.div 
         id="projects" 
         ref={sectionRef} 
-        className="h-[75vh] flex items-center justify-center py-4 xs:py-5 sm:py-6 md:py-8 scroll-container overflow-x-hidden scroll-snap-align-start"
+  className="min-h-screen flex items-center justify-center py-0 scroll-container overflow-x-hidden scroll-snap-align-start"
         initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{
@@ -272,44 +283,58 @@ function Projects() {
         }}
         viewport={{ once: true, margin: "-100px" }}
       >
-        <div className="container mx-auto px-3 xs:px-4 sm:px-5 max-w-5xl">
-          <motion.h2 
-            className={`text-fluid-2xl font-bold mb-6 sm:mb-8 text-center transition-all duration-1000 text-light scroll-animate ${
-              initialLoad ? 'opacity-0 scale-75' : 
-              inView ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-5 scale-95'
-            }`}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
+  <div className="container mx-auto px-6 sm:px-8 md:px-12 lg:px-16 md:pl-20 lg:pl-24 max-w-5xl transform -translate-y-10 md:-translate-y-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-center text-light">
             Featured Projects
-          </motion.h2>
+          </h2>
         
           <div className={`relative transition-all duration-1000 delay-300 ${
             initialLoad ? 'opacity-0 translate-y-10' : 
             inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}>
             {/* Navigation Arrows */}
-            <button
+            <motion.button
               onClick={prevProject}
-              className="absolute left-2 md:-left-24 top-1/2 transform -translate-y-1/2 z-10 bg-primary/80 backdrop-blur-sm border border-tertiary/20 rounded-full p-2 md:p-3 text-tertiary hover:text-secondary transition-all duration-300 hover:scale-110"
+              className="absolute left-2 md:-left-24 top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 text-tertiary hover:text-secondary transition-colors rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary/40"
               aria-label="Previous project"
+              whileTap={{}}
             >
-              <FaChevronLeft className="w-4 h-4 md:w-6 md:h-6" />
-            </button>
+              <motion.span 
+                animate={{ x: isAnimating ? -3 : 0 }} 
+                whileTap={{ rotate: -15 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              >
+                <FaChevronLeft className="w-4 h-4 md:w-6 md:h-6" />
+              </motion.span>
+            </motion.button>
             
-            <button
+            <motion.button
               onClick={nextProject}
-              className="absolute right-2 md:-right-24 top-1/2 transform -translate-y-1/2 z-10 bg-primary/80 backdrop-blur-sm border border-tertiary/20 rounded-full p-2 md:p-3 text-tertiary hover:text-secondary transition-all duration-300 hover:scale-110"
+              className="absolute right-2 md:-right-24 top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 text-tertiary hover:text-secondary transition-colors rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary/40"
               aria-label="Next project"
+              whileTap={{}}
             >
-              <FaChevronRight className="w-4 h-4 md:w-6 md:h-6" />
-            </button>
+              <motion.span 
+                animate={{ x: isAnimating ? 3 : 0 }} 
+                whileTap={{ rotate: 15 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              >
+                <FaChevronRight className="w-4 h-4 md:w-6 md:h-6" />
+              </motion.span>
+            </motion.button>
 
             {/* Project Content */}
-            <div
-              className="project-content"
-            >
+            <div className="project-content">
+              <AnimatePresence mode="wait" custom={direction}>
+                <motion.div
+                  key={currentProject}
+                  custom={direction}
+                  variants={slideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ duration: 0.28, ease: 'easeOut' }}
+                >
               {currentProject === 0 ? (
                 // Centered layout for portfolio project
                 <div className="max-w-4xl mx-auto text-center px-4 xs:px-6">
@@ -337,7 +362,7 @@ function Projects() {
                           Home Assistant Project
                         </div>
                       )}
-                      <div className="aspect-w-16 aspect-h-9 overflow-hidden bg-card">
+                      <div className="aspect-w-16 aspect-h-9 overflow-hidden bg-card rounded-lg">
                         {currentProjectData.coverImage && (
                           <img
                             src={currentProjectData.coverImage}
@@ -352,7 +377,7 @@ function Projects() {
                           href={currentProjectData.sourceCode}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="absolute bottom-3 xs:bottom-4 right-3 xs:right-4 px-3 xs:px-4 py-1.5 xs:py-2 bg-gradient-to-r from-secondary to-tertiary text-white rounded-lg hover:from-tertiary hover:to-secondary transition-all duration-300 shadow-lg font-medium flex items-center gap-1.5 xs:gap-2 text-fluid-sm z-10"
+                          className="absolute bottom-3 xs:bottom-4 right-3 xs:right-4 px-3 xs:px-4 py-1.5 xs:py-2 rounded-lg transition-all duration-300 shadow-lg font-medium flex items-center gap-1.5 xs:gap-2 text-fluid-sm z-10 bg-primary/80 backdrop-blur text-light hover:text-secondary"
                         >
                           <FaCode className="w-3.5 h-3.5 xs:w-4 xs:h-4" />
                           View Source
@@ -364,7 +389,6 @@ function Projects() {
                       className="w-full py-2.5 xs:py-3 px-4 xs:px-6 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-lg text-fluid-base xs:text-fluid-lg font-semibold flex items-center justify-center gap-2 hover:scale-[1.02] transform touch-manipulation"
                     >
                       <span>View Project Showcase</span>
-                      <FaChevronRight className="w-3.5 h-3.5 xs:w-4 xs:h-4" />
                     </button>
                   </div>
                 </div>
@@ -391,8 +415,9 @@ function Projects() {
                     </div>
                   </div>
                   <div className="order-1 md:order-2">
-                    <div className="relative overflow-hidden rounded-lg shadow-lg">
-                      <div className="aspect-w-16 aspect-h-9 overflow-hidden bg-card">
+                    <div className="rounded-lg">
+                      <div className="relative overflow-hidden rounded-lg shadow-lg">
+                        <div className="aspect-w-16 aspect-h-9 overflow-hidden bg-card rounded-lg">
                         {currentProjectData.coverImage && (
                           <img
                             src={currentProjectData.coverImage}
@@ -401,40 +426,23 @@ function Projects() {
                             loading="lazy"
                           />
                         )}
+                        </div>
                       </div>
-                      <div className="flex flex-col gap-2 xs:gap-3 mt-4">
+                      <div className="mt-4 grid grid-cols-1 gap-2 xs:gap-3">
                         <motion.button
                           onClick={() => setSelectedProject(currentProjectData)}
-                          className="w-full py-2.5 xs:py-3 px-4 xs:px-6 bg-blue-600 text-white rounded-lg shadow-lg text-fluid-base xs:text-fluid-lg font-semibold flex items-center justify-center gap-2 touch-manipulation"
-                          whileHover={{ 
-                            scale: 1.02,
-                            backgroundColor: "#2563eb"
-                          }}
-                          whileTap={{ scale: 0.98 }}
-                          transition={{
-                            type: "spring",
-                            stiffness: 400,
-                            damping: 10
-                          }}
+                          className="w-full py-2.5 xs:py-3 px-4 xs:px-6 bg-blue-600 text-white rounded-lg shadow-lg text-fluid-base xs:text-fluid-lg font-semibold flex items-center justify-center gap-2 touch-manipulation transform transition-transform duration-200 hover:scale-[1.02]"
+                          whileHover={{}}
+                          whileTap={{}}
                         >
                           <span>View Project Showcase</span>
-                          <motion.div
-                            animate={{ x: [0, 4, 0] }}
-                            transition={{ 
-                              duration: 1.5,
-                              repeat: Infinity,
-                              ease: "easeInOut"
-                            }}
-                          >
-                            <FaChevronRight className="w-3.5 h-3.5 xs:w-4 xs:h-4" />
-                          </motion.div>
                         </motion.button>
-                        {currentProjectData.sourceCode && (
+            {currentProjectData.sourceCode && (
                           <a
                             href={currentProjectData.sourceCode}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="w-full py-2 xs:py-2.5 px-4 xs:px-6 bg-gradient-to-r from-secondary to-tertiary text-white rounded-lg hover:from-tertiary hover:to-secondary transition-all duration-300 shadow-lg font-medium flex items-center justify-center gap-2 text-fluid-sm hover:scale-[1.02] transform"
+                            className="w-full py-2 xs:py-2.5 px-4 xs:px-6 rounded-lg transition-all duration-300 shadow-lg font-medium flex items-center justify-center gap-2 text-fluid-sm hover:scale-[1.02] transform bg-primary/80 backdrop-blur text-light hover:text-secondary"
                           >
                             <FaCode className="w-3.5 h-3.5 xs:w-4 xs:h-4" />
                             <span>View Source</span>
@@ -445,6 +453,8 @@ function Projects() {
                   </div>
                 </div>
               )}
+                </motion.div>
+              </AnimatePresence>
             </div>
 
             {/* Dots Indicator */}

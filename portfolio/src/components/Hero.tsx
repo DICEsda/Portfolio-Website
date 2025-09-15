@@ -2,8 +2,8 @@ import heroImage from '../assets/hero-image.png';
 
 const Hero = () => {
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center py-20 scroll-snap-align-start">
-      <div className="container mx-auto px-4 max-w-6xl">
+  <section id="home" className="min-h-screen flex items-center justify-center pt-24 md:pt-28 pb-20 scroll-snap-align-start">
+  <div className="container mx-auto px-6 sm:px-8 md:px-12 lg:px-16 md:pl-20 lg:pl-24 max-w-6xl">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="max-w-3xl">
             <p className="text-secondary mb-4 scroll-animate">Hello! I'm</p>
@@ -26,9 +26,9 @@ const Hero = () => {
                 View Projects
               </a>
               <a
-                href="/CV - Yahya Ali.pdf"
+                href={`${import.meta.env.BASE_URL}CV - Yahya Ali.pdf`}
                 download="CV - Yahya Ali.pdf"
-                className="inline-flex items-center gap-2 bg-secondary text-white px-8 py-3 rounded-lg hover:bg-secondary/90 transition-all duration-300 font-medium"
+                className="inline-flex items-center gap-2 bg-secondary text-white px-8 py-3 rounded-lg hover:bg-secondary/90 transition-all duration-300 font-medium shadow-lg hover:shadow-xl"
               >
                 <svg
                   className="w-6 h-6"
@@ -52,7 +52,7 @@ const Hero = () => {
             <img 
               src={heroImage} 
               alt="Yahya Ali" 
-              className="w-full max-w-sm rounded-lg shadow-2xl animate-fade-in"
+              className="w-full max-w-sm rounded-lg shadow-2xl animate-fade-in will-change-transform"
             />
           </div>
         </div>
