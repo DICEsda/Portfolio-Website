@@ -7,6 +7,8 @@
   --color-tertiary: #555555;
   --color-light: #333333;
   --color-card: #f5f5f5;
+  /* Fixed navbar height (responsive) used for scroll padding */
+  --nav-height: 3.5rem; /* matches h-14 on mobile */
 }
 
 .dark {
@@ -16,6 +18,12 @@
   --color-tertiary: #8892b0;
   --color-light: #ccd6f6;
   --color-card: #3A3A3A;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --nav-height: 4rem; /* matches md:h-16 */
+  }
 }
 
 /* Theme transition */
@@ -29,7 +37,7 @@
 /* Improved smooth scroll behavior with snap scrolling */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 5rem;
+  scroll-padding-top: 0; /* handled by snap positioning */
   height: 100%;
 }
 
@@ -48,8 +56,7 @@ body {
   text-rendering: optimizeLegibility;
   margin: 0;
   height: 100vh;
-  scroll-snap-type: y mandatory;
-  overflow-y: scroll;
+  overflow-y: hidden; /* delegate scrolling to main */
   overflow-x: hidden;
 }
 
@@ -78,16 +85,19 @@ body {
   scrollbar-width: none;  /* Firefox */
 }
 
-/* Smooth scrolling for the main container */
-.snap-y {
-  scroll-behavior: smooth;
-  scroll-snap-type: y proximity;
+/* Smooth, locked per-section scrolling */
+main.scroll-container {
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-snap-type: y mandatory;
   scroll-snap-stop: always;
+  scroll-padding-top: var(--nav-height);
 }
 
 /* Add smooth transitions to sections */
-.snap-start {
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+section.scroll-snap-align-start {
+  scroll-snap-align: start;
 }
 
 /* Custom color utility classes */
@@ -131,3 +141,28 @@ body {
 /* Disabled states */
 .disabled\:opacity-50:disabled { opacity: 0.5; }
 .disabled\:cursor-not-allowed:disabled { cursor: not-allowed; }
+
+/* Pretty, theme-aware scrollbars for scrollable panes */
+.scrollbar-nice {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: var(--color-tertiary) transparent; /* thumb track */
+  scrollbar-gutter: stable both-edges; /* avoid layout shift when scrollbars appear */
+}
+.scrollbar-nice::-webkit-scrollbar {
+  width: 10px;
+}
+.scrollbar-nice::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-nice::-webkit-scrollbar-thumb {
+  background-color: var(--color-tertiary);
+  border-radius: 9999px;
+  border: 2px solid transparent; /* creates padding around the thumb */
+  background-clip: padding-box;
+}
+.scrollbar-nice:hover::-webkit-scrollbar-thumb {
+  background-color: var(--color-secondary);
+}
+.scrollbar-nice::-webkit-scrollbar-thumb:active {
+  background-color: var(--color-secondary);
+}

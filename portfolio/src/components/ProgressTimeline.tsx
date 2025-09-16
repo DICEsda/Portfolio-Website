@@ -17,69 +17,77 @@ const ProgressTimeline = () => {
   const [progress, setProgress] = useState<number>(0)
 
   useEffect(() => {
-    const observers: IntersectionObserver[] = []
-
-    const callback: IntersectionObserverCallback = (entries) => {
-      // Pick the section with the highest intersection ratio that's intersecting
-      const visible = entries
-        .filter((e) => e.isIntersecting)
-        .sort((a, b) => (b.intersectionRatio || 0) - (a.intersectionRatio || 0))
-
-      if (visible.length > 0) {
-        const id = (visible[0].target as HTMLElement).id
-        if (id && id !== active) setActive(id)
-      } else {
-        // Fallback based on viewport position if none intersect (rare)
-        const candidates = sections
-          .map((s) => document.getElementById(s.id))
-          .filter(Boolean) as HTMLElement[]
-        const mid = window.innerHeight / 2
-        let candidateId: string | null = null
-        let closestDist = Number.POSITIVE_INFINITY
-        candidates.forEach((el) => {
+    const scrollEl = document.querySelector('main.scroll-container') as HTMLElement | null
+    let ticking = false
+    const computeActive = () => {
+      const viewportH = scrollEl ? scrollEl.clientHeight : window.innerHeight
+      const mid = viewportH / 2
+      let next: string | null = null
+      for (const s of sections) {
+        const el = document.getElementById(s.id)
+        if (!el) continue
+        const rect = el.getBoundingClientRect()
+        const bottom = rect.top + rect.height
+        if (rect.top <= mid && bottom >= mid) {
+          next = s.id
+          break
+        }
+      }
+      if (!next) {
+        // Fallback to closest
+        let closest = Number.POSITIVE_INFINITY
+        for (const s of sections) {
+          const el = document.getElementById(s.id)
+          if (!el) continue
           const rect = el.getBoundingClientRect()
           const dist = Math.abs(rect.top - mid)
-          if (dist < closestDist) {
-            closestDist = dist
-            candidateId = el.id
+          if (dist < closest) {
+            closest = dist
+            next = s.id
           }
+        }
+      }
+      const scrollTop = scrollEl ? scrollEl.scrollTop : window.scrollY
+      if ((scrollTop || 0) < 10) next = 'home'
+      if (next && next !== active) setActive(next)
+    }
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          computeActive()
+          ticking = false
         })
-        if (candidateId && candidateId !== active) setActive(candidateId)
+        ticking = true
       }
     }
 
-    const options: IntersectionObserverInit = {
-      root: null,
-      threshold: [0.2, 0.5, 0.8],
-      rootMargin: '-10% 0px -10% 0px',
+    computeActive()
+    if (scrollEl) scrollEl.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      if (scrollEl) scrollEl.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
     }
-
-    sections.forEach((s) => {
-      const el = document.getElementById(s.id)
-      if (!el) return
-      const observer = new IntersectionObserver(callback, options)
-      observer.observe(el)
-      observers.push(observer)
-    })
-
-    return () => observers.forEach((o) => o.disconnect())
-  }, [active])
+  }, [])
 
   // Global scroll progress for fill line
   useEffect(() => {
+    const scrollEl = document.querySelector('main.scroll-container') as HTMLElement | null
     const onScroll = () => {
-      const doc = document.documentElement
-      const scrollTop = window.scrollY || doc.scrollTop || 0
-      const max = Math.max(1, doc.scrollHeight - window.innerHeight)
+      const el = scrollEl
+      if (!el) return
+      const scrollTop = el.scrollTop
+      const max = Math.max(1, el.scrollHeight - el.clientHeight)
       const ratio = Math.min(1, Math.max(0, scrollTop / max))
       setProgress(ratio)
     }
 
     onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
+    if (scrollEl) scrollEl.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('resize', onScroll)
     return () => {
-      window.removeEventListener('scroll', onScroll)
+      if (scrollEl) scrollEl.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onScroll)
     }
   }, [])
@@ -92,9 +100,9 @@ const ProgressTimeline = () => {
       className="hidden md:block fixed left-6 md:left-8 lg:left-12 top-1/2 -translate-y-1/2 z-30 pointer-events-none"
       aria-hidden="true"
     >
-      <div className="relative h-64 md:h-72 lg:h-80 w-6 flex items-center justify-center opacity-90">
+      <div className="relative h-64 md:h-72 lg:h-80 w-4 flex items-center justify-center opacity-90">
         {/* Track */}
-        <div className="absolute left-1/2 -translate-x-1/2 w-px h-full bg-tertiary/25 rounded" />
+        <div className="absolute left-1/2 -translate-x-1/2 w-px h-full bg-secondary/20 rounded" />
         {/* Fill */}
         <div
           className="absolute left-1/2 -translate-x-1/2 w-px bg-secondary rounded"
@@ -106,12 +114,12 @@ const ProgressTimeline = () => {
           const isActive = active === s.id
           const isFilled = progress >= dotPos - 0.001
           const isLast = idx === total - 1
-          const baseSize = isLast ? 14 : 10 // px
-          const activeSize = isLast ? 20 : 14 // px
+          const baseSize = isLast ? 12 : 8 // px
+          const activeSize = isLast ? 16 : 12 // px
           const size = isActive ? activeSize : baseSize
           const isActiveLast = isActive && isLast && s.id === lastId
-          const bgClass = (isFilled || isActiveLast) ? 'bg-secondary' : 'bg-tertiary/40'
-          const ringClass = isActive ? 'shadow-[0_0_0_4px] shadow-secondary/20' : ''
+          const bgClass = (isFilled || isActiveLast) ? 'bg-secondary' : 'bg-secondary/40'
+          const ringClass = isActive ? 'shadow-[0_0_0_3px] shadow-secondary/20' : ''
           return (
             <div
               key={s.id}

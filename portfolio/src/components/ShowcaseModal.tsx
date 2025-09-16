@@ -1,4 +1,3 @@
-import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface Project {
@@ -38,7 +37,7 @@ export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) 
         <div className="flex gap-6 max-w-[90vw] h-[85vh] items-start">
           {/* Left side: Info Card */}
           <motion.div
-            className="bg-white rounded-2xl shadow-2xl w-[600px] p-8 relative overflow-y-auto h-full border border-gray-200"
+            className="bg-white rounded-2xl shadow-2xl w-[600px] p-8 relative overflow-y-auto h-full border border-gray-200 scrollbar-nice"
             initial={{ scale: 0.95, x: -40, opacity: 0 }}
             animate={{ scale: 1, x: 0, opacity: 1 }}
             exit={{ scale: 0.95, x: -40, opacity: 0 }}
@@ -148,7 +147,7 @@ export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) 
 
           {/* Right side: Floating Images */}
           <motion.div
-            className="w-[500px] space-y-4 h-full overflow-y-auto"
+            className="w-[500px] space-y-4 h-full overflow-y-auto scrollbar-nice"
             initial={{ scale: 0.95, x: 40, opacity: 0 }}
             animate={{ scale: 1, x: 0, opacity: 1 }}
             exit={{ scale: 0.95, x: 40, opacity: 0 }}
@@ -165,6 +164,7 @@ export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) 
                 src={project.coverImage}
                 alt={project.title}
                 className="w-full h-auto object-cover"
+                loading="lazy"
               />
             </motion.div>
             
@@ -175,23 +175,51 @@ export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) 
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
               >
-                {project.gallery.map((img, i) => (
-                  <motion.div
-                    key={i}
-                    className="relative rounded-lg overflow-hidden shadow-md group cursor-pointer"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <img
-                      src={img}
-                      alt={`${project.title} gallery ${i + 1}`}
-                      className="w-full h-32 object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <span className="text-white text-sm">Click to enlarge</span>
-                    </div>
-                  </motion.div>
-                ))}
+                {project.gallery.map((item, i) => {
+                  const isVideo = /\.(mp4|webm|ogg)$/i.test(item);
+                  const isImage = /\.(png|jpe?g|gif|svg|webp)$/i.test(item);
+                  const fileName = item.split("/").pop() || `asset-${i + 1}`;
+
+                  return (
+                    <motion.div
+                      key={i}
+                      className="relative rounded-lg overflow-hidden shadow-md group"
+                      whileHover={{ scale: 1.03 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {isImage ? (
+                        <img
+                          src={item}
+                          alt={`${project.title} asset ${i + 1}`}
+                          className="w-full h-32 object-cover"
+                          loading="lazy"
+                        />
+                      ) : isVideo ? (
+                        <video
+                          controls
+                          preload="metadata"
+                          src={item}
+                          className="w-full h-32 object-cover bg-black"
+                        />
+                      ) : (
+                        <a
+                          href={item}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center justify-center w-full h-32 bg-gray-100 text-gray-700 text-center px-3"
+                          title={fileName}
+                        >
+                          <span className="text-sm truncate">{fileName}</span>
+                        </a>
+                      )}
+                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span className="text-white text-xs">
+                          {isVideo ? "Click to play" : isImage ? "Click to enlarge" : "Open file"}
+                        </span>
+                      </div>
+                    </motion.div>
+                  );
+                })}
               </motion.div>
             )}
           </motion.div>

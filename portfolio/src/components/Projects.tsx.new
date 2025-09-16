@@ -51,8 +51,23 @@ function Projects() {
     'Stripe': <FaCreditCard className="text-current" />,
     'Firebase': <FaCloud className="text-current" />,
     'Material-UI': <FaLayerGroup className="text-current" />,
-    'Redux': <FaSitemap className="text-current" />
+    'Redux': <FaSitemap className="text-current" />,
+    '.NET MAUI': <FaLayerGroup className="text-current" />,
+    'C#': <FaCode className="text-current" />
   };
+
+  // Semester Project 4 asset URLs (bundled by Vite)
+  const sp4Cover = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 10 - Registrer bruger klasse diagram.png', import.meta.url).href;
+  const sp4VidMauiPdf = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 07 - PDF-Generering-MAUI_US9.mp4', import.meta.url).href;
+  const sp4VidBilingual = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 08 - Dansk-engelsk-MAUI.mp4', import.meta.url).href;
+  const sp4VidWebPdf = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 09 - PDF-Generering-DanskogEnglsk-Webapp.mp4', import.meta.url).href;
+  const sp4DocProcess = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 01 - Procesbeskrivelse.pdf', import.meta.url).href;
+  const sp4DocTech = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 04 - Teknisk analyse.docx', import.meta.url).href;
+  const sp4DocFrontend = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 05 - Frontend Web.docx', import.meta.url).href;
+  const sp4DocTests = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 06 - Tests.docx', import.meta.url).href;
+  // Semester Project 3 asset URLs
+  const sp3Pdf = new URL('../../Project-Showcase/Semesterprojekt 3/Semesterprojekt_3 endelig.pdf', import.meta.url).href;
+  const sp3Cover = sp4Cover;
 
   const projects: Project[] = [
     {
@@ -101,48 +116,64 @@ function Projects() {
       tags: ["Full Stack", "Real-time", "Web App"]
     },
     {
-      title: "Project Two",
-      tagline: "Modern e-commerce platform",
-      description: "An e-commerce platform with features like product search, cart management, and secure payment processing.",
+      title: "Semester Project 4 — Finance Tracker",
+      tagline: "Cross-platform finance management with PDF generation and bilingual UI",
+      description: "A comprehensive finance tracking solution delivered as both a .NET MAUI mobile app and a React web app. It features secure authentication, budget/category management, transaction history, analytics, and PDF report generation in both Danish and English. Built with a clean architecture and focus on performance, accessibility, and developer experience.",
       features: [
-        "Product search",
-        "Cart management",
-        "Secure payments",
-        "Order tracking"
+        "User authentication and role-based access",
+        "Budgets, categories, and transaction management",
+        "Analytics dashboards and insights",
+        "PDF report generation (DK/EN)",
+        "Responsive web UI and native mobile",
+        "Robust testing strategy and CI-ready structure"
       ],
-      technologies: ["Next.js", "TypeScript", "Stripe", "Tailwind CSS"],
-      coverImage: "https://via.placeholder.com/600x400",
-      gallery: ["https://via.placeholder.com/600x400"],
-      type: "E-commerce Platform",
-      liveDemo: "https://project-two-demo.com",
-      sourceCode: "https://github.com/yourusername/project-two",
-      date: "July 2025",
-      role: "Frontend Developer",
-      challenges: "Implementing secure payment processing, optimizing the checkout flow, and ensuring a smooth user experience across different devices.",
-      projectNature: "Client Project",
-      tags: ["E-commerce", "Next.js", "Payments"]
+      technologies: [
+        "React",
+        ".NET MAUI",
+        "C#",
+        "TypeScript",
+        "Tailwind CSS",
+        "Node.js",
+        "MongoDB"
+      ],
+      coverImage: "/Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 10 - Registrer bruger klasse diagram.png",
+      gallery: [
+        "/Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 07 - PDF-Generering-MAUI_US9.mp4",
+        "/Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 08 - Dansk-engelsk-MAUI.mp4",
+        "/Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 09 - PDF-Generering-DanskogEnglsk-Webapp.mp4",
+        "/Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 01 - Procesbeskrivelse.pdf",
+        "/Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 04 - Teknisk analyse.docx",
+        "/Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 05 - Frontend Web.docx",
+        "/Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 06 - Tests.docx"
+      ],
+      type: "Cross-Platform App + Web",
+      liveDemo: undefined,
+      sourceCode: undefined,
+      date: "Spring 2025",
+      role: "Full Stack Developer",
+      challenges: "Designing a shared domain model across mobile and web, ensuring PDF generation parity across platforms, implementing bilingual UX without duplication, and maintaining performance while supporting analytics.",
+      projectNature: "University Project",
+      tags: [".NET MAUI", "React", "TypeScript", "PDF", "i18n"]
     },
     {
-      title: "Project Three",
-      tagline: "Collaborative task management app",
-      description: "A task management application with drag-and-drop functionality, team collaboration, and progress tracking.",
+      title: "Semester Project 3 — [Title]",
+      tagline: "Academic project with strong documentation and delivery",
+      description: "Semester project with a focus on practical implementation and thorough documentation. Delivered with a complete final report and polished outcomes.",
       features: [
-        "Drag-and-drop interface",
-        "Team collaboration",
-        "Progress tracking",
-        "Real-time updates"
+        "Well-documented architecture and process",
+        "Clear scope and deliverables",
+        "Demonstrable outcomes",
+        "Focus on maintainability"
       ],
-      technologies: ["React", "Firebase", "Material-UI", "Redux"],
-      coverImage: "https://via.placeholder.com/600x400",
-      gallery: ["https://via.placeholder.com/600x400"],
-      type: "Web Application",
-      liveDemo: "https://project-three-demo.com",
-      sourceCode: "https://github.com/yourusername/project-three",
-      date: "June 2025",
-      role: "Frontend Developer",
-      challenges: "Implementing smooth drag-and-drop functionality, managing complex state with Redux, and ensuring real-time updates work reliably.",
-      projectNature: "Team Project",
-      tags: ["Productivity", "Collaboration", "React"]
+      technologies: ["React", "TypeScript", "Tailwind CSS"],
+      coverImage: sp3Cover,
+      gallery: [sp3Pdf],
+      type: "Academic Project",
+      date: "2024/2025",
+      role: "Developer",
+      challenges: "Balancing scope with quality while maintaining strong documentation and consistent delivery.",
+      projectNature: "University Project",
+      tags: ["Academia", "Documentation", "Frontend"]
     }
   ];
 
@@ -160,28 +191,44 @@ function Projects() {
     }, 100);
 
     return () => clearTimeout(timer);
-  }, []);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setInView(true);
-          } else {
-            setInView(false);
-          }
-        });
-      },
-      {
-        threshold: 0.2,
-        rootMargin: '-50px 0px -50px 0px',
-      }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
+    {
+      title: "Semester Project 4 — Finance Tracker",
+      tagline: "Cross-platform finance management with PDF generation and bilingual UI",
+      description: "A comprehensive finance tracking solution delivered as both a .NET MAUI mobile app and a React web app. It features secure authentication, budget/category management, transaction history, analytics, and PDF report generation in both Danish and English. Built with a clean architecture and focus on performance, accessibility, and developer experience.",
+      features: [
+        "User authentication and role-based access",
+        "Budgets, categories, and transaction management",
+        "Analytics dashboards and insights",
+        "PDF report generation (DK/EN)",
+        "Responsive web UI and native mobile",
+        "Robust testing strategy and CI-ready structure"
+      ],
+      technologies: [
+        "React",
+        ".NET MAUI",
+        "C#",
+        "TypeScript",
+        "Tailwind CSS",
+        "Node.js",
+        "MongoDB"
+      ],
+      coverImage: sp4Cover,
+      gallery: [
+        sp4VidMauiPdf,
+        sp4VidBilingual,
+        sp4VidWebPdf,
+        sp4DocProcess,
+        sp4DocTech,
+        sp4DocFrontend,
+        sp4DocTests
+      ],
+      type: "Cross-Platform App + Web",
+      date: "Spring 2025",
+      role: "Full Stack Developer",
+      challenges: "Designing a shared domain model across mobile and web, ensuring PDF generation parity across platforms, implementing bilingual UX without duplication, and maintaining performance while supporting analytics.",
+      projectNature: "University Project",
+      tags: [".NET MAUI", "React", "TypeScript", "PDF", "i18n"]
+    },
 
     return () => {
       if (sectionRef.current) {

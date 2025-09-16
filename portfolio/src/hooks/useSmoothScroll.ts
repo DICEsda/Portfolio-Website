@@ -45,9 +45,10 @@ export const useSmoothScroll = () => {
 
   const scrollToSection = useCallback((elementId: string, options: ScrollOptions = {}) => {
     try {
+      const scrollEl = document.querySelector('main.scroll-container') as HTMLElement | null;
       const {
-        duration = 1000,
-        offset = 80, // Header height
+        duration = 800,
+        offset = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 64,
         easing: easingFn = easing.easeOutExpo
       } = options;
 
@@ -57,8 +58,9 @@ export const useSmoothScroll = () => {
         return;
       }
 
-      const start = window.pageYOffset;
-      const end = Math.max(0, element.getBoundingClientRect().top + start - offset);
+  const start = scrollEl ? scrollEl.scrollTop : window.pageYOffset;
+  const elTop = element.getBoundingClientRect().top + (scrollEl ? scrollEl.scrollTop : window.pageYOffset);
+  const end = Math.max(0, elTop - offset);
       const startTime = performance.now();
 
       // Smooth scroll animation
@@ -69,7 +71,11 @@ export const useSmoothScroll = () => {
         const easedProgress = easingFn(progress);
         const currentPosition = start + (end - start) * easedProgress;
         
-        window.scrollTo(0, currentPosition);
+        if (scrollEl) {
+          scrollEl.scrollTo({ top: currentPosition, left: 0, behavior: 'auto' });
+        } else {
+          window.scrollTo(0, currentPosition);
+        }
 
         if (progress < 1) {
           requestAnimationFrame(animateScroll);

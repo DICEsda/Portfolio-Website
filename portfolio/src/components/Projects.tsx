@@ -53,8 +53,23 @@ function Projects() {
     'Stripe': <FaCreditCard className="text-current" />,
     'Firebase': <FaCloud className="text-current" />,
     'Material-UI': <FaLayerGroup className="text-current" />,
-    'Redux': <FaSitemap className="text-current" />
+    'Redux': <FaSitemap className="text-current" />,
+    '.NET MAUI': <FaLayerGroup className="text-current" />,
+    'C#': <FaCode className="text-current" />
   };
+
+  // Semester Project 4 asset URLs (bundled by Vite)
+  const sp4Cover = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 10 - Registrer bruger klasse diagram.png', import.meta.url).href;
+  const sp4VidMauiPdf = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 07 - PDF-Generering-MAUI_US9.mp4', import.meta.url).href;
+  const sp4VidBilingual = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 08 - Dansk-engelsk-MAUI.mp4', import.meta.url).href;
+  const sp4VidWebPdf = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 09 - PDF-Generering-DanskogEnglsk-Webapp.mp4', import.meta.url).href;
+  const sp4DocProcess = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 01 - Procesbeskrivelse.pdf', import.meta.url).href;
+  const sp4DocTech = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 04 - Teknisk analyse.docx', import.meta.url).href;
+  const sp4DocFrontend = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 05 - Frontend Web.docx', import.meta.url).href;
+  const sp4DocTests = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 06 - Tests.docx', import.meta.url).href;
+  // Semester Project 3 asset URLs
+  const sp3Pdf = new URL('../../Project-Showcase/Semesterprojekt 3/Semesterprojekt_3 endelig.pdf', import.meta.url).href;
+  const sp3Cover = sp4Cover; // reuse a safe image as cover; can be changed later
 
   const projects: Project[] = [
     {
@@ -124,48 +139,62 @@ function Projects() {
       tags: ["Full Stack", "Real-time", "Web App"]
     },
     {
-      title: "E-Shop Platform",
-      tagline: "Modern e-commerce platform",
-      description: "An e-commerce platform with features like product search, cart management, and secure payment processing.",
+      title: "Semester Project 4 — Finance Tracker",
+      tagline: "Cross-platform finance management with PDF generation and bilingual UI",
+      description: "A comprehensive finance tracking solution delivered as both a .NET MAUI mobile app and a React web app. It features secure authentication, budget/category management, transaction history, analytics, and PDF report generation in both Danish and English. Built with a clean architecture and focus on performance, accessibility, and developer experience.",
       features: [
-        "Product search",
-        "Cart management",
-        "Secure payments",
-        "Order tracking"
+        "User authentication and role-based access",
+        "Budgets, categories, and transaction management",
+        "Analytics dashboards and insights",
+        "PDF report generation (DK/EN)",
+        "Responsive web UI and native mobile",
+        "Robust testing strategy and CI-ready structure"
       ],
-      technologies: ["Next.js", "TypeScript", "Stripe", "Tailwind CSS"],
-      coverImage: "",
-      gallery: [],
-      type: "E-commerce Platform",
-      liveDemo: "https://project-two-demo.com",
-      sourceCode: "https://github.com/yourusername/project-two",
-      date: "July 2025",
-      role: "Frontend Developer",
-      challenges: "Implementing secure payment processing, optimizing the checkout flow, and ensuring a smooth user experience across different devices.",
-      projectNature: "Client Project",
-      tags: ["E-commerce", "Next.js", "Payments"]
+      technologies: [
+        "React",
+        ".NET MAUI",
+        "C#",
+        "TypeScript",
+        "Tailwind CSS",
+        "Node.js",
+        "MongoDB"
+      ],
+      coverImage: sp4Cover,
+      gallery: [
+        sp4VidMauiPdf,
+        sp4VidBilingual,
+        sp4VidWebPdf,
+        sp4DocProcess,
+        sp4DocTech,
+        sp4DocFrontend,
+        sp4DocTests
+      ],
+      type: "Cross-Platform App + Web",
+      date: "Spring 2025",
+      role: "Full Stack Developer",
+      challenges: "Designing a shared domain model across mobile and web, ensuring PDF generation parity across platforms, implementing bilingual UX without duplication, and maintaining performance while supporting analytics.",
+      projectNature: "University Project",
+      tags: [".NET MAUI", "React", "TypeScript", "PDF", "i18n"]
     },
     {
-      title: "TaskFlow Manager",
-      tagline: "Collaborative task management app",
-      description: "A task management application with drag-and-drop functionality, team collaboration, and progress tracking.",
+      title: "Semester Project 3 — [Title]",
+      tagline: "Academic project with strong documentation and delivery",
+      description: "Semester project with a focus on practical implementation and thorough documentation. Delivered with a complete final report and polished outcomes.",
       features: [
-        "Drag-and-drop interface",
-        "Team collaboration",
-        "Progress tracking",
-        "Real-time updates"
+        "Well-documented architecture and process",
+        "Clear scope and deliverables",
+        "Demonstrable outcomes",
+        "Focus on maintainability"
       ],
-      technologies: ["React", "Firebase", "Material-UI", "Redux"],
-      coverImage: "",
-      gallery: [],
-      type: "Web Application",
-      liveDemo: "https://project-three-demo.com",
-      sourceCode: "https://github.com/yourusername/project-three",
-      date: "June 2025",
-      role: "Frontend Developer",
-      challenges: "Implementing smooth drag-and-drop functionality, managing complex state with Redux, and ensuring real-time updates work reliably.",
-      projectNature: "Team Project",
-      tags: ["Productivity", "Collaboration", "React"]
+      technologies: ["React", "TypeScript", "Tailwind CSS"],
+      coverImage: sp3Cover,
+      gallery: [sp3Pdf],
+      type: "Academic Project",
+      date: "2024/2025",
+      role: "Developer",
+      challenges: "Balancing scope with quality while maintaining strong documentation and consistent delivery.",
+      projectNature: "University Project",
+      tags: ["Academia", "Documentation", "Frontend"]
     }
   ].sort((a, b) => {
     if (a.title === "Portfolio Website") return -1;
@@ -178,7 +207,6 @@ function Projects() {
   const [currentProject, setCurrentProject] = useState(0);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [direction, setDirection] = useState<1 | -1>(1);
   const sectionRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
   const [initialLoad, setInitialLoad] = useState(true);
@@ -223,7 +251,6 @@ function Projects() {
   const nextProject = () => {
     if (!isAnimating) {
       setIsAnimating(true);
-  setDirection(1);
       const nextIndex = (currentProject + 1) % projects.length;
       
       setTimeout(() => {
@@ -236,7 +263,6 @@ function Projects() {
   const prevProject = () => {
     if (!isAnimating) {
       setIsAnimating(true);
-  setDirection(-1);
       const nextIndex = (currentProject - 1 + projects.length) % projects.length;
       
       setTimeout(() => {
@@ -258,21 +284,14 @@ function Projects() {
   };
 
   const currentProjectData = projects[currentProject];
-
-  // Slide variants for project content based on navigation direction
-  const slideVariants = {
-    enter: (dir: number) => ({ opacity: 0, x: dir * 40, scale: 0.98 }),
-    center: { opacity: 1, x: 0, scale: 1 },
-    exit: (dir: number) => ({ opacity: 0, x: dir * -40, scale: 0.98 })
-  };
-
+  const [imgLoading, setImgLoading] = useState<boolean>(true);
 
   return (
     <>
       <motion.div 
         id="projects" 
         ref={sectionRef} 
-  className="min-h-screen flex items-center justify-center py-0 scroll-container overflow-x-hidden scroll-snap-align-start"
+        className="h-screen flex items-center justify-center py-4 xs:py-5 sm:py-6 md:py-8 overflow-x-hidden scroll-snap-align-start"
         initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{
@@ -283,58 +302,44 @@ function Projects() {
         }}
         viewport={{ once: true, margin: "-100px" }}
       >
-  <div className="container mx-auto px-6 sm:px-8 md:px-12 lg:px-16 md:pl-20 lg:pl-24 max-w-5xl transform -translate-y-10 md:-translate-y-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-center text-light">
+  <div className="container mx-auto px-3 xs:px-4 sm:px-5 max-w-6xl">
+          <motion.h2 
+            className={`text-fluid-2xl font-bold mb-6 sm:mb-8 text-center transition-all duration-1000 text-light scroll-animate ${
+              initialLoad ? 'opacity-0 scale-75' : 
+              inView ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-5 scale-95'
+            }`}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
             Featured Projects
-          </h2>
+          </motion.h2>
         
           <div className={`relative transition-all duration-1000 delay-300 ${
             initialLoad ? 'opacity-0 translate-y-10' : 
             inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}>
             {/* Navigation Arrows */}
-            <motion.button
+            <button
               onClick={prevProject}
-              className="absolute left-2 md:-left-24 top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 text-tertiary hover:text-secondary transition-colors rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary/40"
+              className="absolute left-2 md:-left-24 top-1/2 transform -translate-y-1/2 z-10 bg-primary/80 backdrop-blur-sm border border-tertiary/20 rounded-full p-2 md:p-3 text-tertiary hover:text-secondary transition-all duration-300 hover:scale-110"
               aria-label="Previous project"
-              whileTap={{}}
             >
-              <motion.span 
-                animate={{ x: isAnimating ? -3 : 0 }} 
-                whileTap={{ rotate: -15 }}
-                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-              >
-                <FaChevronLeft className="w-4 h-4 md:w-6 md:h-6" />
-              </motion.span>
-            </motion.button>
+              <FaChevronLeft className="w-4 h-4 md:w-6 md:h-6" />
+            </button>
             
-            <motion.button
+            <button
               onClick={nextProject}
-              className="absolute right-2 md:-right-24 top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 text-tertiary hover:text-secondary transition-colors rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary/40"
+              className="absolute right-2 md:-right-24 top-1/2 transform -translate-y-1/2 z-10 bg-primary/80 backdrop-blur-sm border border-tertiary/20 rounded-full p-2 md:p-3 text-tertiary hover:text-secondary transition-all duration-300 hover:scale-110"
               aria-label="Next project"
-              whileTap={{}}
             >
-              <motion.span 
-                animate={{ x: isAnimating ? 3 : 0 }} 
-                whileTap={{ rotate: 15 }}
-                transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-              >
-                <FaChevronRight className="w-4 h-4 md:w-6 md:h-6" />
-              </motion.span>
-            </motion.button>
+              <FaChevronRight className="w-4 h-4 md:w-6 md:h-6" />
+            </button>
 
             {/* Project Content */}
-            <div className="project-content">
-              <AnimatePresence mode="wait" custom={direction}>
-                <motion.div
-                  key={currentProject}
-                  custom={direction}
-                  variants={slideVariants}
-                  initial="enter"
-                  animate="center"
-                  exit="exit"
-                  transition={{ duration: 0.28, ease: 'easeOut' }}
-                >
+            <div
+              className="project-content"
+            >
               {currentProject === 0 ? (
                 // Centered layout for portfolio project
                 <div className="max-w-4xl mx-auto text-center px-4 xs:px-6">
@@ -362,14 +367,20 @@ function Projects() {
                           Home Assistant Project
                         </div>
                       )}
-                      <div className="aspect-w-16 aspect-h-9 overflow-hidden bg-card rounded-lg">
+                      <div className="aspect-w-16 aspect-h-9 overflow-hidden bg-card">
                         {currentProjectData.coverImage && (
-                          <img
-                            src={currentProjectData.coverImage}
-                            alt={currentProjectData.title}
-                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                            loading="lazy"
-                          />
+                          <>
+                            {imgLoading && (
+                              <div className="w-full h-full animate-pulse bg-tertiary/10" />
+                            )}
+                            <img
+                              src={currentProjectData.coverImage}
+                              alt={currentProjectData.title}
+                              className={`w-full h-full object-cover transition-transform duration-300 ${imgLoading ? 'opacity-0' : 'opacity-100 hover:scale-105'}`}
+                              loading="lazy"
+                              onLoad={() => setImgLoading(false)}
+                            />
+                          </>
                         )}
                       </div>
                       {currentProjectData.sourceCode && (
@@ -377,7 +388,7 @@ function Projects() {
                           href={currentProjectData.sourceCode}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="absolute bottom-3 xs:bottom-4 right-3 xs:right-4 px-3 xs:px-4 py-1.5 xs:py-2 rounded-lg transition-all duration-300 shadow-lg font-medium flex items-center gap-1.5 xs:gap-2 text-fluid-sm z-10 bg-primary/80 backdrop-blur text-light hover:text-secondary"
+                          className="absolute bottom-3 xs:bottom-4 right-3 xs:right-4 px-3 xs:px-4 py-1.5 xs:py-2 bg-gradient-to-r from-secondary to-tertiary text-white rounded-lg hover:from-tertiary hover:to-secondary transition-all duration-300 shadow-lg font-medium flex items-center gap-1.5 xs:gap-2 text-fluid-sm z-10"
                         >
                           <FaCode className="w-3.5 h-3.5 xs:w-4 xs:h-4" />
                           View Source
@@ -389,6 +400,7 @@ function Projects() {
                       className="w-full py-2.5 xs:py-3 px-4 xs:px-6 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-lg text-fluid-base xs:text-fluid-lg font-semibold flex items-center justify-center gap-2 hover:scale-[1.02] transform touch-manipulation"
                     >
                       <span>View Project Showcase</span>
+                      <FaChevronRight className="w-3.5 h-3.5 xs:w-4 xs:h-4" />
                     </button>
                   </div>
                 </div>
@@ -415,34 +427,56 @@ function Projects() {
                     </div>
                   </div>
                   <div className="order-1 md:order-2">
-                    <div className="rounded-lg">
-                      <div className="relative overflow-hidden rounded-lg shadow-lg">
-                        <div className="aspect-w-16 aspect-h-9 overflow-hidden bg-card rounded-lg">
+                    <div className="relative overflow-hidden rounded-lg shadow-lg">
+                      <div className="aspect-w-16 aspect-h-9 overflow-hidden bg-card">
                         {currentProjectData.coverImage && (
-                          <img
-                            src={currentProjectData.coverImage}
-                            alt={currentProjectData.title}
-                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-                            loading="lazy"
-                          />
+                          <>
+                            {imgLoading && (
+                              <div className="w-full h-full animate-pulse bg-tertiary/10" />
+                            )}
+                            <img
+                              src={currentProjectData.coverImage}
+                              alt={currentProjectData.title}
+                              className={`w-full h-full object-cover transition-transform duration-300 ${imgLoading ? 'opacity-0' : 'opacity-100 hover:scale-105'}`}
+                              loading="lazy"
+                              onLoad={() => setImgLoading(false)}
+                            />
+                          </>
                         )}
-                        </div>
                       </div>
-                      <div className="mt-4 grid grid-cols-1 gap-2 xs:gap-3">
+                      <div className="flex flex-col gap-2 xs:gap-3 mt-4">
                         <motion.button
                           onClick={() => setSelectedProject(currentProjectData)}
-                          className="w-full py-2.5 xs:py-3 px-4 xs:px-6 bg-blue-600 text-white rounded-lg shadow-lg text-fluid-base xs:text-fluid-lg font-semibold flex items-center justify-center gap-2 touch-manipulation transform transition-transform duration-200 hover:scale-[1.02]"
-                          whileHover={{}}
-                          whileTap={{}}
+                          className="w-full py-2.5 xs:py-3 px-4 xs:px-6 bg-blue-600 text-white rounded-lg shadow-lg text-fluid-base xs:text-fluid-lg font-semibold flex items-center justify-center gap-2 touch-manipulation"
+                          whileHover={{ 
+                            scale: 1.02,
+                            backgroundColor: "#2563eb"
+                          }}
+                          whileTap={{ scale: 0.98 }}
+                          transition={{
+                            type: "spring",
+                            stiffness: 400,
+                            damping: 10
+                          }}
                         >
                           <span>View Project Showcase</span>
+                          <motion.div
+                            animate={{ x: [0, 4, 0] }}
+                            transition={{ 
+                              duration: 1.5,
+                              repeat: Infinity,
+                              ease: "easeInOut"
+                            }}
+                          >
+                            <FaChevronRight className="w-3.5 h-3.5 xs:w-4 xs:h-4" />
+                          </motion.div>
                         </motion.button>
-            {currentProjectData.sourceCode && (
+                        {currentProjectData.sourceCode && (
                           <a
                             href={currentProjectData.sourceCode}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="w-full py-2 xs:py-2.5 px-4 xs:px-6 rounded-lg transition-all duration-300 shadow-lg font-medium flex items-center justify-center gap-2 text-fluid-sm hover:scale-[1.02] transform bg-primary/80 backdrop-blur text-light hover:text-secondary"
+                            className="w-full py-2 xs:py-2.5 px-4 xs:px-6 bg-gradient-to-r from-secondary to-tertiary text-white rounded-lg hover:from-tertiary hover:to-secondary transition-all duration-300 shadow-lg font-medium flex items-center justify-center gap-2 text-fluid-sm hover:scale-[1.02] transform"
                           >
                             <FaCode className="w-3.5 h-3.5 xs:w-4 xs:h-4" />
                             <span>View Source</span>
@@ -453,8 +487,6 @@ function Projects() {
                   </div>
                 </div>
               )}
-                </motion.div>
-              </AnimatePresence>
             </div>
 
             {/* Dots Indicator */}
