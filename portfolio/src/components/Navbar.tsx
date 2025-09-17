@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useTheme } from '../context/ThemeContext'
-import { useSmoothScroll } from '../hooks/useSmoothScroll'
+// no smooth scroll needed with fullPage.js
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -9,66 +9,14 @@ const Navbar = () => {
   const { theme, toggleTheme } = useTheme()
 
   useEffect(() => {
-    const scrollEl = document.querySelector('main.scroll-container') as HTMLElement | null
-    let ticking = false
-    const computeActive = () => {
-      const scrollTop = scrollEl ? scrollEl.scrollTop : window.scrollY
-      const viewportH = scrollEl ? scrollEl.clientHeight : window.innerHeight
-      setIsScrolled((scrollTop || 0) > 50)
-
-      const ids = ['home', 'about', 'projects', 'contact']
-      const mid = viewportH / 2
-      let next = 'home'
-
-      // Prefer the section that contains the viewport midpoint
-      for (const id of ids) {
-        const el = document.getElementById(id)
-        if (!el) continue
-        const rect = el.getBoundingClientRect()
-        const bottom = rect.top + rect.height
-        if (rect.top <= mid && bottom >= mid) {
-          next = id
-          break
-        }
-      }
-
-      // Fallback: if none contain mid (e.g., spacers), pick closest by top
-      if (!next) {
-        let closest = Number.POSITIVE_INFINITY
-        for (const id of ids) {
-          const el = document.getElementById(id)
-          if (!el) continue
-          const rect = el.getBoundingClientRect()
-          const dist = Math.abs(rect.top - mid)
-          if (dist < closest) {
-            closest = dist
-            next = id
-          }
-        }
-      }
-
-      // Guard: when near very top, keep Home
-      if ((scrollTop || 0) < 10) next = 'home'
-      if (next !== activeSection) setActiveSection(next)
+    const handler = (e: any) => {
+      const anchor: string = e?.detail?.anchor || 'home'
+      const index: number = e?.detail?.index || 0
+      setActiveSection(anchor)
+      setIsScrolled(index > 0)
     }
-
-    const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          computeActive()
-          ticking = false
-        })
-        ticking = true
-      }
-    }
-
-    computeActive()
-    if (scrollEl) scrollEl.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', onScroll)
-    return () => {
-      if (scrollEl) scrollEl.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', onScroll)
-    }
+    window.addEventListener('pageChange', handler)
+    return () => window.removeEventListener('pageChange', handler)
   }, [])
 
   // Close mobile menu when clicking outside
@@ -91,12 +39,12 @@ const Navbar = () => {
     { href: '#contact', label: 'Contact', isCTA: true },
   ]
 
-  const scrollToSection = useSmoothScroll()
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault()
     const sectionId = href.replace('#', '')
-    scrollToSection(sectionId)
+    const api = (window as any).fullpage_api
+    if (api) api.moveTo(sectionId)
     setIsMenuOpen(false)
   }
 
@@ -118,7 +66,7 @@ const Navbar = () => {
                   key={item.href}
                   href={item.href}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className={`relative text-tertiary hover:text-secondary transition-colors font-medium border-b-2 border-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-secondary focus-visible:ring-offset-primary rounded ${activeSection === item.href.replace('#','') ? 'text-secondary border-secondary' : ''}`}
+                  className="inline-flex items-center px-4 py-2 rounded-lg bg-secondary text-white shadow-md hover:bg-secondary/90 transition-colors font-semibold"
                 >
                   {item.label}
                 </a>

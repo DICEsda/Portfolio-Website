@@ -1,8 +1,13 @@
 import heroImage from '../assets/hero-image.png';
 
 const Hero = () => {
+  const moveToProjects = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const api = (window as any).fullpage_api;
+    if (api) api.moveTo('projects');
+  };
   return (
-  <section id="home" className="h-screen flex items-center justify-center pt-24 md:pt-28 pb-20 scroll-snap-align-start">
+  <section id="home" className="h-screen flex items-center justify-center">
   <div className="container mx-auto px-6 sm:px-8 md:px-12 lg:px-16 max-w-6xl">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="max-w-3xl">
@@ -21,6 +26,7 @@ const Hero = () => {
             <div className="flex gap-4">
               <a
                 href="#projects"
+                onClick={moveToProjects}
                 className="inline-block border-2 border-secondary text-secondary px-8 py-3 rounded-lg hover:bg-secondary/10 transition-all duration-300 font-medium"
               >
                 View Projects

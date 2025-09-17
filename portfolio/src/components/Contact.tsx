@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import emailjs from '@emailjs/browser';
+import { m, AnimatePresence } from 'framer-motion';
+import { usePageActive } from '../hooks/usePageActive';
+// Dynamically import EmailJS when needed to keep it out of the initial bundle
 
 const Contact = () => {
   const form = useRef<HTMLFormElement>(null);
@@ -40,7 +41,7 @@ const Contact = () => {
     };
   }, []);
 
-  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+  const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!form.current) return;
@@ -72,39 +73,51 @@ const Contact = () => {
     setStatus('sending');
     setStatusMessage('Sending...');
 
-    emailjs
-      .sendForm('service_zcxdb79', 'template_f1ovonq', form.current, {
+    try {
+      const { default: emailjs } = await import('@emailjs/browser');
+      await emailjs.sendForm('service_zcxdb79', 'template_f1ovonq', form.current, {
         publicKey: 'K-s_xFAcbcC3jPeW2',
-      })
-      .then(
-  () => {
-          setStatus('success');
-          setStatusMessage('Message sent successfully!');
-          form.current?.reset();
-        },
-        (error) => {
-          setStatus('error');
-          setStatusMessage('Failed to send message. Please try again.');
-          console.log('FAILED...', error.text);
-        },
-      );
+      });
+      setStatus('success');
+      setStatusMessage('Message sent successfully!');
+      form.current?.reset();
+    } catch (error: any) {
+      setStatus('error');
+      setStatusMessage('Failed to send message. Please try again.');
+      console.log('FAILED...', error?.text || error);
+    }
   };
 
   
 
   return (
-  <section id="contact" ref={sectionRef} className="h-screen flex items-center justify-center py-0 scroll-snap-align-start">
+  <section id="contact" ref={sectionRef} className="h-screen flex items-center justify-center py-0">
   <div className="container mx-auto px-6 sm:px-8 md:px-12 lg:px-16 max-w-6xl flex flex-col items-center">
-        <h2 className={`text-3xl md:text-4xl font-bold mb-6 text-center transition-all duration-700 text-light ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+        <m.h2
+          initial={{ opacity: 0, y: 16 }}
+          animate={usePageActive('contact') ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+          transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
+          className="text-3xl md:text-4xl font-bold mb-6 text-center text-light mt-2 sm:mt-3 md:mt-4 relative top-[7px]"
+        >
           Get In Touch
-        </h2>
+        </m.h2>
         <div className="mx-auto w-full">
-          <p className={`text-center mb-6 text-tertiary leading-relaxed transition-all duration-700 delay-200 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
-            I'm currently looking for new opportunities. Whether you have a question
-            or just want to say hello. I'll try my best to get back to you!
-          </p>
+          <m.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={usePageActive('contact') ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1], delay: 0.04 }}
+            className="text-center mb-6 text-tertiary leading-relaxed"
+          >
+            Open to opportunities and collaborations. Have a question or just want to say hi?
+            I’ll get back to you as soon as I can.
+          </m.p>
           <div className="w-full max-w-sm sm:max-w-md md:max-w-lg mx-auto">
-            <div className={`bg-card p-3 sm:p-4 md:p-5 rounded-lg shadow-lg transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+            <m.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={usePageActive('contact') ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1], delay: 0.05 }}
+              className="bg-card p-3 sm:p-4 md:p-5 rounded-lg shadow-lg"
+            >
               <form ref={form} onSubmit={sendEmail} className="space-y-3 sm:space-y-4">
               {/* Honeypot field (hidden from users) */}
               <div className="hidden">
@@ -240,7 +253,7 @@ const Contact = () => {
                       </button>
                       <AnimatePresence>
                         {copied === 'phone' && (
-                          <motion.span
+                          <m.span
                             key="copied-phone"
                             initial={{ opacity: 0, x: 8, scale: 0.95 }}
                             animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -254,14 +267,14 @@ const Contact = () => {
                               <path d="M20 6L9 17l-5-5" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                             Copied!
-                          </motion.span>
+                          </m.span>
                         )}
                       </AnimatePresence>
                     </div>
                     <div className="flex items-center gap-2 bg-primary/40 rounded-md p-2 sm:p-2.5 justify-end">
                       <AnimatePresence>
                         {copied === 'email' && (
-                          <motion.span
+                          <m.span
                             key="copied-email"
                             initial={{ opacity: 0, x: -8, scale: 0.95 }}
                             animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -275,7 +288,7 @@ const Contact = () => {
                               <path d="M20 6L9 17l-5-5" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                             Copied!
-                          </motion.span>
+                          </m.span>
                         )}
                       </AnimatePresence>
                       <button
@@ -294,9 +307,9 @@ const Contact = () => {
                   </div>
                 </div>
               </form>
-            </div>
+            </m.div>
           </div>
-          {/* Social links moved to Footer on this section for a unified experience */}
+          {/* BottomPill handles credit/icons globally */}
         </div>
       </div>
     </section>

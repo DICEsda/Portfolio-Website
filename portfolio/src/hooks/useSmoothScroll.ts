@@ -7,17 +7,6 @@ interface ScrollOptions {
 }
 
 export const useSmoothScroll = () => {
-  // Easing functions
-  const easing = {
-    easeInOutCubic: (t: number): number => 
-      t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2,
-    
-    easeOutExpo: (t: number): number => 
-      t === 1 ? 1 : 1 - Math.pow(2, -10 * t),
-      
-    easeInOutQuint: (t: number): number =>
-      t < 0.5 ? 16 * t * t * t * t * t : 1 - Math.pow(-2 * t + 2, 5) / 2
-  };
 
   // Handle intersection observer for scroll animations
   useEffect(() => {
@@ -43,46 +32,18 @@ export const useSmoothScroll = () => {
     return () => observer.disconnect();
   }, []);
 
-  const scrollToSection = useCallback((elementId: string, options: ScrollOptions = {}) => {
+  const scrollToSection = useCallback((elementId: string, _options: ScrollOptions = {}) => {
     try {
-      const scrollEl = document.querySelector('main.scroll-container') as HTMLElement | null;
-      const {
-        duration = 800,
-        offset = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 64,
-        easing: easingFn = easing.easeOutExpo
-      } = options;
-
       const element = document.getElementById(elementId);
       if (!element) {
         console.warn(`Element with id '${elementId}' not found`);
         return;
       }
 
-  const start = scrollEl ? scrollEl.scrollTop : window.pageYOffset;
-  const elTop = element.getBoundingClientRect().top + (scrollEl ? scrollEl.scrollTop : window.pageYOffset);
-  const end = Math.max(0, elTop - offset);
-      const startTime = performance.now();
+      const navHeight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 64;
+      (element as HTMLElement).style.scrollMarginTop = `${navHeight}px`;
 
-      // Smooth scroll animation
-      const animateScroll = (currentTime: number) => {
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        
-        const easedProgress = easingFn(progress);
-        const currentPosition = start + (end - start) * easedProgress;
-        
-        if (scrollEl) {
-          scrollEl.scrollTo({ top: currentPosition, left: 0, behavior: 'auto' });
-        } else {
-          window.scrollTo(0, currentPosition);
-        }
-
-        if (progress < 1) {
-          requestAnimationFrame(animateScroll);
-        }
-      };
-
-      requestAnimationFrame(animateScroll);
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } catch (error) {
       console.error('Error scrolling to section:', error);
     }

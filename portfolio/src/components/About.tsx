@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
 import { FaCheck } from 'react-icons/fa';
+import { m } from 'framer-motion';
+import { usePageActive } from '../hooks/usePageActive';
 
 const About = () => {
   const skills = [
@@ -22,45 +23,57 @@ const About = () => {
     'Built scalable and maintainable software architectures with a focus on clean design and long-term flexibility',
   ]
 
-  const sectionRef = useRef<HTMLElement>(null);
-  const [inView, setInView] = useState(false);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setInView(true);
-        } else {
-          setInView(false);
-        }
-      },
-      {
-        threshold: 0.1,
+  const containerVariants = {
+    hidden: { opacity: 0, y: 18 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: 0.02,
+        duration: 0.38,
+        ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+        staggerChildren: 0.07,
+        when: 'beforeChildren'
       }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
     }
+  }
 
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
-  }, []);
+  const itemVariants = {
+    hidden: { opacity: 0, y: 12 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.32, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }
+    }
+  }
 
   return (
-  <section id="about" ref={sectionRef} className="h-screen flex items-center justify-center py-0 scroll-snap-align-start">
-  <div className="container mx-auto px-6 sm:px-8 md:px-12 lg:px-16 max-w-6xl transform -translate-y-10 md:-translate-y-16">
-        <div className={`text-center mb-10 transition-all duration-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
-          <h2 className="text-3xl md:text-4xl font-bold text-light">About Me</h2>
-          <p className="text-tertiary mt-3 max-w-3xl mx-auto leading-relaxed">
-          I enjoy designing scalable, well-structured solutions and turning complex ideas into reliable, user-friendly experiences!          </p>
-        </div>
+    <section id="about" className="h-screen flex items-center justify-center py-0">
+      <div className="container mx-auto px-6 sm:px-8 md:px-12 lg:px-16 max-w-6xl">
+        <m.div
+          className="text-center mb-10"
+          variants={containerVariants}
+          initial="hidden"
+          animate={usePageActive('about') ? 'show' : 'hidden'}
+        >
+          <m.h2 variants={itemVariants} className="text-3xl md:text-4xl font-bold text-light">
+            About Me
+          </m.h2>
+          <m.p variants={itemVariants} className="text-tertiary mt-3 max-w-3xl mx-auto leading-relaxed">
+            I enjoy designing scalable, well-structured solutions and turning complex ideas into reliable, user-friendly experiences!
+          </m.p>
+        </m.div>
 
-        <div className="grid md:grid-cols-3 gap-6 md:gap-10 items-stretch">
-          <div className={`bg-card md:col-span-2 p-6 md:p-8 rounded-lg shadow-xl border border-secondary/20 transition-all duration-700 will-change-transform ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
+        <m.div
+          className="grid md:grid-cols-3 gap-6 md:gap-10 items-stretch"
+          variants={containerVariants}
+          initial="hidden"
+          animate={usePageActive('about') ? 'show' : 'hidden'}
+        >
+          <m.div
+            variants={itemVariants}
+            className="bg-card md:col-span-2 p-6 md:p-8 rounded-lg shadow-xl border border-secondary/20"
+          >
             <h3 className="text-2xl md:text-3xl font-semibold text-light mb-6">What I Like Working With</h3>
             <ul className="grid grid-cols-1 gap-3 text-tertiary">
               {favorites.map((item) => (
@@ -70,9 +83,12 @@ const About = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </m.div>
 
-          <div className={`bg-card p-5 md:p-6 rounded-lg shadow-lg transition-all duration-700 delay-100 will-change-transform md:col-span-1 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'}`}>
+          <m.div
+            variants={itemVariants}
+            className="bg-card p-5 md:p-6 rounded-lg shadow-lg md:col-span-1"
+          >
             <h3 className="text-lg md:text-xl font-semibold text-light mb-5">Core Technologies</h3>
             <ul className="grid grid-cols-2 gap-3 text-tertiary">
               {skills.map((skill) => (
@@ -82,8 +98,8 @@ const About = () => {
                 </li>
               ))}
             </ul>
-          </div>
-        </div>
+          </m.div>
+        </m.div>
       </div>
     </section>
   )

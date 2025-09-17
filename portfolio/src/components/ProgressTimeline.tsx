@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { m } from 'framer-motion'
 
 type Section = {
   id: string
@@ -14,86 +15,35 @@ const sections: Section[] = [
 
 const ProgressTimeline = () => {
   const [active, setActive] = useState<string>('home')
-  const [progress, setProgress] = useState<number>(0)
 
+  // Listen to global fullPage.js page changes
   useEffect(() => {
-    const scrollEl = document.querySelector('main.scroll-container') as HTMLElement | null
-    let ticking = false
-    const computeActive = () => {
-      const viewportH = scrollEl ? scrollEl.clientHeight : window.innerHeight
-      const mid = viewportH / 2
-      let next: string | null = null
-      for (const s of sections) {
-        const el = document.getElementById(s.id)
-        if (!el) continue
-        const rect = el.getBoundingClientRect()
-        const bottom = rect.top + rect.height
-        if (rect.top <= mid && bottom >= mid) {
-          next = s.id
-          break
-        }
-      }
-      if (!next) {
-        // Fallback to closest
-        let closest = Number.POSITIVE_INFINITY
-        for (const s of sections) {
-          const el = document.getElementById(s.id)
-          if (!el) continue
-          const rect = el.getBoundingClientRect()
-          const dist = Math.abs(rect.top - mid)
-          if (dist < closest) {
-            closest = dist
-            next = s.id
-          }
-        }
-      }
-      const scrollTop = scrollEl ? scrollEl.scrollTop : window.scrollY
-      if ((scrollTop || 0) < 10) next = 'home'
-      if (next && next !== active) setActive(next)
+    const onPageChange = (e: Event) => {
+      const detail = (e as CustomEvent).detail as { index: number; anchor: string }
+      if (!detail) return
+      setActive(detail.anchor || sections[detail.index]?.id || 'home')
+  // progress not required; follower uses active index directly
+      // visited derived from index now; no explicit set
     }
 
-    const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          computeActive()
-          ticking = false
-        })
-        ticking = true
-      }
-    }
+    window.addEventListener('pageChange', onPageChange as EventListener)
 
-    computeActive()
-    if (scrollEl) scrollEl.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', onScroll)
+    // Initialize based on current hash/anchor if present
+    const hash = window.location.hash.replace('#', '')
+    const initialIdx = Math.max(0, sections.findIndex(s => s.id === hash))
+    setActive(hash || sections[initialIdx]?.id || 'home')
+    // visited is derived from active index
+
     return () => {
-      if (scrollEl) scrollEl.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', onScroll)
+      window.removeEventListener('pageChange', onPageChange as EventListener)
     }
   }, [])
 
-  // Global scroll progress for fill line
-  useEffect(() => {
-    const scrollEl = document.querySelector('main.scroll-container') as HTMLElement | null
-    const onScroll = () => {
-      const el = scrollEl
-      if (!el) return
-      const scrollTop = el.scrollTop
-      const max = Math.max(1, el.scrollHeight - el.clientHeight)
-      const ratio = Math.min(1, Math.max(0, scrollTop / max))
-      setProgress(ratio)
-    }
-
-    onScroll()
-    if (scrollEl) scrollEl.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', onScroll)
-    return () => {
-      if (scrollEl) scrollEl.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', onScroll)
-    }
-  }, [])
+  // No container scroll progress; computed via fullPage index
 
   const total = sections.length
-  const lastId = sections[total - 1]?.id
+  const activeIdx = Math.max(0, sections.findIndex(s => s.id === active))
+  const fillPercent = (activeIdx / Math.max(1, total - 1)) * 100
 
   return (
     <div
@@ -102,35 +52,56 @@ const ProgressTimeline = () => {
     >
       <div className="relative h-64 md:h-72 lg:h-80 w-4 flex items-center justify-center opacity-90">
         {/* Track */}
-        <div className="absolute left-1/2 -translate-x-1/2 w-px h-full bg-secondary/20 rounded" />
-        {/* Fill */}
-        <div
-          className="absolute left-1/2 -translate-x-1/2 w-px bg-secondary rounded"
-          style={{ height: `${progress * 100}%`, top: 0 }}
+        <div className="absolute left-1/2 -translate-x-1/2 w-[2px] h-full bg-secondary/25 rounded" />
+
+        {/* Fill to active (connect past/current circles) */}
+        <m.div
+          className="absolute left-1/2 -translate-x-1/2 w-[2px] bg-secondary rounded"
+          style={{ top: 0 }}
+          initial={{ height: 0 }}
+          animate={{ height: `${fillPercent}%` }}
+          transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
         />
-        {/* Dots */}
+
+        {/* Dots: always visible, active larger */}
         {sections.map((s, idx) => {
           const dotPos = total > 1 ? idx / (total - 1) : 0
           const isActive = active === s.id
-          const isFilled = progress >= dotPos - 0.001
-          const isLast = idx === total - 1
-          const baseSize = isLast ? 12 : 8 // px
-          const activeSize = isLast ? 16 : 12 // px
+          const isPastOrCurrent = idx <= activeIdx
+          const baseSize = 12 // px
+          const activeSize = 16 // px
           const size = isActive ? activeSize : baseSize
-          const isActiveLast = isActive && isLast && s.id === lastId
-          const bgClass = (isFilled || isActiveLast) ? 'bg-secondary' : 'bg-secondary/40'
-          const ringClass = isActive ? 'shadow-[0_0_0_3px] shadow-secondary/20' : ''
+          const ringClass = isActive ? 'shadow-[0_0_0_4px] shadow-secondary/25' : ''
           return (
             <div
               key={s.id}
-              className={`absolute -translate-x-1/2 -translate-y-1/2 rounded-full transition-all duration-300 ${bgClass} ${ringClass}`}
-              style={{
-                left: '50%',
-                top: `${dotPos * 100}%`,
-                width: size,
-                height: size,
-              }}
-            />
+              className="group absolute -translate-x-1/2 -translate-y-1/2 pointer-events-auto"
+              style={{ left: '50%', top: `${dotPos * 100}%` }}
+              title={s.label}
+            >
+              <m.div
+                className={`relative z-20 rounded-full bg-primary border border-secondary/40 ${ringClass}`}
+                animate={{ width: size, height: size }}
+                transition={{ duration: 0.25, ease: 'easeOut' }}
+                style={{ width: size, height: size }}
+              >
+                <m.span
+                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 block rounded-full bg-secondary"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: isPastOrCurrent ? 1 : 0 }}
+                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                  style={{ width: Math.max(6, size - 6), height: Math.max(6, size - 6) }}
+                />
+              </m.div>
+              <div
+                className="absolute left-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 select-none"
+                style={{ whiteSpace: 'nowrap' }}
+              >
+                <span className="px-2 py-0.5 text-xs bg-card text-light rounded shadow border border-tertiary/15">
+                  {s.label}
+                </span>
+              </div>
+            </div>
           )
         })}
       </div>

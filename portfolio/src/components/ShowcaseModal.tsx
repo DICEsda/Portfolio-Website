@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 
 interface Project {
   title: string;
@@ -26,7 +26,7 @@ interface ShowcaseModalProps {
 export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) {
   return (
     <AnimatePresence mode="wait">
-      <motion.div
+      <m.div
         key="modal"
         className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur p-4"
         initial={{ opacity: 0 }}
@@ -36,7 +36,7 @@ export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) 
       >
         <div className="flex gap-6 max-w-[90vw] h-[85vh] items-start">
           {/* Left side: Info Card */}
-          <motion.div
+          <m.div
             className="bg-white rounded-2xl shadow-2xl w-[600px] p-8 relative overflow-y-auto h-full border border-gray-200 scrollbar-nice"
             initial={{ scale: 0.95, x: -40, opacity: 0 }}
             animate={{ scale: 1, x: 0, opacity: 1 }}
@@ -44,23 +44,23 @@ export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) 
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
             onClick={(e) => e.stopPropagation()}
           >
-            <motion.button
+            <m.button
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl transition"
               whileHover={{ scale: 1.2, rotate: 90 }}
               onClick={onClose}
               aria-label="Close"
             >
               &times;
-            </motion.button>
+            </m.button>
 
-            <motion.h2
+            <m.h2
               className="text-3xl font-heading font-bold mb-2"
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.15 }}
             >
               {project.title}
-            </motion.h2>
+            </m.h2>
             <p className="text-blue-600 mb-4">{project.tagline}</p>
             <p className="text-gray-700 mb-6">{project.description}</p>
             
@@ -143,10 +143,10 @@ export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) 
                 </div>
               </div>
             </div>
-          </motion.div>
+          </m.div>
 
           {/* Right side: Floating Images */}
-          <motion.div
+          <m.div
             className="w-[500px] space-y-4 h-full overflow-y-auto scrollbar-nice"
             initial={{ scale: 0.95, x: 40, opacity: 0 }}
             animate={{ scale: 1, x: 0, opacity: 1 }}
@@ -154,7 +154,7 @@ export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) 
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
             onClick={(e) => e.stopPropagation()}
           >
-            <motion.div
+            <m.div
               className="relative rounded-xl overflow-hidden shadow-lg"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -166,10 +166,10 @@ export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) 
                 className="w-full h-auto object-cover"
                 loading="lazy"
               />
-            </motion.div>
+            </m.div>
             
             {project.gallery && project.gallery.length > 0 && (
-              <motion.div 
+              <m.div 
                 className="grid grid-cols-2 gap-2"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -181,7 +181,7 @@ export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) 
                   const fileName = item.split("/").pop() || `asset-${i + 1}`;
 
                   return (
-                    <motion.div
+                    <m.div
                       key={i}
                       className="relative rounded-lg overflow-hidden shadow-md group"
                       whileHover={{ scale: 1.03 }}
@@ -217,14 +217,14 @@ export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) 
                           {isVideo ? "Click to play" : isImage ? "Click to enlarge" : "Open file"}
                         </span>
                       </div>
-                    </motion.div>
+                    </m.div>
                   );
                 })}
-              </motion.div>
+              </m.div>
             )}
-          </motion.div>
+          </m.div>
         </div>
-      </motion.div>
+      </m.div>
     </AnimatePresence>
   );
 }

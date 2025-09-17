@@ -1,74 +1,105 @@
-import { useEffect } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
 import Projects from './components/Projects'
 import Contact from './components/Contact'
-import Footer from './components/Footer'
 import { useTheme } from './context/ThemeContext'
 import ProgressTimeline from './components/ProgressTimeline'
+import BottomPill from './components/BottomPill'
+import LoadingOverlay from './components/LoadingOverlay'
 
 function App() {
   const { theme } = useTheme()
+  const [loading, setLoading] = useState(true)
+  const loaderHiddenRef = useRef(false)
 
   useEffect(() => {
-    // Add observer for scroll animations
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in-view')
+    let fp: any = null
+    let fallbackTimer: any = null
+
+    const start = async () => {
+      try {
+        const el = document.querySelector('#fullpage') as HTMLElement | null
+        if (!el) {
+          // If container is missing, fail open (hide loader) after short delay
+          fallbackTimer = setTimeout(() => setLoading(false), 600)
+          return
+        }
+
+        // Start a fallback timer in case fullpage afterLoad never fires
+        fallbackTimer = setTimeout(() => {
+          if (!loaderHiddenRef.current) {
+            loaderHiddenRef.current = true
+            setLoading(false)
+          }
+        }, 1500)
+
+        const mod = await import('fullpage.js')
+        // @ts-ignore - library may export default or function
+        const FullPage = (mod as any).default ?? mod
+
+        // eslint-disable-next-line new-cap
+        fp = new FullPage('#fullpage', {
+          licenseKey: 'gplv3-license',
+          sectionSelector: '.section',
+          anchors: ['home','about','projects','contact'],
+          navigation: false,
+          scrollingSpeed: 700,
+          fitToSection: true,
+          fitToSectionDelay: 200,
+          keyboardScrolling: true,
+          animateAnchor: true,
+          recordHistory: false,
+          css3: true,
+          easingcss3: 'ease-out',
+          touchSensitivity: 10,
+          normalScrollElements: '[data-allow-native-scroll]',
+          credits: { enabled: false },
+          afterLoad: (_origin: any, destination: any) => {
+            try {
+              const idx = destination?.index ?? 0
+              const anchor = destination?.anchor ?? ''
+              window.dispatchEvent(new CustomEvent('pageChange', { detail: { index: idx, anchor } }))
+              if (!loaderHiddenRef.current) {
+                loaderHiddenRef.current = true
+                setTimeout(() => setLoading(false), 40)
+              }
+            } catch {}
           }
         })
-      },
-      {
-        threshold: 0.1,
-        rootMargin: '0px'
-      }
-    )
-
-    // Observe all elements with scroll-animate class
-    document.querySelectorAll('.scroll-animate').forEach((el) => {
-      observer.observe(el)
-    })
-
-    return () => observer.disconnect()
-  }, [])
-
-  useEffect(() => {
-    const mainElement = document.querySelector('main')
-    if (!mainElement) return
-
-    const handleScroll = () => {
-      const sections = mainElement.querySelectorAll('section')
-      sections.forEach((section) => {
-        const rect = section.getBoundingClientRect()
-        if (rect.top >= 0 && rect.top <= window.innerHeight / 2) {
-          section.classList.add('in-view')
+      } catch (err) {
+        // On any init error, fail open by hiding loader soon
+        if (!loaderHiddenRef.current) {
+          loaderHiddenRef.current = true
+          setTimeout(() => setLoading(false), 200)
         }
-      })
+        console.error('fullPage init failed', err)
+      }
     }
 
-    mainElement.addEventListener('scroll', handleScroll, { passive: true })
-    // Initial check
-    handleScroll()
+    start()
 
     return () => {
-      mainElement.removeEventListener('scroll', handleScroll)
+      try { fp?.destroy?.('all') } catch { /* ignore */ }
+      if (fallbackTimer) clearTimeout(fallbackTimer)
     }
   }, [])
+
+  // Removed legacy scroll observers to avoid conflicts; animations are handled per-component.
 
   return (
     <div className={`${theme} bg-primary min-h-screen`}>
-      <ProgressTimeline />
-      <main className="scroll-container">
-        <Navbar />
-        <Hero />
-        <About />
-        <Projects />
-        <Contact />
-        <Footer />
-      </main>
+  <LoadingOverlay visible={loading} />
+  <ProgressTimeline />
+      <Navbar />
+      <div id="fullpage">
+        <div className="section"><Hero /></div>
+        <div className="section"><About /></div>
+        <div className="section"><Projects /></div>
+        <div className="section"><Contact /></div>
+      </div>
+      <BottomPill />
     </div>
   )
 }

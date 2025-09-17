@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 import { FaGithub, FaLinkedin, FaFacebook } from 'react-icons/fa'
 
 const Footer = () => {
@@ -25,7 +25,7 @@ const Footer = () => {
       <div className="flex justify-center items-center">
         <AnimatePresence mode="wait" initial={false}>
           {isAtLastSection ? (
-            <motion.div
+            <m.div
               key="socials"
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
@@ -61,9 +61,9 @@ const Footer = () => {
               >
                 <FaFacebook className="w-4 h-4" />
               </a>
-            </motion.div>
+            </m.div>
           ) : (
-            <motion.p
+            <m.p
               key="credit"
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
@@ -72,7 +72,7 @@ const Footer = () => {
               className="text-tertiary/80 text-xs md:text-sm bg-primary/70 backdrop-blur-md rounded-full px-4 py-1.5 shadow-md pointer-events-auto"
             >
               Designed and created by <span className="font-medium text-secondary">Yahya Ali</span>
-            </motion.p>
+            </m.p>
           )}
         </AnimatePresence>
       </div>
@@ -80,4 +80,4 @@ const Footer = () => {
   )
 }
 
-export default Footer 
+export default Footer

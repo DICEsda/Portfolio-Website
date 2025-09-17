@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useRef, lazy, Suspense } from 'react';
+import { m, AnimatePresence } from 'framer-motion';
+import { usePageActive } from '../hooks/usePageActive';
 import { 
   FaReact, 
   FaNodeJs, 
@@ -16,7 +17,7 @@ import {
   FaLayerGroup,
   FaSitemap
 } from 'react-icons/fa';
-import ShowcaseModal from './ShowcaseModal';
+const ShowcaseModal = lazy(() => import('./ShowcaseModal'));
 
 interface Project {
   title: string;
@@ -36,42 +37,39 @@ interface Project {
   tags: string[];
 }
 
+// Technology icons mapping with React Icons (hoisted to avoid re-creation)
+const techIcons: { [key: string]: JSX.Element } = {
+  'React': <FaReact className="text-current" />,
+  'TypeScript': <FaCode className="text-current" />,
+  'Tailwind CSS': <FaPalette className="text-current" />,
+  'EmailJS': <FaEnvelope className="text-current" />,
+  'Vite': <FaBolt className="text-current" />,
+  'Node.js': <FaNodeJs className="text-current" />,
+  'MongoDB': <FaDatabase className="text-current" />,
+  'Socket.io': <FaComments className="text-current" />,
+  'Next.js': <FaCode className="text-current" />,
+  'Stripe': <FaCreditCard className="text-current" />,
+  'Firebase': <FaCloud className="text-current" />,
+  'Material-UI': <FaLayerGroup className="text-current" />,
+  'Redux': <FaSitemap className="text-current" />,
+  '.NET MAUI': <FaLayerGroup className="text-current" />,
+  'C#': <FaCode className="text-current" />
+};
 
+// Asset URLs (bundled by Vite)
+const sp4Cover = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 10 - Registrer bruger klasse diagram.png', import.meta.url).href;
+const sp4VidMauiPdf = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 07 - PDF-Generering-MAUI_US9.mp4', import.meta.url).href;
+const sp4VidBilingual = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 08 - Dansk-engelsk-MAUI.mp4', import.meta.url).href;
+const sp4VidWebPdf = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 09 - PDF-Generering-DanskogEnglsk-Webapp.mp4', import.meta.url).href;
+const sp4DocProcess = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 01 - Procesbeskrivelse.pdf', import.meta.url).href;
+const sp4DocTech = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 04 - Teknisk analyse.docx', import.meta.url).href;
+const sp4DocFrontend = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 05 - Frontend Web.docx', import.meta.url).href;
+const sp4DocTests = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 06 - Tests.docx', import.meta.url).href;
+const sp3Pdf = new URL('../../Project-Showcase/Semesterprojekt 3/Semesterprojekt_3 endelig.pdf', import.meta.url).href;
+const sp3Cover = sp4Cover; // reuse a safe image as cover; can be changed later
 
-function Projects() {
-  // Technology icons mapping with React Icons
-  const techIcons: { [key: string]: JSX.Element } = {
-    'React': <FaReact className="text-current" />,
-    'TypeScript': <FaCode className="text-current" />,
-    'Tailwind CSS': <FaPalette className="text-current" />,
-    'EmailJS': <FaEnvelope className="text-current" />,
-    'Vite': <FaBolt className="text-current" />,
-    'Node.js': <FaNodeJs className="text-current" />,
-    'MongoDB': <FaDatabase className="text-current" />,
-    'Socket.io': <FaComments className="text-current" />,
-    'Next.js': <FaCode className="text-current" />,
-    'Stripe': <FaCreditCard className="text-current" />,
-    'Firebase': <FaCloud className="text-current" />,
-    'Material-UI': <FaLayerGroup className="text-current" />,
-    'Redux': <FaSitemap className="text-current" />,
-    '.NET MAUI': <FaLayerGroup className="text-current" />,
-    'C#': <FaCode className="text-current" />
-  };
-
-  // Semester Project 4 asset URLs (bundled by Vite)
-  const sp4Cover = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 10 - Registrer bruger klasse diagram.png', import.meta.url).href;
-  const sp4VidMauiPdf = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 07 - PDF-Generering-MAUI_US9.mp4', import.meta.url).href;
-  const sp4VidBilingual = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 08 - Dansk-engelsk-MAUI.mp4', import.meta.url).href;
-  const sp4VidWebPdf = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 09 - PDF-Generering-DanskogEnglsk-Webapp.mp4', import.meta.url).href;
-  const sp4DocProcess = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 01 - Procesbeskrivelse.pdf', import.meta.url).href;
-  const sp4DocTech = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 04 - Teknisk analyse.docx', import.meta.url).href;
-  const sp4DocFrontend = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 05 - Frontend Web.docx', import.meta.url).href;
-  const sp4DocTests = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 06 - Tests.docx', import.meta.url).href;
-  // Semester Project 3 asset URLs
-  const sp3Pdf = new URL('../../Project-Showcase/Semesterprojekt 3/Semesterprojekt_3 endelig.pdf', import.meta.url).href;
-  const sp3Cover = sp4Cover; // reuse a safe image as cover; can be changed later
-
-  const projects: Project[] = [
+// Projects data hoisted to avoid recomputing
+const projects: Project[] = [
     {
       title: "Home Assistant Automations",
       tagline: "Smart Home Automation Suite",
@@ -204,9 +202,13 @@ function Projects() {
     return 0;
   });
 
+
+function Projects() {
+
   const [currentProject, setCurrentProject] = useState(0);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [slideDirection, setSlideDirection] = useState<1 | -1>(1);
   const sectionRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
   const [initialLoad, setInitialLoad] = useState(true);
@@ -249,38 +251,32 @@ function Projects() {
   }, []);
 
   const nextProject = () => {
-    if (!isAnimating) {
-      setIsAnimating(true);
-      const nextIndex = (currentProject + 1) % projects.length;
-      
-      setTimeout(() => {
-        setCurrentProject(nextIndex);
-        setIsAnimating(false);
-      }, 250);
-    }
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setSlideDirection(1);
+    const nextIndex = (currentProject + 1) % projects.length;
+    setImgLoading(Boolean(projects[nextIndex].coverImage));
+    setCurrentProject(nextIndex);
+    setTimeout(() => setIsAnimating(false), 500);
   };
 
   const prevProject = () => {
-    if (!isAnimating) {
-      setIsAnimating(true);
-      const nextIndex = (currentProject - 1 + projects.length) % projects.length;
-      
-      setTimeout(() => {
-        setCurrentProject(nextIndex);
-        setIsAnimating(false);
-      }, 250);
-    }
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setSlideDirection(-1);
+    const nextIndex = (currentProject - 1 + projects.length) % projects.length;
+    setImgLoading(Boolean(projects[nextIndex].coverImage));
+    setCurrentProject(nextIndex);
+    setTimeout(() => setIsAnimating(false), 500);
   };
 
   const goToProject = (index: number) => {
-    if (!isAnimating && index !== currentProject) {
-      setIsAnimating(true);
-      
-      setTimeout(() => {
-        setCurrentProject(index);
-        setIsAnimating(false);
-      }, 250);
-    }
+    if (isAnimating || index === currentProject) return;
+    setIsAnimating(true);
+    setSlideDirection(index > currentProject ? 1 : -1);
+    setImgLoading(Boolean(projects[index].coverImage));
+    setCurrentProject(index);
+    setTimeout(() => setIsAnimating(false), 500);
   };
 
   const currentProjectData = projects[currentProject];
@@ -288,37 +284,33 @@ function Projects() {
 
   return (
     <>
-      <motion.div 
+      <section 
         id="projects" 
         ref={sectionRef} 
-        className="h-screen flex items-center justify-center py-4 xs:py-5 sm:py-6 md:py-8 overflow-x-hidden scroll-snap-align-start"
-        initial={{ opacity: 0, y: 100 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{
-          type: "spring",
-          stiffness: 50,
-          damping: 20,
-          duration: 1
-        }}
-        viewport={{ once: true, margin: "-100px" }}
-      >
+        className="h-screen flex items-center justify-center overflow-x-hidden"
+  >
   <div className="container mx-auto px-3 xs:px-4 sm:px-5 max-w-6xl">
-          <motion.h2 
-            className={`text-fluid-2xl font-bold mb-6 sm:mb-8 text-center transition-all duration-1000 text-light scroll-animate ${
+          <m.h2 
+            className={`text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-center transition-all duration-1000 text-light scroll-animate ${
               initialLoad ? 'opacity-0 scale-75' : 
               inView ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-5 scale-95'
             }`}
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={usePageActive('projects') ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
           >
             Featured Projects
-          </motion.h2>
+          </m.h2>
         
-          <div className={`relative transition-all duration-1000 delay-300 ${
+          <m.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={usePageActive('projects') ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+            transition={{ delay: 0.04, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className={`relative transition-all duration-1000 delay-300 ${
             initialLoad ? 'opacity-0 translate-y-10' : 
             inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`}>
+          }`}
+          >
             {/* Navigation Arrows */}
             <button
               onClick={prevProject}
@@ -337,9 +329,47 @@ function Projects() {
             </button>
 
             {/* Project Content */}
-            <div
-              className="project-content"
-            >
+            <div className="project-content relative">
+              {/* Loader overlay for carousel transitions and image loading */}
+              <AnimatePresence>
+                {(isAnimating || (imgLoading && Boolean(currentProjectData.coverImage))) && (
+                  <m.div
+                    key="carousel-loader"
+                    className="absolute inset-0 z-20 flex items-center justify-center bg-primary/55 backdrop-blur-[1px]"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    aria-label="Loading project"
+                  >
+                    <div className="flex items-end gap-2">
+                      {[0, 1, 2].map((i) => (
+                        <m.span
+                          key={i}
+                          className="block rounded-full"
+                          style={{ width: 8, height: 8, backgroundColor: 'var(--color-secondary)' }}
+                          animate={{ y: [0, -8, 0], opacity: [1, 0.7, 1] }}
+                          transition={{ duration: 0.9, ease: [0.4, 0.0, 0.2, 1.0], repeat: Infinity, delay: i * 0.12 }}
+                        />
+                      ))}
+                    </div>
+                  </m.div>
+                )}
+              </AnimatePresence>
+              <AnimatePresence mode="wait" initial={false}>
+                <m.div
+                  key={currentProject}
+                  custom={slideDirection}
+                  variants={{
+                    enter: (dir: number) => ({ x: dir > 0 ? 40 : -40, opacity: 0 }),
+                    center: { x: 0, opacity: 1 },
+                    exit: (dir: number) => ({ x: dir > 0 ? -40 : 40, opacity: 0 })
+                  }}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ type: "spring", stiffness: 60, damping: 15, opacity: { duration: 0.2 } }}
+                >
               {currentProject === 0 ? (
                 // Centered layout for portfolio project
                 <div className="max-w-4xl mx-auto text-center px-4 xs:px-6">
@@ -445,7 +475,7 @@ function Projects() {
                         )}
                       </div>
                       <div className="flex flex-col gap-2 xs:gap-3 mt-4">
-                        <motion.button
+                        <m.button
                           onClick={() => setSelectedProject(currentProjectData)}
                           className="w-full py-2.5 xs:py-3 px-4 xs:px-6 bg-blue-600 text-white rounded-lg shadow-lg text-fluid-base xs:text-fluid-lg font-semibold flex items-center justify-center gap-2 touch-manipulation"
                           whileHover={{ 
@@ -460,7 +490,7 @@ function Projects() {
                           }}
                         >
                           <span>View Project Showcase</span>
-                          <motion.div
+                          <m.div
                             animate={{ x: [0, 4, 0] }}
                             transition={{ 
                               duration: 1.5,
@@ -469,8 +499,8 @@ function Projects() {
                             }}
                           >
                             <FaChevronRight className="w-3.5 h-3.5 xs:w-4 xs:h-4" />
-                          </motion.div>
-                        </motion.button>
+                          </m.div>
+                        </m.button>
                         {currentProjectData.sourceCode && (
                           <a
                             href={currentProjectData.sourceCode}
@@ -487,6 +517,8 @@ function Projects() {
                   </div>
                 </div>
               )}
+                </m.div>
+              </AnimatePresence>
             </div>
 
             {/* Dots Indicator */}
@@ -511,15 +543,17 @@ function Projects() {
                 {currentProject + 1} / {projects.length}
               </span>
             </div>
-          </div>
+          </m.div>
         </div>
-      </motion.div>
+  </section>
       <AnimatePresence>
         {selectedProject && (
-          <ShowcaseModal
-            project={selectedProject as Project}
-            onClose={() => setSelectedProject(null)}
-          />
+          <Suspense fallback={null}>
+            <ShowcaseModal
+              project={selectedProject as Project}
+              onClose={() => setSelectedProject(null)}
+            />
+          </Suspense>
         )}
       </AnimatePresence>
     </>
