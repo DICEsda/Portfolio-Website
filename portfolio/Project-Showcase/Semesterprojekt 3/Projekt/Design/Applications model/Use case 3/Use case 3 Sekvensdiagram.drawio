@@ -1,0 +1,98 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 OPR/114.0.0.0" version="25.0.3">
+  <diagram name="Page-1" id="wfxF2s0Q98URZiTwFw8N">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="09gwyna4KFaieDKeGfNG-1" value="" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};participant=umlActor;" vertex="1" parent="1">
+          <mxGeometry x="70" y="70" width="20" height="480" as="geometry" />
+        </mxCell>
+        <mxCell id="09gwyna4KFaieDKeGfNG-2" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="09gwyna4KFaieDKeGfNG-1">
+          <mxGeometry x="5" y="80" width="10" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="09gwyna4KFaieDKeGfNG-3" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="09gwyna4KFaieDKeGfNG-1">
+          <mxGeometry x="5" y="310" width="10" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="09gwyna4KFaieDKeGfNG-4" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="09gwyna4KFaieDKeGfNG-1">
+          <mxGeometry x="5" y="380" width="10" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="09gwyna4KFaieDKeGfNG-5" value="Use case 3 SD" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=200;height=15;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="440" height="490" as="geometry" />
+        </mxCell>
+        <mxCell id="09gwyna4KFaieDKeGfNG-6" value="Webclient" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+          <mxGeometry x="190" y="70" width="100" height="480" as="geometry" />
+        </mxCell>
+        <mxCell id="09gwyna4KFaieDKeGfNG-7" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="09gwyna4KFaieDKeGfNG-6">
+          <mxGeometry x="45" y="80" width="10" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="09gwyna4KFaieDKeGfNG-8" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="09gwyna4KFaieDKeGfNG-6">
+          <mxGeometry x="50" y="180" width="10" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="09gwyna4KFaieDKeGfNG-9" value="Update Humidity/Temperature" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;" edge="1" parent="09gwyna4KFaieDKeGfNG-6" target="09gwyna4KFaieDKeGfNG-8">
+          <mxGeometry x="0.0118" relative="1" as="geometry">
+            <mxPoint x="55" y="160" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="85" y="190" />
+            </Array>
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="09gwyna4KFaieDKeGfNG-10" value="genererer grafer&amp;nbsp;&lt;div&gt;ud fra dataene&lt;/div&gt;" style="html=1;align=left;spacingLeft=2;endArrow=block;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=0;rounded=0;" edge="1" parent="09gwyna4KFaieDKeGfNG-6" target="09gwyna4KFaieDKeGfNG-11">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="55" y="240" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="85" y="270" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="09gwyna4KFaieDKeGfNG-11" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="09gwyna4KFaieDKeGfNG-6">
+          <mxGeometry x="50" y="260" width="10" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="09gwyna4KFaieDKeGfNG-12" value="HTTP" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;html=1;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+          <mxGeometry x="350" y="70" width="100" height="480" as="geometry" />
+        </mxCell>
+        <mxCell id="09gwyna4KFaieDKeGfNG-13" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="09gwyna4KFaieDKeGfNG-12">
+          <mxGeometry x="45" y="100" width="10" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="09gwyna4KFaieDKeGfNG-14" value="tilgå webclient" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;entryX=0;entryY=0;entryDx=0;entryDy=5;" edge="1" parent="1" source="09gwyna4KFaieDKeGfNG-2" target="09gwyna4KFaieDKeGfNG-7">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="170" y="165" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="09gwyna4KFaieDKeGfNG-15" value="Send data som ID variable" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;curved=0;rounded=0;exitX=0;exitY=1;exitDx=0;exitDy=-5;" edge="1" parent="1" source="09gwyna4KFaieDKeGfNG-13" target="09gwyna4KFaieDKeGfNG-7">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="330" y="250" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="09gwyna4KFaieDKeGfNG-16" value="xhttp.open(&quot;GET&quot;, humidity/tempertaure)" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;entryX=0;entryY=0;entryDx=0;entryDy=5;" edge="1" parent="1" source="09gwyna4KFaieDKeGfNG-7" target="09gwyna4KFaieDKeGfNG-13">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="320" y="185" as="sourcePoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="09gwyna4KFaieDKeGfNG-17" value="hum/temphttxp.open(&quot;GET&quot;&lt;div&gt;,&quot;graph_Tem/Humidity&quot;,true;)&lt;/div&gt;" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;entryX=1;entryY=0;entryDx=0;entryDy=5;" edge="1" parent="1" source="09gwyna4KFaieDKeGfNG-7" target="09gwyna4KFaieDKeGfNG-3">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="155" y="415" as="sourcePoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="09gwyna4KFaieDKeGfNG-18" value="opt" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;" vertex="1" parent="1">
+          <mxGeometry x="45" y="410" width="425" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="09gwyna4KFaieDKeGfNG-19" value="" style="html=1;points=[[0,0,0,0,5],[0,1,0,0,-5],[1,0,0,0,5],[1,1,0,0,-5]];perimeter=orthogonalPerimeter;outlineConnect=0;targetShapes=umlLifeline;portConstraint=eastwest;newEdgeStyle={&quot;curved&quot;:0,&quot;rounded&quot;:0};" vertex="1" parent="1">
+          <mxGeometry x="235" y="460" width="10" height="10" as="geometry" />
+        </mxCell>
+        <mxCell id="09gwyna4KFaieDKeGfNG-20" value="interagere med grafer" style="html=1;verticalAlign=bottom;endArrow=block;curved=0;rounded=0;" edge="1" parent="1" source="09gwyna4KFaieDKeGfNG-4" target="09gwyna4KFaieDKeGfNG-19">
+          <mxGeometry width="80" relative="1" as="geometry">
+            <mxPoint x="120" y="455" as="sourcePoint" />
+            <mxPoint x="200" y="455" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="09gwyna4KFaieDKeGfNG-21" value="&lt;font style=&quot;font-size: 10px;&quot;&gt;loop&lt;/font&gt;" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=55;height=20;" vertex="1" parent="1">
+          <mxGeometry x="45" y="120" width="425" height="290" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

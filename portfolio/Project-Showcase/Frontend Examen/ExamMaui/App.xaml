@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FED___Exam.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <!-- New Color Palette -->
+            <Color x:Key="PrimaryColorLight">LightGreen</Color>
+            <Color x:Key="PrimaryColorDark">#90CAF9</Color>
+            <Color x:Key="SecondaryColorLight">#F2994A</Color>
+            <Color x:Key="SecondaryColorDark">#FFB74D</Color>
+            <Color x:Key="ErrorColorLight">#EB5757</Color>
+            <Color x:Key="ErrorColorDark">#EF9A9A</Color>
+            <Color x:Key="SuccessColorLight">#27AE60</Color>
+            <Color x:Key="SuccessColorDark">#66BB6A</Color>
+            <Color x:Key="InfoColorLight">#56CCF2</Color>
+            <Color x:Key="InfoColorDark">#29B6F6</Color>
+            <Color x:Key="WarningColorLight">#F2C94C</Color>
+            <Color x:Key="WarningColorDark">#FFD54F</Color>
+            <Color x:Key="BackgroundColorLight">#FFFFFF</Color>
+            <Color x:Key="BackgroundColorDark">#121212</Color>
+            <Color x:Key="TextColorLight">#000000</Color>
+            <Color x:Key="TextColorDark">#FFFFFF</Color>
+            <!-- Shell background colors -->
+            <Color x:Key="ShellBackgroundLight">NavajoWhite</Color>
+            <Color x:Key="ShellBackgroundDark">#212121</Color>
+
+            <!-- Styles -->
+            <Style TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource BackgroundColorLight}, Dark={StaticResource BackgroundColorDark}}" />
+            </Style>
+
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource TextColorLight}, Dark={StaticResource TextColorDark}}" />
+            </Style>
+
+            <Style x:Key="AccentButtonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource PrimaryColorLight}, Dark={StaticResource PrimaryColorDark}}" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Padding" Value="10,5" />
+                <Setter Property="HeightRequest" Value="45"/>
+                <Setter Property="WidthRequest" Value="300"/>
+            </Style>
+
+
+            <!-- Shell Style -->
+            <Style TargetType="Shell">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource ShellBackgroundLight}, Dark={StaticResource ShellBackgroundDark}}" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -15,7 +15,8 @@ import {
   FaCloud,
   FaCreditCard,
   FaLayerGroup,
-  FaSitemap
+  FaSitemap,
+  FaGithub
 } from 'react-icons/fa';
 const ShowcaseModal = lazy(() => import('./ShowcaseModal'));
 
@@ -35,6 +36,12 @@ interface Project {
   challenges: string;
   projectNature: string;
   tags: string[];
+  sections?: Array<{
+    title: string;
+    description?: string;
+    technologies: string[];
+    sourceCode?: string;
+  }>;
 }
 
 // Technology icons mapping with React Icons (hoisted to avoid re-creation)
@@ -67,9 +74,61 @@ const sp4DocFrontend = new URL('../../Project-Showcase/semester-project4/Bilag (
 const sp4DocTests = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 06 - Tests.docx', import.meta.url).href;
 const sp3Pdf = new URL('../../Project-Showcase/Semesterprojekt 3/Semesterprojekt_3 endelig.pdf', import.meta.url).href;
 const sp3Cover = sp4Cover; // reuse a safe image as cover; can be changed later
+// Personal Tracker assets
+const ptCover = new URL('../../Project-Showcase/PersonalTracker-main/PersonalTrackerNative/assets/images/icon.png', import.meta.url).href;
+const ptReadme = new URL('../../Project-Showcase/PersonalTracker-main/README.md', import.meta.url).href;
+const ptPrd = new URL('../../Project-Showcase/PersonalTracker-main/ProductRequirementDocument.md', import.meta.url).href;
 
 // Projects data hoisted to avoid recomputing
 const projects: Project[] = [
+    {
+      title: "Personal Tracker — Suite",
+      tagline: "Native + Web app with .NET and Node backends",
+      description: "A multi-platform personal tracker consisting of a React web app, an Expo/React Native app, a .NET 9 backend with SQLite and Google Calendar integration, and a Node/Express food microservice. The suite tracks finances, training, prayer, knowledge, and integrates calendar events.",
+      features: [
+        "Modular native and web frontends",
+        ".NET 9 backend with EF Core + SQLite",
+        "Google Calendar API integration",
+        "Node/Express food service",
+        "Dashboard metrics and graphs"
+      ],
+      technologies: ["React", "TypeScript", "Tailwind CSS", "Expo", "React Native", ".NET 9", "C#", "SQLite", "Express", "Node.js"],
+      coverImage: ptCover,
+      gallery: [ptPrd, ptReadme],
+      type: "Multi-platform App",
+      date: "2025",
+      role: "Full Stack Developer",
+      challenges: "Coordinating multiple frontends with separate backends, maintaining shared domain concepts, handling OAuth and Google Calendar API flows, and ensuring consistent UX across platforms.",
+      projectNature: "Personal Project",
+      tags: ["Full Stack", "React", "Expo", ".NET", "Node"],
+      sourceCode: "https://github.com/DICEsda/Portfolio-Website/tree/main/portfolio/Project-Showcase/PersonalTracker-main",
+      sections: [
+        {
+          title: "Native App (Expo)",
+          description: "Tabs for finances, knowledge, meditation, prayer, and training with themed UI and EPUB reading.",
+          technologies: ["Expo", "React Native", "TypeScript"],
+          sourceCode: "https://github.com/DICEsda/Portfolio-Website/tree/main/portfolio/Project-Showcase/PersonalTracker-main/PersonalTrackerNative"
+        },
+        {
+          title: "Web App (React)",
+          description: "Dashboard grid, metric cards, graph modal, and Google Calendar integration.",
+          technologies: ["React", "TypeScript", "Vite", "Tailwind CSS"],
+          sourceCode: "https://github.com/DICEsda/Portfolio-Website/tree/main/portfolio/Project-Showcase/PersonalTracker-main/PersonalTrackerReact"
+        },
+        {
+          title: ".NET Backend",
+          description: "ASP.NET Core 9 with EF Core, SQLite, and Google Calendar service.",
+          technologies: [".NET 9", "C#", "EF Core", "SQLite", "Google API"],
+          sourceCode: "https://github.com/DICEsda/Portfolio-Website/tree/main/portfolio/Project-Showcase/PersonalTracker-main/PersonalTrackerBackend"
+        },
+        {
+          title: "Node Food Service",
+          description: "Express microservice with basic routes and static pages.",
+          technologies: ["Node.js", "Express"],
+          sourceCode: "https://github.com/DICEsda/Portfolio-Website/tree/main/portfolio/Project-Showcase/PersonalTracker-main/food-backend"
+        }
+      ]
+    },
     {
       title: "Home Assistant Automations",
       tagline: "Smart Home Automation Suite",
@@ -94,7 +153,7 @@ const projects: Project[] = [
     {
       title: "Portfolio Website",
       tagline: "A modern, responsive portfolio showcase",
-      description: "A modern, responsive portfolio website built with React and TypeScript. Features include smooth scroll navigation, dark/light mode toggle, animated sections, and a functional contact form with EmailJS integration. The design emphasizes clean aesthetics with custom color schemes and smooth transitions.",
+      description: "I built this portfolio to show how I design and ship front‑end work. It’s React + TypeScript with Tailwind, smooth section navigation, light/dark theme, and playful but performant animations. The contact form runs on EmailJS, and the app is tuned for quick loads with Vite and lazy chunks. It’s a small project, but it reflects how I think about UX, accessibility, and clean, readable code.",
       features: [
         "Smooth scroll navigation",
         "Dark/light mode toggle",
@@ -372,13 +431,13 @@ function Projects() {
                 >
               {currentProject === 0 ? (
                 // Centered layout for portfolio project
-                <div className="max-w-4xl mx-auto text-center px-4 xs:px-6">
+                <m.div className="max-w-4xl mx-auto text-center px-4 xs:px-6" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, ease: [0.22,1,0.36,1] }}>
                   <h3 className="text-fluid-xl xs:text-fluid-2xl font-semibold text-light mb-4 scroll-animate">
                     {currentProjectData.title}
                   </h3>
-                  <div className="bg-card p-4 xs:p-6 rounded-lg mb-6 shadow-lg scroll-animate">
+                  <m.div className="bg-card p-4 xs:p-6 rounded-lg mb-6 shadow-lg scroll-animate" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.06, duration: 0.3 }}>
                     <p className="text-fluid-base text-tertiary leading-relaxed">{currentProjectData.description}</p>
-                  </div>
+                  </m.div>
                   <div className="flex flex-wrap justify-center gap-2 xs:gap-3 sm:gap-4 mb-6 scroll-animate">
                     {currentProjectData.technologies.map((tech) => (
                       <span
@@ -390,7 +449,7 @@ function Projects() {
                       </span>
                     ))}
                   </div>
-                  <div className="space-y-4 xs:space-y-6 max-w-2xl mx-auto">
+                  <m.div className="space-y-4 xs:space-y-6 max-w-2xl mx-auto" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12, duration: 0.28 }}>
                     <div className="relative overflow-hidden rounded-lg shadow-lg">
                       {currentProjectData.type === "IoT/Smart Home" && (
                         <div className="absolute top-3 xs:top-4 left-3 xs:left-4 px-2 xs:px-3 py-1 xs:py-1.5 bg-primary/90 backdrop-blur-sm text-secondary rounded-lg text-fluid-sm font-medium border border-secondary/20 z-10">
@@ -413,17 +472,7 @@ function Projects() {
                           </>
                         )}
                       </div>
-                      {currentProjectData.sourceCode && (
-                        <a
-                          href={currentProjectData.sourceCode}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="absolute bottom-3 xs:bottom-4 right-3 xs:right-4 px-3 xs:px-4 py-1.5 xs:py-2 bg-gradient-to-r from-secondary to-tertiary text-white rounded-lg hover:from-tertiary hover:to-secondary transition-all duration-300 shadow-lg font-medium flex items-center gap-1.5 xs:gap-2 text-fluid-sm z-10"
-                        >
-                          <FaCode className="w-3.5 h-3.5 xs:w-4 xs:h-4" />
-                          View Source
-                        </a>
-                      )}
+                      {/* Source link moved below action buttons for consistency */}
                     </div>
                     <button
                       onClick={() => setSelectedProject(currentProjectData)}
@@ -432,18 +481,29 @@ function Projects() {
                       <span>View Project Showcase</span>
                       <FaChevronRight className="w-3.5 h-3.5 xs:w-4 xs:h-4" />
                     </button>
-                  </div>
-                </div>
+                    {currentProjectData.sourceCode && (
+                      <a
+                        href={currentProjectData.sourceCode}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full py-2 xs:py-2.5 px-4 xs:px-6 bg-card border border-tertiary/25 text-secondary rounded-lg hover:bg-secondary/10 hover:border-secondary/40 transition-all duration-300 shadow-lg font-medium flex items-center justify-center gap-2 text-fluid-sm hover:scale-[1.02] transform"
+                      >
+                        <FaGithub className="w-4 h-4" />
+                        <span>View on GitHub</span>
+                      </a>
+                    )}
+                  </m.div>
+                </m.div>
               ) : (
                 // Alternating layout for other projects
-                <div className="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-center">
-                  <div className="md:text-left order-2 md:order-1">
+                <m.div className="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-center" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
+                  <m.div className="md:text-left order-2 md:order-1" initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.3, delay: 0.05 }}>
                     <h3 className="text-fluid-xl xs:text-fluid-2xl font-semibold text-light mb-4">
                       {currentProjectData.title}
                     </h3>
-                    <div className="bg-card p-4 xs:p-6 rounded-lg mb-4 xs:mb-6 shadow-lg">
+                    <m.div className="bg-card p-4 xs:p-6 rounded-lg mb-4 xs:mb-6 shadow-lg" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }}>
                       <p className="text-fluid-base text-tertiary leading-relaxed">{currentProjectData.description}</p>
-                    </div>
+                    </m.div>
                     <div className="flex flex-wrap gap-2 xs:gap-3 sm:gap-4 mb-4 xs:mb-6">
                       {currentProjectData.technologies.map((tech) => (
                         <span
@@ -455,9 +515,9 @@ function Projects() {
                         </span>
                       ))}
                     </div>
-                  </div>
-                  <div className="order-1 md:order-2">
-                    <div className="relative overflow-hidden rounded-lg shadow-lg">
+                  </m.div>
+                  <m.div className="order-1 md:order-2" initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.3, delay: 0.05 }}>
+                    <m.div className="relative overflow-hidden rounded-lg shadow-lg" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }}>
                       <div className="aspect-w-16 aspect-h-9 overflow-hidden bg-card">
                         {currentProjectData.coverImage && (
                           <>
@@ -474,7 +534,7 @@ function Projects() {
                           </>
                         )}
                       </div>
-                      <div className="flex flex-col gap-2 xs:gap-3 mt-4">
+                      <m.div className="flex flex-col gap-2 xs:gap-3 mt-4" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25, delay: 0.05 }}>
                         <m.button
                           onClick={() => setSelectedProject(currentProjectData)}
                           className="w-full py-2.5 xs:py-3 px-4 xs:px-6 bg-blue-600 text-white rounded-lg shadow-lg text-fluid-base xs:text-fluid-lg font-semibold flex items-center justify-center gap-2 touch-manipulation"
@@ -506,16 +566,16 @@ function Projects() {
                             href={currentProjectData.sourceCode}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="w-full py-2 xs:py-2.5 px-4 xs:px-6 bg-gradient-to-r from-secondary to-tertiary text-white rounded-lg hover:from-tertiary hover:to-secondary transition-all duration-300 shadow-lg font-medium flex items-center justify-center gap-2 text-fluid-sm hover:scale-[1.02] transform"
+                            className="w-full py-2 xs:py-2.5 px-4 xs:px-6 bg-card border border-tertiary/25 text-secondary rounded-lg hover:bg-secondary/10 hover:border-secondary/40 transition-all duration-300 shadow-lg font-medium flex items-center justify-center gap-2 text-fluid-sm hover:scale-[1.02] transform"
                           >
-                            <FaCode className="w-3.5 h-3.5 xs:w-4 xs:h-4" />
-                            <span>View Source</span>
+                            <FaGithub className="w-4 h-4" />
+                            <span>View on GitHub</span>
                           </a>
                         )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                      </m.div>
+                    </m.div>
+                  </m.div>
+                </m.div>
               )}
                 </m.div>
               </AnimatePresence>

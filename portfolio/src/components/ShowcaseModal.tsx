@@ -1,4 +1,5 @@
 import { m, AnimatePresence } from "framer-motion";
+import { createPortal } from "react-dom";
 
 interface Project {
   title: string;
@@ -16,6 +17,12 @@ interface Project {
   challenges: string;
   projectNature: string;
   tags: string[];
+  sections?: Array<{
+    title: string;
+    description?: string;
+    technologies: string[];
+    sourceCode?: string;
+  }>;
 }
 
 interface ShowcaseModalProps {
@@ -24,15 +31,17 @@ interface ShowcaseModalProps {
 }
 
 export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) {
-  return (
+  const modal = (
     <AnimatePresence mode="wait">
       <m.div
         key="modal"
-        className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur p-4"
+        className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/40 backdrop-blur p-4"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         onClick={onClose}
+        role="dialog"
+        aria-modal="true"
       >
         <div className="flex gap-6 max-w-[90vw] h-[85vh] items-start">
           {/* Left side: Info Card */}
@@ -65,6 +74,31 @@ export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) 
             <p className="text-gray-700 mb-6">{project.description}</p>
             
             <div className="space-y-6">
+              {project.sections && project.sections.length > 0 && (
+                <div>
+                  <h3 className="font-semibold text-lg mb-2">Project Sections</h3>
+                  <div className="space-y-3">
+                    {project.sections.map((sec, i) => (
+                      <div key={i} className="border border-gray-200 rounded-lg p-3">
+                        <div className="flex items-center justify-between mb-2">
+                          <h4 className="font-semibold">{sec.title}</h4>
+                          {sec.sourceCode && (
+                            <a href={sec.sourceCode} target="_blank" rel="noopener noreferrer" className="text-blue-600 text-sm hover:underline">Source</a>
+                          )}
+                        </div>
+                        {sec.description && (
+                          <p className="text-gray-700 text-sm mb-2">{sec.description}</p>
+                        )}
+                        <div className="flex flex-wrap gap-2">
+                          {sec.technologies.map((t, ti) => (
+                            <span key={ti} className="px-2 py-0.5 bg-blue-50 text-blue-600 rounded-full text-xs">{t}</span>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
               <div>
                 <h3 className="font-semibold text-lg mb-2">Key Features</h3>
                 <ul className="list-disc ml-6 space-y-1">
@@ -227,4 +261,9 @@ export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) 
       </m.div>
     </AnimatePresence>
   );
+
+  if (typeof document !== 'undefined' && document.body) {
+    return createPortal(modal, document.body);
+  }
+  return modal;
 }

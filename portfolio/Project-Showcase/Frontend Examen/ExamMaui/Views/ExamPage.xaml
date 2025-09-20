@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FED___Exam.ViewModels"
+             x:Class="FED___Exam.Views.ExamPage">
+
+    <Shell.TitleView>
+        <HorizontalStackLayout Spacing="10" Padding="10,0" HorizontalOptions="Start">
+            <Button Text="Eksamen" Clicked="OnGoToExamPageClicked" BackgroundColor="Transparent" BorderColor="Transparent" HeightRequest="30"/>
+            <Button Text="Tilføj Studerende" Clicked="OnGoToAddStudentPageClicked" BackgroundColor="Transparent" BorderColor="Transparent" HeightRequest="30" />
+            <Button Text="Eksaminer" Clicked="OnGoToExamSessionPageClicked" BackgroundColor="Transparent" BorderColor="Transparent" HeightRequest="30" />
+            <Button Text="Historik" Clicked="OnGoToHistoryPageClicked"  BackgroundColor="Transparent" BorderColor="Transparent" HeightRequest="30"/>
+            <Button Text="{Binding ThemeIcon}" FontFamily="FontAwesomeSolid" FontSize="20" Command="{Binding ToggleThemeCommand}" BackgroundColor="Transparent" HorizontalOptions="End" BorderColor="Transparent"/>
+        </HorizontalStackLayout>
+    </Shell.TitleView>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <Entry Placeholder="Eksamenstermin" Text="{Binding Termin}"
+                   BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundColorLight}, Dark={StaticResource BackgroundColorDark}}"
+                   TextColor="{AppThemeBinding Light={StaticResource TextColorLight}, Dark={StaticResource TextColorDark}}" />
+            <Entry Placeholder="Kursusnavn" Text="{Binding CourseName}"
+                   BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundColorLight}, Dark={StaticResource BackgroundColorDark}}"
+                   TextColor="{AppThemeBinding Light={StaticResource TextColorLight}, Dark={StaticResource TextColorDark}}" />
+            <DatePicker Date="{Binding Date}" HorizontalOptions="Center" />
+            <Entry Placeholder="Antal spørgsmål" Keyboard="Numeric" Text="{Binding NumberOfQuestions}"
+                   BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundColorLight}, Dark={StaticResource BackgroundColorDark}}"
+                   TextColor="{AppThemeBinding Light={StaticResource TextColorLight}, Dark={StaticResource TextColorDark}}" />
+            <Entry Placeholder="Eksaminationstid (minutter)" Keyboard="Numeric" Text="{Binding DurationMinutes}"
+                   BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundColorLight}, Dark={StaticResource BackgroundColorDark}}"
+                   TextColor="{AppThemeBinding Light={StaticResource TextColorLight}, Dark={StaticResource TextColorDark}}" />
+            <TimePicker Time="{Binding StartTime}"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundColorLight}, Dark={StaticResource BackgroundColorDark}}"
+                        TextColor="{AppThemeBinding Light={StaticResource TextColorLight}, Dark={StaticResource TextColorDark}}" 
+                        HorizontalOptions="Center"/>
+
+            <Button Text="Gem eksamen" Command="{Binding SaveExamCommand}" WidthRequest="150" HorizontalOptions="Center" Style="{StaticResource AccentButtonStyle}" />
+            <Button Text="Ryd alle eksamener" Command="{Binding ClearExamsAsyncCommand}" WidthRequest="180" HorizontalOptions="Center" Style="{StaticResource AccentButtonStyle}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

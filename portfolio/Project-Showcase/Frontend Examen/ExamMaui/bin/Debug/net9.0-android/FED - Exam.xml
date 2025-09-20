@@ -1,0 +1,246 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FED - Exam</name>
+    </assembly>
+    <members>
+        <member name="T:FED___Exam.ViewModels.AddStudentViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:FED___Exam.ViewModels.AddStudentViewModel.Name">
+            <inheritdoc cref="F:FED___Exam.ViewModels.AddStudentViewModel.name"/>
+        </member>
+        <member name="P:FED___Exam.ViewModels.AddStudentViewModel.StudentNo">
+            <inheritdoc cref="F:FED___Exam.ViewModels.AddStudentViewModel.studentNo"/>
+        </member>
+        <member name="P:FED___Exam.ViewModels.AddStudentViewModel.ThemeIcon">
+            <inheritdoc cref="F:FED___Exam.ViewModels.AddStudentViewModel.themeIcon"/>
+        </member>
+        <member name="P:FED___Exam.ViewModels.AddStudentViewModel.SelectedExam">
+            <inheritdoc cref="F:FED___Exam.ViewModels.AddStudentViewModel.selectedExam"/>
+        </member>
+        <member name="F:FED___Exam.ViewModels.AddStudentViewModel.toggleThemeCommand">
+            <summary>The backing field for <see cref="P:FED___Exam.ViewModels.AddStudentViewModel.ToggleThemeCommand"/>.</summary>
+        </member>
+        <member name="P:FED___Exam.ViewModels.AddStudentViewModel.ToggleThemeCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:FED___Exam.ViewModels.AddStudentViewModel.ToggleTheme"/>.</summary>
+        </member>
+        <member name="T:FED___Exam.ViewModels.ExamSessionViewModel">
+            <inheritdoc/>
+        </member>
+        <member name="P:FED___Exam.ViewModels.ExamSessionViewModel.SelectedExam">
+            <inheritdoc cref="F:FED___Exam.ViewModels.ExamSessionViewModel.selectedExam"/>
+        </member>
+        <member name="P:FED___Exam.ViewModels.ExamSessionViewModel.CurrentStudent">
+            <inheritdoc cref="F:FED___Exam.ViewModels.ExamSessionViewModel.currentStudent"/>
+        </member>
+        <member name="P:FED___Exam.ViewModels.ExamSessionViewModel.QuestionNo">
+            <inheritdoc cref="F:FED___Exam.ViewModels.ExamSessionViewModel.questionNo"/>
+        </member>
+        <member name="P:FED___Exam.ViewModels.ExamSessionViewModel.Notes">
+            <inheritdoc cref="F:FED___Exam.ViewModels.ExamSessionViewModel.notes"/>
+        </member>
+        <member name="P:FED___Exam.ViewModels.ExamSessionViewModel.SelectedGrade">
+            <inheritdoc cref="F:FED___Exam.ViewModels.ExamSessionViewModel.selectedGrade"/>
+        </member>
+        <member name="P:FED___Exam.ViewModels.ExamSessionViewModel.RemainingTime">
+            <inheritdoc cref="F:FED___Exam.ViewModels.ExamSessionViewModel.remainingTime"/>
+        </member>
+        <member name="P:FED___Exam.ViewModels.ExamSessionViewModel.RemainingSeconds">
+            <inheritdoc cref="F:FED___Exam.ViewModels.ExamSessionViewModel.remainingSeconds"/>
+        </member>
+        <member name="P:FED___Exam.ViewModels.ExamSessionViewModel.TotalSeconds">
+            <inheritdoc cref="F:FED___Exam.ViewModels.ExamSessionViewModel.totalSeconds"/>
+        </member>
+        <member name="P:FED___Exam.ViewModels.ExamSessionViewModel.ThemeIcon">
+            <inheritdoc cref="F:FED___Exam.ViewModels.ExamSessionViewModel.themeIcon"/>
+        </member>
+        <member name="M:FED___Exam.ViewModels.ExamSessionViewModel.OnSelectedExamChanged(FED___Exam.Models.Exam)">
+            <summary>Executes the logic for when <see cref="P:FED___Exam.ViewModels.ExamSessionViewModel.SelectedExam"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:FED___Exam.ViewModels.ExamSessionViewModel.SelectedExam"/> is changed.</remarks>
+        </member>
+        <member name="T:FED___Exam.ViewModels.ExamViewModel">
+            <inheritdoc/>
+        </member>
+        <member name="P:FED___Exam.ViewModels.ExamViewModel.ThemeIcon">
+            <inheritdoc cref="F:FED___Exam.ViewModels.ExamViewModel.themeIcon"/>
+        </member>
+        <member name="P:FED___Exam.ViewModels.ExamViewModel.Termin">
+            <inheritdoc cref="F:FED___Exam.ViewModels.ExamViewModel.termin"/>
+        </member>
+        <member name="P:FED___Exam.ViewModels.ExamViewModel.CourseName">
+            <inheritdoc cref="F:FED___Exam.ViewModels.ExamViewModel.courseName"/>
+        </member>
+        <member name="P:FED___Exam.ViewModels.ExamViewModel.Date">
+            <inheritdoc cref="F:FED___Exam.ViewModels.ExamViewModel.date"/>
+        </member>
+        <member name="P:FED___Exam.ViewModels.ExamViewModel.NumberOfQuestions">
+            <inheritdoc cref="F:FED___Exam.ViewModels.ExamViewModel.numberOfQuestions"/>
+        </member>
+        <member name="P:FED___Exam.ViewModels.ExamViewModel.DurationMinutes">
+            <inheritdoc cref="F:FED___Exam.ViewModels.ExamViewModel.durationMinutes"/>
+        </member>
+        <member name="P:FED___Exam.ViewModels.ExamViewModel.StartTime">
+            <inheritdoc cref="F:FED___Exam.ViewModels.ExamViewModel.startTime"/>
+        </member>
+        <member name="T:FED___Exam.ViewModels.HistoryViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:FED___Exam.ViewModels.HistoryViewModel.ThemeIcon">
+            <inheritdoc cref="F:FED___Exam.ViewModels.HistoryViewModel.themeIcon"/>
+        </member>
+        <member name="P:FED___Exam.ViewModels.HistoryViewModel.SelectedExam">
+            <inheritdoc cref="F:FED___Exam.ViewModels.HistoryViewModel.selectedExam"/>
+        </member>
+        <member name="P:FED___Exam.ViewModels.HistoryViewModel.AverageGrade">
+            <inheritdoc cref="F:FED___Exam.ViewModels.HistoryViewModel.averageGrade"/>
+        </member>
+        <member name="M:FED___Exam.ViewModels.HistoryViewModel.OnSelectedExamChanged(FED___Exam.Models.Exam)">
+            <summary>Executes the logic for when <see cref="P:FED___Exam.ViewModels.HistoryViewModel.SelectedExam"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:FED___Exam.ViewModels.HistoryViewModel.SelectedExam"/> is changed.</remarks>
+        </member>
+        <member name="F:FED___Exam.ViewModels.HistoryViewModel.toggleThemeCommand">
+            <summary>The backing field for <see cref="P:FED___Exam.ViewModels.HistoryViewModel.ToggleThemeCommand"/>.</summary>
+        </member>
+        <member name="P:FED___Exam.ViewModels.HistoryViewModel.ToggleThemeCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:FED___Exam.ViewModels.HistoryViewModel.ToggleTheme"/>.</summary>
+        </member>
+        <member name="F:FED___Exam.ViewModels.HistoryViewModel.loadExamsCommand">
+            <summary>The backing field for <see cref="P:FED___Exam.ViewModels.HistoryViewModel.LoadExamsCommand"/>.</summary>
+        </member>
+        <member name="P:FED___Exam.ViewModels.HistoryViewModel.LoadExamsCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:FED___Exam.ViewModels.HistoryViewModel.LoadExamsAsync"/>.</summary>
+        </member>
+        <member name="T:FED___Exam.Resource">
+            <summary>
+            Android Resource Designer class.
+            Exposes the Android Resource designer assembly into the project Namespace.
+            </summary>
+        </member>
+        <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs">
+            <summary>
+            A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instances
+            for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Name">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Name" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.StudentNo">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "StudentNo" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ThemeIcon">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ThemeIcon" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedExam">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedExam" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CurrentStudent">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CurrentStudent" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.QuestionNo">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "QuestionNo" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Notes">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Notes" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectedGrade">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectedGrade" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.RemainingTime">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "RemainingTime" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.RemainingSeconds">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "RemainingSeconds" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TotalSeconds">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TotalSeconds" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Termin">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Termin" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CourseName">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CourseName" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Date">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Date" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.NumberOfQuestions">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "NumberOfQuestions" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.DurationMinutes">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "DurationMinutes" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.StartTime">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "StartTime" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.AverageGrade">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "AverageGrade" generated properties.</summary>
+        </member>
+        <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs">
+            <summary>
+            A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instances
+            for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Name">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Name" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.StudentNo">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "StudentNo" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ThemeIcon">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ThemeIcon" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedExam">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedExam" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CurrentStudent">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CurrentStudent" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.QuestionNo">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "QuestionNo" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Notes">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Notes" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectedGrade">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectedGrade" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.RemainingTime">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "RemainingTime" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.RemainingSeconds">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "RemainingSeconds" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TotalSeconds">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TotalSeconds" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Termin">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Termin" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CourseName">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CourseName" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Date">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Date" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.NumberOfQuestions">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "NumberOfQuestions" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.DurationMinutes">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "DurationMinutes" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.StartTime">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "StartTime" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.AverageGrade">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "AverageGrade" generated properties.</summary>
+        </member>
+    </members>
+</doc>

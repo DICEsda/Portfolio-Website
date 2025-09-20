@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FED___Exam.ViewModels"
+             x:Class="FED___Exam.Views.HistoryPage">
+
+    <Shell.TitleView>
+        <HorizontalStackLayout Spacing="10" Padding="10,0" HorizontalOptions="Start">
+            <Button Text="Eksamen" Clicked="OnGoToExamPageClicked" BackgroundColor="Transparent" BorderColor="Transparent" HeightRequest="30"/>
+            <Button Text="Tilføj Studerende" Clicked="OnGoToAddStudentPageClicked" BackgroundColor="Transparent" BorderColor="Transparent" HeightRequest="30"/>
+            <Button Text="Eksaminer" Clicked="OnGoToExamSessionPageClicked" BackgroundColor="Transparent" BorderColor="Transparent" HeightRequest="30" />
+            <Button Text="Historik" Clicked="OnGoToHistoryPageClicked"  BackgroundColor="Transparent" BorderColor="Transparent" HeightRequest="30"/>
+            <Button Text="{Binding ThemeIcon}" FontFamily="FontAwesomeSolid" FontSize="20" Command="{Binding ToggleThemeCommand}" BackgroundColor="Transparent" HorizontalOptions="End" BorderColor="Transparent"/>
+        </HorizontalStackLayout>
+    </Shell.TitleView>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <HorizontalStackLayout>
+                <Label Text="Historik" FontSize="24" FontAttributes="Bold" HorizontalOptions="StartAndExpand" />
+            </HorizontalStackLayout>
+
+            <Picker Title="Vælg eksamen" ItemsSource="{Binding Exams}" ItemDisplayBinding="{Binding CourseName}" SelectedItem="{Binding SelectedExam}"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundColorLight}, Dark={StaticResource BackgroundColorDark}}"
+                    TextColor="{AppThemeBinding Light={StaticResource TextColorLight}, Dark={StaticResource TextColorDark}}" />
+
+            <Label Text="Karaktergennemsnit: {Binding AverageGrade}" FontAttributes="Bold" />
+
+            <CollectionView ItemsSource="{Binding Results}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout>
+                            <Label Text="Navn: {Binding Name}" TextColor="{AppThemeBinding Light={StaticResource TextColorLight}, Dark={StaticResource TextColorDark}}" />
+                            <Label Text="Spørgsmål: {Binding QuestionNo}" TextColor="{AppThemeBinding Light={StaticResource TextColorLight}, Dark={StaticResource TextColorDark}}" />
+                            <Label Text="Tid: {Binding ActualDuration}" TextColor="{AppThemeBinding Light={StaticResource TextColorLight}, Dark={StaticResource TextColorDark}}" />
+                            <Label Text="Karakter: {Binding Grade}" TextColor="{AppThemeBinding Light={StaticResource TextColorLight}, Dark={StaticResource TextColorDark}}" />
+                            <Label Text="Noter: {Binding Notes}" TextColor="{AppThemeBinding Light={StaticResource TextColorLight}, Dark={StaticResource TextColorDark}}" />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

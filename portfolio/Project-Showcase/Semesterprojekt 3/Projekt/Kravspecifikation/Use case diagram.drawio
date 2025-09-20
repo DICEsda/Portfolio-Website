@@ -1,0 +1,82 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36" version="25.0.3">
+  <diagram name="Side-1" id="pD_5yJUApeDJO3ZN-hG5">
+    <mxGraphModel grid="0" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="GE-jzq6qs6Qy_EOtn8jj-3" value="&lt;p&gt;USE CASE DIAGRAM - IOT based Dual-Axis Solar Tracking system&lt;/p&gt;" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=414;height=23;" vertex="1" parent="1">
+          <mxGeometry x="185" y="70" width="550" height="462" as="geometry" />
+        </mxCell>
+        <mxCell id="GE-jzq6qs6Qy_EOtn8jj-5" value="" style="rounded=0;whiteSpace=wrap;html=1;rotation=-90;fontFamily=Helvetica;align=center;" vertex="1" parent="1">
+          <mxGeometry x="244.25" y="177.25" width="386" height="251.5" as="geometry" />
+        </mxCell>
+        <mxCell id="GE-jzq6qs6Qy_EOtn8jj-6" value="USE CASE 1:&amp;nbsp;&lt;br&gt;&lt;font style=&quot;&quot;&gt;&lt;span style=&quot;white-space-collapse: preserve;&quot;&gt;BEVÆGELSE&lt;/span&gt;&lt;/font&gt;&amp;nbsp;" style="ellipse;whiteSpace=wrap;html=1;fontFamily=Helvetica;align=center;" vertex="1" parent="1">
+          <mxGeometry x="353.06" y="158" width="168.37" height="66" as="geometry" />
+        </mxCell>
+        <mxCell id="GE-jzq6qs6Qy_EOtn8jj-7" value="IOT based Dual-Axis Solar Tracking system" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="340.5" y="114" width="193.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="GE-jzq6qs6Qy_EOtn8jj-8" value="USE CASE 3:&amp;nbsp;&lt;br&gt;REAL-TIME MONITORING" style="ellipse;whiteSpace=wrap;html=1;fontFamily=Helvetica;align=center;" vertex="1" parent="1">
+          <mxGeometry x="350.5" y="315" width="173.49" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="GE-jzq6qs6Qy_EOtn8jj-9" value="USE CASE 2:&amp;nbsp;&lt;br&gt;DATAINDSAMLING" style="ellipse;whiteSpace=wrap;html=1;fontFamily=Helvetica;align=center;" vertex="1" parent="1">
+          <mxGeometry x="353.06" y="238" width="172.43" height="66" as="geometry" />
+        </mxCell>
+        <mxCell id="yyU_5QaLnxNiHFgzBneC-4" value="USE CASE 4:&amp;nbsp;&lt;br&gt;STRØMGENERING" style="ellipse;whiteSpace=wrap;html=1;fontFamily=Helvetica;align=center;" vertex="1" parent="1">
+          <mxGeometry x="354.09" y="394" width="170.37" height="65" as="geometry" />
+        </mxCell>
+        <mxCell id="Z2hQcF6LbJZStMNGUvSg-6" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" edge="1" parent="1" source="GE-jzq6qs6Qy_EOtn8jj-4" target="GE-jzq6qs6Qy_EOtn8jj-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Era7v1ufrwq-L5S5YiGb-2" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" edge="1" parent="1" source="GE-jzq6qs6Qy_EOtn8jj-4" target="GE-jzq6qs6Qy_EOtn8jj-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Era7v1ufrwq-L5S5YiGb-3" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" edge="1" parent="1" source="GE-jzq6qs6Qy_EOtn8jj-4" target="yyU_5QaLnxNiHFgzBneC-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="GE-jzq6qs6Qy_EOtn8jj-4" value="BRUGER&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;fontFamily=Helvetica;align=center;" vertex="1" parent="1">
+          <mxGeometry x="215" y="300.5" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Z2hQcF6LbJZStMNGUvSg-1" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" edge="1" parent="1" source="VVawUY3JbwAIii9EVID3-2" target="GE-jzq6qs6Qy_EOtn8jj-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Z2hQcF6LbJZStMNGUvSg-2" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" edge="1" parent="1" source="VVawUY3JbwAIii9EVID3-2" target="GE-jzq6qs6Qy_EOtn8jj-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VVawUY3JbwAIii9EVID3-2" value="HTTP server" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;fontFamily=Helvetica;align=center;" vertex="1" parent="1">
+          <mxGeometry x="655" y="213" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="Z2hQcF6LbJZStMNGUvSg-4" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" edge="1" parent="1" source="VVawUY3JbwAIii9EVID3-30" target="GE-jzq6qs6Qy_EOtn8jj-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Era7v1ufrwq-L5S5YiGb-1" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endArrow=none;endFill=0;" edge="1" parent="1" source="VVawUY3JbwAIii9EVID3-30" target="GE-jzq6qs6Qy_EOtn8jj-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VVawUY3JbwAIii9EVID3-30" value="WEBCLIENT" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;fontFamily=Helvetica;align=center;" vertex="1" parent="1">
+          <mxGeometry x="655" y="341" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="X3vWx2TP0gWS8IBDl1r0-1" value="&lt;p&gt;AKTØR DIAGRAM - IOT based Dual-Axis Solar Tracking system&lt;/p&gt;" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=414;height=23;" vertex="1" parent="1">
+          <mxGeometry x="159" y="635" width="550" height="348" as="geometry" />
+        </mxCell>
+        <mxCell id="X3vWx2TP0gWS8IBDl1r0-2" value="" style="rounded=0;whiteSpace=wrap;html=1;rotation=-90;fontFamily=Helvetica;align=center;" vertex="1" parent="1">
+          <mxGeometry x="291.5" y="683.38" width="244.25" height="251.5" as="geometry" />
+        </mxCell>
+        <mxCell id="X3vWx2TP0gWS8IBDl1r0-4" value="IOT based Dual-Axis Solar Tracking system" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="316.87" y="691" width="193.5" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="X3vWx2TP0gWS8IBDl1r0-9" value="BRUGER&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;fontFamily=Helvetica;align=center;" vertex="1" parent="1">
+          <mxGeometry x="204" y="790.63" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="X3vWx2TP0gWS8IBDl1r0-12" value="HTTP server" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;fontFamily=Helvetica;align=center;" vertex="1" parent="1">
+          <mxGeometry x="598" y="696.63" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="X3vWx2TP0gWS8IBDl1r0-14" value="WEBCLIENT" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;fontFamily=Helvetica;align=center;" vertex="1" parent="1">
+          <mxGeometry x="598" y="824.63" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="X3vWx2TP0gWS8IBDl1r0-16" value="" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn4.iconfinder.com/data/icons/evil-icons-user-interface/64/question-128.png" vertex="1" parent="1">
+          <mxGeometry x="349.62" y="756.63" width="128" height="128" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

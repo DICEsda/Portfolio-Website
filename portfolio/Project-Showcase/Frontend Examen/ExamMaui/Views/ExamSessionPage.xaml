@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:FED___Exam.ViewModels"
+             x:Class="FED___Exam.Views.ExamSessionPage">
+
+    <Shell.TitleView>
+        <HorizontalStackLayout Spacing="10" Padding="10,0" HorizontalOptions="Start">
+            <Button Text="Eksamen" Clicked="OnGoToExamPageClicked" BackgroundColor="Transparent" BorderColor="Transparent" HeightRequest="30" />
+            <Button Text="Tilføj Studerende" Clicked="OnGoToAddStudentPageClicked" BackgroundColor="Transparent" BorderColor="Transparent" HeightRequest="30"  />
+            <Button Text="Eksaminer" Clicked="OnGoToExamSessionPageClicked" BackgroundColor="Transparent" BorderColor="Transparent" HeightRequest="30" />
+            <Button Text="Historik" Clicked="OnGoToHistoryPageClicked"  BackgroundColor="Transparent" BorderColor="Transparent" HeightRequest="30" />
+            <Button Text="{Binding ThemeIcon}" FontFamily="FontAwesomeSolid" FontSize="20" Command="{Binding ToggleThemeCommand}" BackgroundColor="Transparent" HorizontalOptions="End" BorderColor="Transparent" Margin="0,0,0,0"/>
+        </HorizontalStackLayout>
+    </Shell.TitleView>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <Picker Title="Vælg eksamen" ItemsSource="{Binding Exams}" ItemDisplayBinding="{Binding CourseName}" SelectedItem="{Binding SelectedExam}"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundColorLight}, Dark={StaticResource BackgroundColorDark}}"
+                    TextColor="{AppThemeBinding Light={StaticResource TextColorLight}, Dark={StaticResource TextColorDark}}" />
+
+            <Label Text="Studerende" FontAttributes="Bold" />
+            <Label Text="{Binding CurrentStudent.Name}" />
+
+            <Button Text="Træk spørgsmål" Command="{Binding DrawQuestionCommand}" Style="{StaticResource AccentButtonStyle}" />
+            <Label Text="Spørgsmål: {Binding QuestionNo}" />
+
+            <Button Text="Start eksamination" Command="{Binding StartExamCommand}" Style="{StaticResource AccentButtonStyle}" />
+            <Label Text="Tid tilbage: {Binding RemainingTime}" />
+
+            <Editor Placeholder="Noter" Text="{Binding Notes}" AutoSize="TextChanges"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundColorLight}, Dark={StaticResource BackgroundColorDark}}"
+                    TextColor="{AppThemeBinding Light={StaticResource TextColorLight}, Dark={StaticResource TextColorDark}}" />
+
+            <Button Text="Slut eksamination" Command="{Binding EndExamCommand}" Style="{StaticResource AccentButtonStyle}" />
+            
+            <BoxView Margin="0,30,0,0" HeightRequest="1" Color="Gray" HorizontalOptions="Fill" />
+            
+            <Picker Title="Giv en karakter" ItemsSource="{Binding Grades}" SelectedItem="{Binding SelectedGrade}"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource BackgroundColorLight}, Dark={StaticResource BackgroundColorDark}}"
+                    TextColor="{AppThemeBinding Light={StaticResource TextColorLight}, Dark={StaticResource TextColorDark}}" />
+
+            <Button Margin ="35"  Text="Gem resultat og næste" Command="{Binding SaveResultAndNextCommand}" Style="{StaticResource AccentButtonStyle}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

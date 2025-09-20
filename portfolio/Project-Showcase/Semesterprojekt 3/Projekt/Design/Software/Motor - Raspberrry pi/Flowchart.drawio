@@ -1,0 +1,131 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36" version="25.0.3">
+  <diagram name="Side-1" id="yJre7HqPqz1-sdGBGAIG">
+    <mxGraphModel grid="1" page="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="0rTfVMTRy5LPev_wMyI0-1" target="0rTfVMTRy5LPev_wMyI0-8">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-1" value="Start" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="354" y="60" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="0rTfVMTRy5LPev_wMyI0-8" target="0rTfVMTRy5LPev_wMyI0-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-8" value="Læs analog værdi&lt;div&gt;fra LDR sensor&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="354" y="170" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-15" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="0rTfVMTRy5LPev_wMyI0-12" target="0rTfVMTRy5LPev_wMyI0-14">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-12" value="Beregn optimal value" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="354" y="280" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="0rTfVMTRy5LPev_wMyI0-14" target="0rTfVMTRy5LPev_wMyI0-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-14" value="Beregn forskellen&lt;div&gt;(vertical og horizontal)&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="354" y="390" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-19" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="0rTfVMTRy5LPev_wMyI0-16" target="0rTfVMTRy5LPev_wMyI0-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-21" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="0rTfVMTRy5LPev_wMyI0-16" target="0rTfVMTRy5LPev_wMyI0-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-16" value="diffverti &amp;lt;= 10" style="rhombus;whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="344.75" y="490" width="138.5" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-23" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="0rTfVMTRy5LPev_wMyI0-18" target="0rTfVMTRy5LPev_wMyI0-22">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-25" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="0rTfVMTRy5LPev_wMyI0-18" target="0rTfVMTRy5LPev_wMyI0-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-18" value="diffverti &amp;gt; 0" style="rhombus;whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="344" y="570" width="138.5" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-36" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="0rTfVMTRy5LPev_wMyI0-20">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="410" y="750" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="130" y="520" />
+              <mxPoint x="130" y="750" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-20" value="Stop venstre-højre motor" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="175.5" y="490" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-37" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="0rTfVMTRy5LPev_wMyI0-22">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="130" y="600" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-22" value="Venstre-højre rotere PV panel med urets retning" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="174.75" y="570" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-29" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="0rTfVMTRy5LPev_wMyI0-24" target="0rTfVMTRy5LPev_wMyI0-28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-24" value="Venstre-højre rotere PV panel imod urets retning" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="353.25" y="670" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-31" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="0rTfVMTRy5LPev_wMyI0-28" target="0rTfVMTRy5LPev_wMyI0-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-28" value="diffhoriz &amp;lt;= 10" style="rhombus;whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="344" y="770" width="138.5" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-39" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="0rTfVMTRy5LPev_wMyI0-30" target="0rTfVMTRy5LPev_wMyI0-38">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-30" value="diffhoriz &amp;gt; 0" style="rhombus;whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="344" y="850" width="138.5" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-32" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" target="0rTfVMTRy5LPev_wMyI0-34">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="345.75" y="800" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-33" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" target="0rTfVMTRy5LPev_wMyI0-35">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="344.75" y="880" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-41" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="0rTfVMTRy5LPev_wMyI0-34">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="80" y="800" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-34" value="Stop op-ned motor" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="176.25" y="770" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="0rTfVMTRy5LPev_wMyI0-35">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="80" y="880" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-35" value="Op-ned rotere PV panel imod uret retning" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="175.5" y="850" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="0rTfVMTRy5LPev_wMyI0-38">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="414" y="140" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="80" y="980" />
+              <mxPoint x="80" y="140" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="0rTfVMTRy5LPev_wMyI0-38" value="Op-ned rotere PV panel med urets retning" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="354" y="950" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ZEpanOspJNeyB462XhWh-1" value="Flowcchart - UC1" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;recursiveResize=0;container=1;collapsible=0;width=160;" vertex="1" parent="1">
+          <mxGeometry x="50" y="50" width="480" height="980" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

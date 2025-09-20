@@ -4,14 +4,16 @@ import { usePageActive } from '../hooks/usePageActive';
 
 const About = () => {
   const skills = [
-    'JavaScript (ES6+)',
-    'TypeScript',
     'React',
     'Node.js',
     'Tailwind CSS',
     'Git',
     'Next.js',
-    'Python',
+    'Vitest',
+    'NUnit',
+    'LangChain',
+    'CrewAI',
+    'n8n',
   ]
 
   const favorites = [
@@ -21,6 +23,7 @@ const About = () => {
     'Strong experience with the .NET ecosystem',
     'Raspberry Pi Automations, and general Linux tinkering',
     'Built scalable and maintainable software architectures with a focus on clean design and long-term flexibility',
+     'AI/LLM automations and integrations using LangChain, CrewAI, and n8n',
   ]
 
   const containerVariants = {
@@ -47,6 +50,13 @@ const About = () => {
     }
   }
 
+  const languages = [
+    'JS/TS',
+    'C#',
+    'Python',
+    'C++',
+  ]
+
   return (
     <section id="about" className="h-screen flex items-center justify-center py-0">
       <div className="container mx-auto px-6 sm:px-8 md:px-12 lg:px-16 max-w-6xl">
@@ -65,39 +75,48 @@ const About = () => {
         </m.div>
 
         <m.div
-          className="grid md:grid-cols-3 gap-6 md:gap-10 items-stretch"
+          className="grid md:grid-cols-3 gap-6 md:gap-8 items-stretch"
           variants={containerVariants}
           initial="hidden"
           animate={usePageActive('about') ? 'show' : 'hidden'}
         >
           <m.div
             variants={itemVariants}
-            className="bg-card md:col-span-2 p-6 md:p-8 rounded-lg shadow-xl border border-secondary/20"
+            className="bg-card md:col-span-2 p-5 md:p-6 rounded-lg shadow-xl border border-secondary/20"
           >
-            <h3 className="text-2xl md:text-3xl font-semibold text-light mb-6">What I Like Working With</h3>
-            <ul className="grid grid-cols-1 gap-3 text-tertiary">
+            <h3 className="text-2xl md:text-3xl font-semibold text-light mb-5">What I Like Working With</h3>
+            <m.ul className="grid grid-cols-1 gap-3 text-tertiary" variants={containerVariants} initial="hidden" animate={usePageActive('about') ? 'show' : 'hidden'}>
               {favorites.map((item) => (
-                <li key={item} className="flex items-start gap-3">
+                <m.li key={item} className="flex items-start gap-3" variants={itemVariants}>
                   <FaCheck className="mt-0.5 text-secondary shrink-0" />
                   <span className="text-base leading-relaxed">{item}</span>
-                </li>
+                </m.li>
               ))}
-            </ul>
+            </m.ul>
           </m.div>
 
-          <m.div
-            variants={itemVariants}
-            className="bg-card p-5 md:p-6 rounded-lg shadow-lg md:col-span-1"
-          >
-            <h3 className="text-lg md:text-xl font-semibold text-light mb-5">Core Technologies</h3>
-            <ul className="grid grid-cols-2 gap-3 text-tertiary">
-              {skills.map((skill) => (
-                <li key={skill} className="flex items-center">
-                  <span className="text-secondary mr-3">▹</span>
-                  <span className="text-sm">{skill}</span>
-                </li>
-              ))}
-            </ul>
+          <m.div variants={itemVariants} className="md:col-span-1">
+            <div className="bg-card p-5 md:p-6 rounded-lg shadow-lg">
+              <h3 className="text-lg md:text-xl font-semibold text-light mb-5">Main Languages</h3>
+              <m.ul className="grid grid-cols-2 gap-3 text-tertiary" variants={containerVariants} initial="hidden" animate={usePageActive('about') ? 'show' : 'hidden'}>
+                {languages.map((lang) => (
+                  <m.li key={lang} className="flex items-center" variants={itemVariants}>
+                    <span className="text-secondary mr-3">▹</span>
+                    <span className="text-sm">{lang}</span>
+                  </m.li>
+                ))}
+              </m.ul>
+              <hr className="my-4 border-tertiary/15" />
+              <h3 className="text-lg md:text-xl font-semibold text-light mb-4">Core Technologies</h3>
+              <m.ul className="grid grid-cols-2 gap-3 text-tertiary" variants={containerVariants} initial="hidden" animate={usePageActive('about') ? 'show' : 'hidden'}>
+                {skills.map((skill) => (
+                  <m.li key={skill} className="flex items-center" variants={itemVariants}>
+                    <span className="text-secondary mr-3">▹</span>
+                    <span className="text-sm">{skill}</span>
+                  </m.li>
+                ))}
+              </m.ul>
+            </div>
           </m.div>
         </m.div>
       </div>

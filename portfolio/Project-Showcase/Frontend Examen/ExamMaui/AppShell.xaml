@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="FED___Exam.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:FED___Exam"
+    xmlns:views="clr-namespace:FED___Exam.Views"
+    Title="FED___Exam"
+    BackgroundColor="{AppThemeBinding Light={StaticResource ShellBackgroundLight}, Dark={StaticResource ShellBackgroundDark}}"
+    Shell.ForegroundColor="{AppThemeBinding Light={StaticResource TextColorLight}, Dark={StaticResource TextColorDark}}"
+    Shell.FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource ShellBackgroundLight}, Dark={StaticResource ShellBackgroundDark}}"
+    Shell.TabBarBackgroundColor="{AppThemeBinding Light={StaticResource ShellBackgroundLight}, Dark={StaticResource ShellBackgroundDark}}">
+
+    <ShellItem Title="Eksamen" Route="exam">
+        <ShellContent ContentTemplate="{DataTemplate views:ExamPage}" />
+    </ShellItem>
+
+    <ShellItem Title="Tilføj Studerende" Route="addstudent">
+        <ShellContent ContentTemplate="{DataTemplate views:AddStudentPage}" />
+    </ShellItem>
+
+    <ShellItem Title="Eksaminér" Route="session">
+        <ShellContent ContentTemplate="{DataTemplate views:ExamSessionPage}" />
+    </ShellItem>
+
+    <ShellItem Title="Historik" Route="history">
+        <ShellContent ContentTemplate="{DataTemplate views:HistoryPage}" />
+    </ShellItem>
+
+</Shell>

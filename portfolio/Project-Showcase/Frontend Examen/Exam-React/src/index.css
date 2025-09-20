@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+/* Base styles */
+body {
+  @apply bg-neutral-200 dark:bg-stone-800 text-gray-900 dark:text-white transition-colors duration-200;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-neutral-200 dark:bg-stone-700;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-neutral-400 dark:bg-stone-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-neutral-500 dark:bg-stone-500;
+}
+
+/* Global border colors */
+* {
+  @apply border-neutral-200 dark:border-stone-700;
+}
+
+/* Card backgrounds */
+.card {
+  @apply bg-neutral-200 dark:bg-stone-700;
+}
+
+/* Button styles */
+.btn-primary {
+  @apply bg-emerald-200 hover:bg-emerald-300 text-gray-900 dark:text-white;
+}
+
+.btn-secondary {
+  @apply bg-neutral-400 dark:bg-stone-600 hover:bg-neutral-500 dark:hover:bg-stone-500 text-white;
+}
+
+.btn-danger {
+  @apply bg-red-400 hover:bg-red-500 text-white;
+}
+
+/* Input styles */
+input, textarea, select {
+  @apply bg-neutral-200 dark:bg-stone-700 border-neutral-400 dark:border-stone-600 text-gray-900 dark:text-white;
+}
+
+/* Navigation styles */
+.nav-item {
+  @apply bg-neutral-200 dark:bg-stone-700 hover:bg-neutral-300 dark:hover:bg-stone-600;
+}
+
+.nav-item.active {
+  @apply bg-neutral-400 dark:bg-stone-600;
+}

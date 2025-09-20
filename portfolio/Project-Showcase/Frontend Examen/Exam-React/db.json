@@ -1,0 +1,68 @@
+{
+  "exams": [
+    {
+      "id": "1164",
+      "term": "Sommer 23",
+      "course": "Programming intro",
+      "date": "2000-12-15",
+      "numQuestions": 29,
+      "duration": 90,
+      "startTime": "12:00",
+      "students": [
+        {
+          "name": "j",
+          "studentNumber": "0"
+        }
+      ],
+      "results": [
+        {
+          "studentNumber": "2023020203",
+          "question": "Question 23",
+          "duration": 58,
+          "notes": "He did great!",
+          "grade": "12"
+        }
+      ]
+    },
+    {
+      "id": "69c4",
+      "term": "real man term",
+      "course": "real man guide",
+      "date": "2004-02-12",
+      "numQuestions": 5,
+      "duration": 60,
+      "startTime": "09:00",
+      "students": [
+        {
+          "name": "obsidian",
+          "studentNumber": "HGello"
+        }
+      ],
+      "results": []
+    },
+    {
+      "id": "edfd",
+      "term": "New",
+      "course": "Test",
+      "date": "2015-12-12",
+      "numQuestions": 4,
+      "duration": 2,
+      "startTime": "09:00",
+      "students": [
+        {
+          "name": "mr. 3",
+          "studentNumber": "3"
+        }
+      ],
+      "results": [
+        {
+          "studentNumber": "3",
+          "question": "",
+          "duration": 6,
+          "notes": "noice",
+          "grade": "12"
+        }
+      ]
+    }
+  ]
+}

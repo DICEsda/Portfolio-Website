@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import { m, AnimatePresence } from 'framer-motion';
 import { usePageActive } from '../hooks/usePageActive';
 // Dynamically import EmailJS when needed to keep it out of the initial bundle
@@ -8,38 +8,24 @@ const Contact = () => {
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [statusMessage, setStatusMessage] = useState('');
   const [botField, setBotField] = useState('');
-  const sectionRef = useRef<HTMLElement>(null);
-  const [inView, setInView] = useState(false);
+  const isActive = usePageActive('contact');
   const [copied, setCopied] = useState<string | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setInView(true);
-          } else {
-            setInView(false);
-          }
-        });
-      },
-      {
-        threshold: 0.3, // Trigger when 30% of the section is visible
-        rootMargin: '-50px 0px -50px 0px', // Add some margin for better trigger timing
-      }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
+  // Cascading motion variants for form contents
+  const containerVariants = {
+    hidden: { opacity: 0, y: 8 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { staggerChildren: 0.08, delayChildren: 0.08 }
     }
+  } as const;
 
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
-  }, []);
+  const itemVariants = {
+    hidden: { opacity: 0, y: 12 },
+    show: { opacity: 1, y: 0 }
+  } as const;
 
   const sendEmail = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -91,11 +77,11 @@ const Contact = () => {
   
 
   return (
-  <section id="contact" ref={sectionRef} className="h-screen flex items-center justify-center py-0">
+  <section id="contact" className="h-screen flex items-center justify-center py-0">
   <div className="container mx-auto px-6 sm:px-8 md:px-12 lg:px-16 max-w-6xl flex flex-col items-center">
         <m.h2
           initial={{ opacity: 0, y: 16 }}
-          animate={usePageActive('contact') ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+          animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
           transition={{ duration: 0.38, ease: [0.22, 1, 0.36, 1] }}
           className="text-3xl md:text-4xl font-bold mb-6 text-center text-light mt-2 sm:mt-3 md:mt-4 relative top-[7px]"
         >
@@ -104,7 +90,7 @@ const Contact = () => {
         <div className="mx-auto w-full">
           <m.p
             initial={{ opacity: 0, y: 16 }}
-            animate={usePageActive('contact') ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+            animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1], delay: 0.04 }}
             className="text-center mb-6 text-tertiary leading-relaxed"
           >
@@ -114,11 +100,11 @@ const Contact = () => {
           <div className="w-full max-w-sm sm:max-w-md md:max-w-lg mx-auto">
             <m.div
               initial={{ opacity: 0, y: 20 }}
-              animate={usePageActive('contact') ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1], delay: 0.05 }}
               className="bg-card p-3 sm:p-4 md:p-5 rounded-lg shadow-lg"
             >
-              <form ref={form} onSubmit={sendEmail} className="space-y-3 sm:space-y-4">
+              <form ref={form} onSubmit={sendEmail} className="space-y-4 sm:space-y-5">
               {/* Honeypot field (hidden from users) */}
               <div className="hidden">
                 <label htmlFor="website">Website</label>
@@ -130,91 +116,112 @@ const Contact = () => {
                   onChange={(e) => setBotField(e.target.value)}
                 />
               </div>
-              <div className="grid md:grid-cols-2 gap-2 sm:gap-3">
-                <div className={`transition-all duration-700 delay-400 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
-                  <label htmlFor="name" className="block text-light mb-1 font-medium text-sm">
+              <m.div variants={containerVariants} initial="hidden" animate={isActive ? 'show' : 'hidden'}>
+              <div className="grid md:grid-cols-2 gap-3 sm:gap-4">
+                <m.div variants={itemVariants}>
+                  <label htmlFor="name" className="block text-light mb-2 font-medium text-sm">
                     Name
                   </label>
-                  <input
+                  <m.input
                     type="text"
                     id="name"
                     name="name"
                     aria-invalid={Boolean(errors.name)}
                     aria-describedby="name-error"
-                    className={`w-full px-3 py-2 bg-primary/50 border rounded-lg focus:outline-none focus:border-secondary text-light transition-colors text-sm ${errors.name ? 'border-red-500' : 'border-tertiary'}`}
+                    className={`w-full px-3 py-2.5 bg-primary/50 border rounded-lg focus:outline-none focus:border-secondary text-light transition-colors text-sm ${errors.name ? 'border-red-500' : 'border-tertiary'}`}
+                    whileFocus={{ boxShadow: '0 0 0 2px rgba(99,102,241,0.35)', scale: 1.01 }}
+                    whileTap={{ scale: 0.995 }}
                     required
                   />
-                  {errors.name && (
-                    <p id="name-error" className="mt-1 text-xs text-red-500" role="alert" aria-live="polite">{errors.name}</p>
-                  )}
-                </div>
-                <div className={`transition-all duration-700 delay-500 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
-                  <label htmlFor="email" className="block text-light mb-1 font-medium text-sm">
+                  <AnimatePresence>{errors.name && (
+                    <m.p id="name-error" className="mt-1 text-xs text-red-500" role="alert" aria-live="polite"
+                      initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }}
+                      transition={{ duration: 0.18 }}
+                    >{errors.name}</m.p>
+                  )}</AnimatePresence>
+                </m.div>
+                <m.div variants={itemVariants}>
+                  <label htmlFor="email" className="block text-light mb-2 font-medium text-sm">
                     Email
                   </label>
-                  <input
+                  <m.input
                     type="email"
                     id="email"
                     name="email"
                     aria-invalid={Boolean(errors.email)}
                     aria-describedby="email-error"
-                    className={`w-full px-3 py-2 bg-primary/50 border rounded-lg focus:outline-none focus:border-secondary text-light transition-colors text-sm ${errors.email ? 'border-red-500' : 'border-tertiary'}`}
+                    className={`w-full px-3 py-2.5 bg-primary/50 border rounded-lg focus:outline-none focus:border-secondary text-light transition-colors text-sm ${errors.email ? 'border-red-500' : 'border-tertiary'}`}
+                    whileFocus={{ boxShadow: '0 0 0 2px rgba(99,102,241,0.35)', scale: 1.01 }}
+                    whileTap={{ scale: 0.995 }}
                     required
                   />
-                  {errors.email && (
-                    <p id="email-error" className="mt-1 text-xs text-red-500" role="alert" aria-live="polite">{errors.email}</p>
-                  )}
-                </div>
+                  <AnimatePresence>{errors.email && (
+                    <m.p id="email-error" className="mt-1 text-xs text-red-500" role="alert" aria-live="polite"
+                      initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }}
+                      transition={{ duration: 0.18 }}
+                    >{errors.email}</m.p>
+                  )}</AnimatePresence>
+                </m.div>
               </div>
-              <div className="grid md:grid-cols-2 gap-2 sm:gap-3">
-                <div className={`transition-all duration-700 delay-600 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
-                  <label htmlFor="company" className="block text-light mb-1 font-medium text-sm">
+              <div className="grid md:grid-cols-2 gap-3 sm:gap-4">
+                <m.div variants={itemVariants}>
+                  <label htmlFor="company" className="block text-light mb-2 font-medium text-sm">
                     Company (Optional)
                   </label>
-                  <input
+                  <m.input
                     type="text"
                     id="company"
                     name="company"
-                    className="w-full px-3 py-2 bg-primary/50 border border-tertiary rounded-lg focus:outline-none focus:border-secondary text-light transition-colors text-sm"
+                    className="w-full px-3 py-2.5 bg-primary/50 border border-tertiary rounded-lg focus:outline-none focus:border-secondary text-light transition-colors text-sm"
+                    whileFocus={{ boxShadow: '0 0 0 2px rgba(99,102,241,0.25)', scale: 1.01 }}
+                    whileTap={{ scale: 0.995 }}
                   />
-                </div>
-                <div className={`transition-all duration-700 delay-700 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
-                  <label htmlFor="phone" className="block text-light mb-1 font-medium text-sm">
+                </m.div>
+                <m.div variants={itemVariants}>
+                  <label htmlFor="phone" className="block text-light mb-2 font-medium text-sm">
                     Phone Number (Optional)
                   </label>
-                  <input
+                  <m.input
                     type="tel"
                     id="phone"
                     name="phone"
-                    className="w-full px-3 py-2 bg-primary/50 border border-tertiary rounded-lg focus:outline-none focus:border-secondary text-light transition-colors text-sm"
+                    className="w-full px-3 py-2.5 bg-primary/50 border border-tertiary rounded-lg focus:outline-none focus:border-secondary text-light transition-colors text-sm"
+                    whileFocus={{ boxShadow: '0 0 0 2px rgba(99,102,241,0.25)', scale: 1.01 }}
+                    whileTap={{ scale: 0.995 }}
                   />
-                </div>
+                </m.div>
               </div>
-              <div className={`transition-all duration-700 delay-800 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
-                <label htmlFor="message" className="block text-light mb-1 font-medium text-sm">
+              <m.div variants={itemVariants}>
+                <label htmlFor="message" className="block text-light mb-2 font-medium text-sm">
                   Message
                 </label>
-                <textarea
+                <m.textarea
                   id="message"
                   name="message"
                   rows={3}
                   aria-invalid={Boolean(errors.message)}
                   aria-describedby="message-error"
-                  className={`w-full px-3 py-2 bg-primary/50 border rounded-lg focus:outline-none focus:border-secondary text-light transition-colors resize-none text-sm ${errors.message ? 'border-red-500' : 'border-tertiary'}`}
+                  className={`w-full px-3 py-2.5 bg-primary/50 border rounded-lg focus:outline-none focus:border-secondary text-light transition-colors resize-none text-sm ${errors.message ? 'border-red-500' : 'border-tertiary'}`}
+                  whileFocus={{ boxShadow: '0 0 0 2px rgba(99,102,241,0.35)', scale: 1.005 }}
+                  whileTap={{ scale: 0.995 }}
                   required
-                ></textarea>
-                {errors.message && (
-                  <p id="message-error" className="mt-1 text-xs text-red-500" role="alert" aria-live="polite">{errors.message}</p>
-                )}
-              </div>
-              <div className={`flex flex-col items-center transition-all duration-700 delay-900 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
-                <button
+                />
+                <AnimatePresence>{errors.message && (
+                  <m.p id="message-error" className="mt-1 text-xs text-red-500" role="alert" aria-live="polite"
+                    initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -4 }}
+                    transition={{ duration: 0.18 }}
+                  >{errors.message}</m.p>
+                )}</AnimatePresence>
+              </m.div>
+              <m.div variants={itemVariants} className="flex flex-col items-center">
+                <m.button
                   type="submit"
                   className="inline-block bg-secondary text-white px-4 sm:px-5 py-1.5 sm:py-2 rounded-md hover:bg-secondary/90 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed font-medium text-xs sm:text-sm"
                   disabled={status === 'sending'}
+                  whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
                 >
                   {status === 'sending' ? 'Sending...' : 'Send Message'}
-                </button>
+                </m.button>
                 {status === 'success' && (
                   <div className="mt-3 text-green-500 text-xs flex items-center gap-2">
                     <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -228,8 +235,8 @@ const Contact = () => {
                     {statusMessage}
                   </p>
                 )}
-              </div>
-                <div className="pt-3 border-t border-tertiary/15">
+              </m.div>
+                <m.div variants={itemVariants} className="pt-4 border-t border-tertiary/15">
                   <div className="mb-2">
                     <div className="flex items-center gap-2">
                       <h3 className="text-xs sm:text-sm font-semibold text-light">Contact Details</h3>
@@ -237,8 +244,8 @@ const Contact = () => {
                       <span className="text-[11px] sm:text-xs text-gray-400/30 relative top-[1px] sm:top-[1px] md:top-0">click to copy!</span>
                     </div>
                   </div>
-                  <div className="grid sm:grid-cols-2 gap-2 text-xs sm:text-sm">
-                    <div className="flex items-center gap-2 bg-primary/40 rounded-md p-2 sm:p-2.5">
+                  <div className="grid sm:grid-cols-2 gap-3 text-xs sm:text-sm">
+                    <m.div variants={itemVariants} className="flex items-center gap-2 bg-primary/40 rounded-md p-2.5 sm:p-3">
                       <svg className="w-4.5 h-4.5 text-secondary shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 011 1V21a1 1 0 01-1 1C10.07 22 2 13.93 2 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.24.2 2.45.57 3.57a1 1 0 01-.24 1.02l-2.2 2.2z" />
                       </svg>
@@ -270,8 +277,8 @@ const Contact = () => {
                           </m.span>
                         )}
                       </AnimatePresence>
-                    </div>
-                    <div className="flex items-center gap-2 bg-primary/40 rounded-md p-2 sm:p-2.5 justify-end">
+                    </m.div>
+                    <m.div variants={itemVariants} className="flex items-center gap-2 bg-primary/40 rounded-md p-2.5 sm:p-3 justify-end">
                       <AnimatePresence>
                         {copied === 'email' && (
                           <m.span
@@ -303,9 +310,10 @@ const Contact = () => {
                       <svg className="w-4.5 h-4.5 text-secondary shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                         <path d="M2.25 6.75A2.25 2.25 0 014.5 4.5h15a2.25 2.25 0 012.25 2.25v10.5A2.25 2.25 0 0119.5 19.5h-15A2.25 2.25 0 012.25 17.25V6.75zm2.28-.75L12 11.127 19.47 6h-14.94z" />
                       </svg>
-                    </div>
+                    </m.div>
                   </div>
-                </div>
+                </m.div>
+              </m.div>
               </form>
             </m.div>
           </div>
