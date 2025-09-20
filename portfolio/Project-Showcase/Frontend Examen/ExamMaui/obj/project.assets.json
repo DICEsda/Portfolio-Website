@@ -37123,11 +37123,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\yahya\\Desktop\\Projekt 4\\Projekt4_Frontend-Maui\\FED - Exam\\FED - Exam.csproj",
+      "projectUniqueName": "C:\\Users\\yahya\\Desktop\\Portfolio-Website\\portfolio\\Project-Showcase\\Frontend Examen\\ExamMaui\\FED - Exam.csproj",
       "projectName": "FED - Exam",
-      "projectPath": "C:\\Users\\yahya\\Desktop\\Projekt 4\\Projekt4_Frontend-Maui\\FED - Exam\\FED - Exam.csproj",
+      "projectPath": "C:\\Users\\yahya\\Desktop\\Portfolio-Website\\portfolio\\Project-Showcase\\Frontend Examen\\ExamMaui\\FED - Exam.csproj",
       "packagesPath": "C:\\Users\\yahya\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\yahya\\Desktop\\Projekt 4\\Projekt4_Frontend-Maui\\FED - Exam\\obj\\",
+      "outputPath": "C:\\Users\\yahya\\Desktop\\Portfolio-Website\\portfolio\\Project-Showcase\\Frontend Examen\\ExamMaui\\obj\\",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
       "fallbackFolders": [
@@ -37231,10 +37231,6 @@
         "warn": true,
         "downloadDependencies": [
           {
-            "name": "Microsoft.Net.Sdk.Compilers.Toolset",
-            "version": "[9.0.201, 9.0.201]"
-          },
-          {
             "name": "Microsoft.NETCore.App.Ref",
             "version": "[9.0.5, 9.0.5]"
           }
@@ -37299,10 +37295,6 @@
         "assetTargetFallback": true,
         "warn": true,
         "downloadDependencies": [
-          {
-            "name": "Microsoft.Net.Sdk.Compilers.Toolset",
-            "version": "[9.0.201, 9.0.201]"
-          },
           {
             "name": "Microsoft.NETCore.App.Ref",
             "version": "[9.0.5, 9.0.5]"
@@ -37370,10 +37362,6 @@
         "warn": true,
         "downloadDependencies": [
           {
-            "name": "Microsoft.Net.Sdk.Compilers.Toolset",
-            "version": "[9.0.201, 9.0.201]"
-          },
-          {
             "name": "Microsoft.NETCore.App.Ref",
             "version": "[9.0.5, 9.0.5]"
           }
@@ -37432,10 +37420,6 @@
         "assetTargetFallback": true,
         "warn": true,
         "downloadDependencies": [
-          {
-            "name": "Microsoft.Net.Sdk.Compilers.Toolset",
-            "version": "[9.0.201, 9.0.201]"
-          },
           {
             "name": "Microsoft.Windows.SDK.NET.Ref",
             "version": "[10.0.19041.57, 10.0.19041.57]"

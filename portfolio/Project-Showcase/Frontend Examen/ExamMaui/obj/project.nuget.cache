@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UV9VxdIiusM=",
+  "dgSpecHash": "sJVHuLWWdQ0=",
   "success": true,
-  "projectFilePath": "C:\\Users\\yahya\\Desktop\\Projekt 4\\Projekt4_Frontend-Maui\\FED - Exam\\FED - Exam.csproj",
+  "projectFilePath": "C:\\Users\\yahya\\Desktop\\Portfolio-Website\\portfolio\\Project-Showcase\\Frontend Examen\\ExamMaui\\FED - Exam.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\yahya\\.nuget\\packages\\communitytoolkit.maui\\12.0.0\\communitytoolkit.maui.12.0.0.nupkg.sha512",
     "C:\\Users\\yahya\\.nuget\\packages\\communitytoolkit.maui.core\\12.0.0\\communitytoolkit.maui.core.12.0.0.nupkg.sha512",
@@ -154,13 +154,9 @@
     "C:\\Users\\yahya\\.nuget\\packages\\xamarin.kotlinx.coroutines.core.jvm\\1.9.0.2\\xamarin.kotlinx.coroutines.core.jvm.1.9.0.2.nupkg.sha512",
     "C:\\Users\\yahya\\.nuget\\packages\\xamarin.kotlinx.serialization.core\\1.7.3.2\\xamarin.kotlinx.serialization.core.1.7.3.2.nupkg.sha512",
     "C:\\Users\\yahya\\.nuget\\packages\\xamarin.kotlinx.serialization.core.jvm\\1.7.3.2\\xamarin.kotlinx.serialization.core.jvm.1.7.3.2.nupkg.sha512",
-    "C:\\Users\\yahya\\.nuget\\packages\\microsoft.net.sdk.compilers.toolset\\9.0.201\\microsoft.net.sdk.compilers.toolset.9.0.201.nupkg.sha512",
     "C:\\Users\\yahya\\.nuget\\packages\\microsoft.netcore.app.ref\\9.0.5\\microsoft.netcore.app.ref.9.0.5.nupkg.sha512",
-    "C:\\Users\\yahya\\.nuget\\packages\\microsoft.net.sdk.compilers.toolset\\9.0.201\\microsoft.net.sdk.compilers.toolset.9.0.201.nupkg.sha512",
     "C:\\Users\\yahya\\.nuget\\packages\\microsoft.netcore.app.ref\\9.0.5\\microsoft.netcore.app.ref.9.0.5.nupkg.sha512",
-    "C:\\Users\\yahya\\.nuget\\packages\\microsoft.net.sdk.compilers.toolset\\9.0.201\\microsoft.net.sdk.compilers.toolset.9.0.201.nupkg.sha512",
     "C:\\Users\\yahya\\.nuget\\packages\\microsoft.netcore.app.ref\\9.0.5\\microsoft.netcore.app.ref.9.0.5.nupkg.sha512",
-    "C:\\Users\\yahya\\.nuget\\packages\\microsoft.net.sdk.compilers.toolset\\9.0.201\\microsoft.net.sdk.compilers.toolset.9.0.201.nupkg.sha512",
     "C:\\Users\\yahya\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.19041.57\\microsoft.windows.sdk.net.ref.10.0.19041.57.nupkg.sha512"
   ],
   "logs": []
