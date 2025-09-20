@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FED - Exam")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+a4786e418f1d2da4f862f21eb3690d349d817107")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+c81170df8abd0a4e05bcd13fcf79104839847f8b")]
 [assembly: System.Reflection.AssemblyProductAttribute("FED - Exam")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FED - Exam")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
