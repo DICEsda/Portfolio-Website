@@ -35,7 +35,7 @@ export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) 
     <AnimatePresence mode="wait">
       <m.div
         key="modal"
-        className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/40 backdrop-blur p-4"
+        className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/40 backdrop-blur p-4 pt-20 pb-16"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -43,16 +43,15 @@ export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) 
         role="dialog"
         aria-modal="true"
       >
-        <div className="flex gap-6 max-w-[90vw] h-[85vh] items-start">
-          {/* Left side: Info Card */}
-          <m.div
-            className="bg-white rounded-2xl shadow-2xl w-[600px] p-8 relative overflow-y-auto h-full border border-gray-200 scrollbar-nice"
-            initial={{ scale: 0.95, x: -40, opacity: 0 }}
-            animate={{ scale: 1, x: 0, opacity: 1 }}
-            exit={{ scale: 0.95, x: -40, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            onClick={(e) => e.stopPropagation()}
-          >
+        {/* Centered Content Card */}
+        <m.div
+          className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[80vh] sm:max-h-[85vh] p-4 sm:p-6 lg:p-8 relative overflow-y-auto border border-gray-200 scrollbar-nice mx-auto"
+          initial={{ scale: 0.95, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.95, opacity: 0 }}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          onClick={(e) => e.stopPropagation()}
+        >
             <m.button
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl transition"
               whileHover={{ scale: 1.2, rotate: 90 }}
@@ -178,92 +177,12 @@ export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) 
               </div>
             </div>
           </m.div>
+        </m.div>
+      </AnimatePresence>
+    );
 
-          {/* Right side: Floating Images */}
-          <m.div
-            className="w-[500px] space-y-4 h-full overflow-y-auto scrollbar-nice"
-            initial={{ scale: 0.95, x: 40, opacity: 0 }}
-            animate={{ scale: 1, x: 0, opacity: 1 }}
-            exit={{ scale: 0.95, x: 40, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <m.div
-              className="relative rounded-xl overflow-hidden shadow-lg"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-            >
-              <img
-                src={project.coverImage}
-                alt={project.title}
-                className="w-full h-auto object-cover"
-                loading="lazy"
-              />
-            </m.div>
-            
-            {project.gallery && project.gallery.length > 0 && (
-              <m.div 
-                className="grid grid-cols-2 gap-2"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-              >
-                {project.gallery.map((item, i) => {
-                  const isVideo = /\.(mp4|webm|ogg)$/i.test(item);
-                  const isImage = /\.(png|jpe?g|gif|svg|webp)$/i.test(item);
-                  const fileName = item.split("/").pop() || `asset-${i + 1}`;
-
-                  return (
-                    <m.div
-                      key={i}
-                      className="relative rounded-lg overflow-hidden shadow-md group"
-                      whileHover={{ scale: 1.03 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      {isImage ? (
-                        <img
-                          src={item}
-                          alt={`${project.title} asset ${i + 1}`}
-                          className="w-full h-32 object-cover"
-                          loading="lazy"
-                        />
-                      ) : isVideo ? (
-                        <video
-                          controls
-                          preload="metadata"
-                          src={item}
-                          className="w-full h-32 object-cover bg-black"
-                        />
-                      ) : (
-                        <a
-                          href={item}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center justify-center w-full h-32 bg-gray-100 text-gray-700 text-center px-3"
-                          title={fileName}
-                        >
-                          <span className="text-sm truncate">{fileName}</span>
-                        </a>
-                      )}
-                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                        <span className="text-white text-xs">
-                          {isVideo ? "Click to play" : isImage ? "Click to enlarge" : "Open file"}
-                        </span>
-                      </div>
-                    </m.div>
-                  );
-                })}
-              </m.div>
-            )}
-          </m.div>
-        </div>
-      </m.div>
-    </AnimatePresence>
-  );
-
-  if (typeof document !== 'undefined' && document.body) {
-    return createPortal(modal, document.body);
+    if (typeof document !== 'undefined' && document.body) {
+      return createPortal(modal, document.body);
+    }
+    return modal;
   }
-  return modal;
-}

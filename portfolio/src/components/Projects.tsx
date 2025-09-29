@@ -60,76 +60,119 @@ const techIcons: { [key: string]: JSX.Element } = {
   'Material-UI': <FaLayerGroup className="text-current" />,
   'Redux': <FaSitemap className="text-current" />,
   '.NET MAUI': <FaLayerGroup className="text-current" />,
-  'C#': <FaCode className="text-current" />
+  'C#': <FaCode className="text-current" />,
+  '.NET Core 9': <FaLayerGroup className="text-current" />,
+  'Entity Framework': <FaDatabase className="text-current" />,
+  'SQLite': <FaDatabase className="text-current" />,
+  'OpenAI API': <FaBolt className="text-current" />,
+  'Google OAuth': <FaCloud className="text-current" />,
+  'JWT': <FaCode className="text-current" />,
+  'Framer Motion': <FaBolt className="text-current" />,
+  'Recharts': <FaLayerGroup className="text-current" />,
+  'React Native': <FaReact className="text-current" />,
+  'Expo': <FaReact className="text-current" />,
+  'JSON Server': <FaDatabase className="text-current" />,
+  'Home Assistant': <FaCloud className="text-current" />,
+  'YAML': <FaCode className="text-current" />,
+  'IoT': <FaCloud className="text-current" />
 };
 
 // Asset URLs (bundled by Vite)
-const sp4Cover = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 10 - Registrer bruger klasse diagram.png', import.meta.url).href;
-const sp4VidMauiPdf = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 07 - PDF-Generering-MAUI_US9.mp4', import.meta.url).href;
-const sp4VidBilingual = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 08 - Dansk-engelsk-MAUI.mp4', import.meta.url).href;
-const sp4VidWebPdf = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 09 - PDF-Generering-DanskogEnglsk-Webapp.mp4', import.meta.url).href;
-const sp4DocProcess = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 01 - Procesbeskrivelse.pdf', import.meta.url).href;
-const sp4DocTech = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 04 - Teknisk analyse.docx', import.meta.url).href;
-const sp4DocFrontend = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 05 - Frontend Web.docx', import.meta.url).href;
-const sp4DocTests = new URL('../../Project-Showcase/semester-project4/Bilag (2)/Bilag/Bilag 06 - Tests.docx', import.meta.url).href;
-const sp3Pdf = new URL('../../Project-Showcase/Semesterprojekt 3/Semesterprojekt_3 endelig.pdf', import.meta.url).href;
-const sp3Cover = sp4Cover; // reuse a safe image as cover; can be changed later
-// Personal Tracker assets
-const ptCover = new URL('../../Project-Showcase/PersonalTracker-main/PersonalTrackerNative/assets/images/icon.png', import.meta.url).href;
-const ptReadme = new URL('../../Project-Showcase/PersonalTracker-main/README.md', import.meta.url).href;
-const ptPrd = new URL('../../Project-Showcase/PersonalTracker-main/ProductRequirementDocument.md', import.meta.url).href;
+// All projects now use text-only layout without images
 
 // Projects data hoisted to avoid recomputing
 const projects: Project[] = [
     {
-      title: "Personal Tracker — Suite",
-      tagline: "Native + Web app with .NET and Node backends",
-      description: "A multi-platform personal tracker consisting of a React web app, an Expo/React Native app, a .NET 9 backend with SQLite and Google Calendar integration, and a Node/Express food microservice. The suite tracks finances, training, prayer, knowledge, and integrates calendar events.",
+      title: "PersonalTracker: AI-Powered Life Analytics Platform",
+      tagline: "Full-Stack Web Application | React + .NET Core + AI Integration",
+      description: "A comprehensive personal analytics platform that transforms daily habits into actionable insights through AI-powered data analysis. Built as a sophisticated full-stack web application demonstrating expertise in modern software development practices, AI integration, and user experience design across fitness, mental health, finances, and personal reflection.",
       features: [
-        "Modular native and web frontends",
-        ".NET 9 backend with EF Core + SQLite",
-        "Google Calendar API integration",
-        "Node/Express food service",
-        "Dashboard metrics and graphs"
+        "🤖 AI-Powered Insights Engine with OpenAI GPT-3.5 Turbo integration",
+        "🔐 Advanced Authentication System with Google OAuth 2.0 + JWT",
+        "📊 Real-Time Analytics Dashboard with live calculations",
+        "💰 Financial Widget with net worth calculation and breakdown",
+        "🏃 Comprehensive Data Tracking (fitness, mood, finances, journal)",
+        "📱 Professional UI/UX with dark/light themes and smooth animations",
+        "🔄 RESTful API with 25+ endpoints and Entity Framework",
+        "📈 Pattern Recognition and Predictive Analytics"
       ],
-      technologies: ["React", "TypeScript", "Tailwind CSS", "Expo", "React Native", ".NET 9", "C#", "SQLite", "Express", "Node.js"],
-      coverImage: ptCover,
-      gallery: [ptPrd, ptReadme],
-      type: "Multi-platform App",
+      technologies: ["React", "TypeScript", "Tailwind CSS", ".NET Core 9", "C#", "Entity Framework", "SQLite", "OpenAI API", "Google OAuth", "JWT", "Framer Motion", "Recharts"],
+      coverImage: "",
+      gallery: [],
+      type: "AI-Powered Full-Stack Application",
       date: "2025",
-      role: "Full Stack Developer",
-      challenges: "Coordinating multiple frontends with separate backends, maintaining shared domain concepts, handling OAuth and Google Calendar API flows, and ensuring consistent UX across platforms.",
-      projectNature: "Personal Project",
-      tags: ["Full Stack", "React", "Expo", ".NET", "Node"],
-      sourceCode: "https://github.com/DICEsda/Portfolio-Website/tree/main/portfolio/Project-Showcase/PersonalTracker-main",
+      role: "Full Stack Developer + AI Integration Specialist",
+      challenges: "Implementing reliable AI service with intelligent fallback mechanisms, designing complex data relationships supporting multiple data types, building performant calculation engine for live financial metrics, seamless Google OAuth integration with secure token management, and ensuring consistent cross-platform UI experience.",
+      projectNature: "Personal Project (Portfolio-Ready)",
+      tags: ["AI Integration", "Full Stack", "React", ".NET Core", "OpenAI", "OAuth"],
+      sourceCode: "https://github.com/DICEsda/Portfolio-Website/tree/main/portfolio/Project-Showcase/PersonalTracker",
       sections: [
         {
-          title: "Native App (Expo)",
-          description: "Tabs for finances, knowledge, meditation, prayer, and training with themed UI and EPUB reading.",
-          technologies: ["Expo", "React Native", "TypeScript"],
-          sourceCode: "https://github.com/DICEsda/Portfolio-Website/tree/main/portfolio/Project-Showcase/PersonalTracker-main/PersonalTrackerNative"
+          title: "Frontend (React + TypeScript)",
+          description: "Modern React application with TypeScript, featuring reusable UI components with animations, API integration layer, Tailwind CSS with dark/light themes, mobile-first responsive design, and WCAG AA compliant accessibility.",
+          technologies: ["React", "TypeScript", "Tailwind CSS", "Framer Motion", "Vite", "Recharts"],
+          sourceCode: "https://github.com/DICEsda/Portfolio-Website/tree/main/portfolio/Project-Showcase/PersonalTracker/PersonalTrackerReact"
         },
         {
-          title: "Web App (React)",
-          description: "Dashboard grid, metric cards, graph modal, and Google Calendar integration.",
-          technologies: ["React", "TypeScript", "Vite", "Tailwind CSS"],
-          sourceCode: "https://github.com/DICEsda/Portfolio-Website/tree/main/portfolio/Project-Showcase/PersonalTracker-main/PersonalTrackerReact"
+          title: "Backend (.NET Core 9)",
+          description: "RESTful API with 25+ endpoints, Entity Framework models with complex relationships, Google OAuth + JWT authentication, business logic & AI integration services, and comprehensive error handling with logging.",
+          technologies: [".NET Core 9", "C#", "Entity Framework", "SQLite", "Google API", "JWT", "OpenAI API"],
+          sourceCode: "https://github.com/DICEsda/Portfolio-Website/tree/main/portfolio/Project-Showcase/PersonalTracker/PersonalTrackerBackend"
         },
         {
-          title: ".NET Backend",
-          description: "ASP.NET Core 9 with EF Core, SQLite, and Google Calendar service.",
-          technologies: [".NET 9", "C#", "EF Core", "SQLite", "Google API"],
-          sourceCode: "https://github.com/DICEsda/Portfolio-Website/tree/main/portfolio/Project-Showcase/PersonalTracker-main/PersonalTrackerBackend"
+          title: "AI Insights Engine",
+          description: "OpenAI GPT-3.5 Turbo integration for generating personalized insights, pattern recognition in mood/fitness/spending, predictive analytics with weekly summaries, and rule-based fallback system for reliability.",
+          technologies: ["OpenAI API", "GPT-3.5 Turbo", "C#", "Pattern Recognition"],
+          sourceCode: "https://github.com/DICEsda/Portfolio-Website/tree/main/portfolio/Project-Showcase/PersonalTracker/PersonalTrackerBackend/Services"
         },
         {
-          title: "Node Food Service",
-          description: "Express microservice with basic routes and static pages.",
-          technologies: ["Node.js", "Express"],
-          sourceCode: "https://github.com/DICEsda/Portfolio-Website/tree/main/portfolio/Project-Showcase/PersonalTracker-main/food-backend"
+          title: "Mobile App (React Native)",
+          description: "Cross-platform mobile application with Expo, featuring tabbed navigation for finances, knowledge, meditation, prayer, and training with themed UI and EPUB reading capabilities.",
+          technologies: ["React Native", "Expo", "TypeScript"],
+          sourceCode: "https://github.com/DICEsda/Portfolio-Website/tree/main/portfolio/Project-Showcase/PersonalTracker/PersonalTrackerNative"
         }
       ]
     },
     {
+      title: "Frontend Development Exam: Exam Management System",
+      tagline: "Cross-platform academic exam administration solution",
+      description: "A comprehensive exam management system built for the Frontend Development exam, featuring both React web application and .NET MAUI cross-platform mobile app. The system enables creating exams, managing students, conducting timed assessments, and tracking performance with bilingual support (Danish/English).",
+      features: [
+        "📝 Complete exam creation and management workflow",
+        "👥 Student registration and assignment to exams", 
+        "⏱️ Real-time exam timer with question randomization",
+        "📊 Grade recording and performance analytics",
+        "🌍 Bilingual interface (Danish/English)",
+        "📱 Cross-platform mobile app with native performance",
+        "🔄 REST API with JSON Server for data persistence",
+        "📈 Exam history and average grade calculations"
+      ],
+      technologies: ["React", "TypeScript", "Tailwind CSS", ".NET MAUI", "C#", "Framer Motion", "JSON Server"],
+      coverImage: "",
+      gallery: [],
+      type: "Academic Cross-Platform Application",
+      date: "2025",
+      role: "Frontend Developer",
+      challenges: "Implementing real-time exam functionality with accurate timers, ensuring data consistency between web and mobile platforms, creating intuitive UX for exam administration, and maintaining performance during timed assessments with multiple concurrent users.",
+      projectNature: "University Exam Project",
+      tags: ["Academic", "Cross-Platform", "React", ".NET MAUI", "Bilingual"],
+      sourceCode: "https://github.com/DICEsda/Portfolio-Website/tree/main/portfolio/Project-Showcase/Frontend%20Examen",
+      sections: [
+        {
+          title: "Web Application (React)",
+          description: "Modern React application with TypeScript and Tailwind CSS, featuring exam creation forms, student management, real-time exam interface with timer, and comprehensive analytics dashboard.",
+          technologies: ["React", "TypeScript", "Tailwind CSS", "Framer Motion", "JSON Server"],
+          sourceCode: "https://github.com/DICEsda/Portfolio-Website/tree/main/portfolio/Project-Showcase/Frontend%20Examen/Exam-React"
+        },
+        {
+          title: "Mobile App (.NET MAUI)",
+          description: "Cross-platform mobile application supporting iOS, Android, and Windows, with native performance for exam administration on mobile devices and offline capability for remote exam scenarios.",
+          technologies: [".NET MAUI", "C#", "XAML"],
+          sourceCode: "https://github.com/DICEsda/Portfolio-Website/tree/main/portfolio/Project-Showcase/Frontend%20Examen/ExamMaui"
+        }
+      ]
+    },
+      {
       title: "Home Assistant Automations",
       tagline: "Smart Home Automation Suite",
       description: "A comprehensive collection of Home Assistant automations that transform a regular house into an intelligent living space. Features various automation scripts for different scenarios, from security notifications to daily routines.",
@@ -142,6 +185,7 @@ const projects: Project[] = [
       ],
       technologies: ["Home Assistant", "YAML", "IoT", "WLED", "Automation"],
       coverImage: "",
+      gallery: [],
       type: "IoT/Smart Home",
       sourceCode: "https://github.com/DICEsda/HomeAssistant-automations",
       date: "2025",
@@ -216,16 +260,8 @@ const projects: Project[] = [
         "Node.js",
         "MongoDB"
       ],
-      coverImage: sp4Cover,
-      gallery: [
-        sp4VidMauiPdf,
-        sp4VidBilingual,
-        sp4VidWebPdf,
-        sp4DocProcess,
-        sp4DocTech,
-        sp4DocFrontend,
-        sp4DocTests
-      ],
+      coverImage: "",
+      gallery: [],
       type: "Cross-Platform App + Web",
       date: "Spring 2025",
       role: "Full Stack Developer",
@@ -244,8 +280,8 @@ const projects: Project[] = [
         "Focus on maintainability"
       ],
       technologies: ["React", "TypeScript", "Tailwind CSS"],
-      coverImage: sp3Cover,
-      gallery: [sp3Pdf],
+      coverImage: "",
+      gallery: [],
       type: "Academic Project",
       date: "2024/2025",
       role: "Developer",
@@ -314,7 +350,6 @@ function Projects() {
     setIsAnimating(true);
     setSlideDirection(1);
     const nextIndex = (currentProject + 1) % projects.length;
-    setImgLoading(Boolean(projects[nextIndex].coverImage));
     setCurrentProject(nextIndex);
     setTimeout(() => setIsAnimating(false), 500);
   };
@@ -324,7 +359,6 @@ function Projects() {
     setIsAnimating(true);
     setSlideDirection(-1);
     const nextIndex = (currentProject - 1 + projects.length) % projects.length;
-    setImgLoading(Boolean(projects[nextIndex].coverImage));
     setCurrentProject(nextIndex);
     setTimeout(() => setIsAnimating(false), 500);
   };
@@ -333,24 +367,22 @@ function Projects() {
     if (isAnimating || index === currentProject) return;
     setIsAnimating(true);
     setSlideDirection(index > currentProject ? 1 : -1);
-    setImgLoading(Boolean(projects[index].coverImage));
     setCurrentProject(index);
     setTimeout(() => setIsAnimating(false), 500);
   };
 
   const currentProjectData = projects[currentProject];
-  const [imgLoading, setImgLoading] = useState<boolean>(true);
 
   return (
     <>
       <section 
         id="projects" 
         ref={sectionRef} 
-        className="h-screen flex items-center justify-center overflow-x-hidden"
+        className="h-screen flex items-center justify-center overflow-x-hidden pt-16"
   >
-  <div className="container mx-auto px-3 xs:px-4 sm:px-5 max-w-6xl">
+  <div className="container mx-auto px-6 sm:px-8 lg:px-12 max-w-5xl xl:max-w-6xl">
           <m.h2 
-            className={`text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-center transition-all duration-1000 text-light scroll-animate ${
+            className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 lg:mb-8 text-center transition-all duration-1000 text-light scroll-animate ${
               initialLoad ? 'opacity-0 scale-75' : 
               inView ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-5 scale-95'
             }`}
@@ -370,10 +402,10 @@ function Projects() {
             inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
           >
-            {/* Navigation Arrows */}
+            {/* Navigation Arrows - positioned within safe viewport bounds */}
             <button
               onClick={prevProject}
-              className="absolute left-2 md:-left-24 top-1/2 transform -translate-y-1/2 z-10 bg-primary/80 backdrop-blur-sm border border-tertiary/20 rounded-full p-2 md:p-3 text-tertiary hover:text-secondary transition-all duration-300 hover:scale-110"
+              className="absolute left-2 sm:left-4 lg:left-6 xl:left-8 top-1/2 transform -translate-y-1/2 z-10 bg-primary/80 backdrop-blur-sm border border-tertiary/20 rounded-full p-2 md:p-3 text-tertiary hover:text-secondary transition-all duration-300 hover:scale-110"
               aria-label="Previous project"
             >
               <FaChevronLeft className="w-4 h-4 md:w-6 md:h-6" />
@@ -381,7 +413,7 @@ function Projects() {
             
             <button
               onClick={nextProject}
-              className="absolute right-2 md:-right-24 top-1/2 transform -translate-y-1/2 z-10 bg-primary/80 backdrop-blur-sm border border-tertiary/20 rounded-full p-2 md:p-3 text-tertiary hover:text-secondary transition-all duration-300 hover:scale-110"
+              className="absolute right-2 sm:right-4 lg:right-6 xl:right-8 top-1/2 transform -translate-y-1/2 z-10 bg-primary/80 backdrop-blur-sm border border-tertiary/20 rounded-full p-2 md:p-3 text-tertiary hover:text-secondary transition-all duration-300 hover:scale-110"
               aria-label="Next project"
             >
               <FaChevronRight className="w-4 h-4 md:w-6 md:h-6" />
@@ -391,7 +423,7 @@ function Projects() {
             <div className="project-content relative">
               {/* Loader overlay for carousel transitions and image loading */}
               <AnimatePresence>
-                {(isAnimating || (imgLoading && Boolean(currentProjectData.coverImage))) && (
+                {isAnimating && (
                   <m.div
                     key="carousel-loader"
                     className="absolute inset-0 z-20 flex items-center justify-center bg-primary/55 backdrop-blur-[1px]"
@@ -429,154 +461,66 @@ function Projects() {
                   exit="exit"
                   transition={{ type: "spring", stiffness: 60, damping: 15, opacity: { duration: 0.2 } }}
                 >
-              {currentProject === 0 ? (
-                // Centered layout for portfolio project
-                <m.div className="max-w-4xl mx-auto text-center px-4 xs:px-6" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, ease: [0.22,1,0.36,1] }}>
-                  <h3 className="text-fluid-xl xs:text-fluid-2xl font-semibold text-light mb-4 scroll-animate">
-                    {currentProjectData.title}
-                  </h3>
-                  <m.div className="bg-card p-4 xs:p-6 rounded-lg mb-6 shadow-lg scroll-animate" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.06, duration: 0.3 }}>
-                    <p className="text-fluid-base text-tertiary leading-relaxed">{currentProjectData.description}</p>
-                  </m.div>
-                  <div className="flex flex-wrap justify-center gap-2 xs:gap-3 sm:gap-4 mb-6 scroll-animate">
-                    {currentProjectData.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="text-fluid-sm text-secondary bg-secondary/10 px-2 xs:px-3 py-1.5 xs:py-2 rounded-full flex items-center gap-1.5 xs:gap-2"
-                      >
-                        {techIcons[tech] && techIcons[tech]}
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                  <m.div className="space-y-4 xs:space-y-6 max-w-2xl mx-auto" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12, duration: 0.28 }}>
-                    <div className="relative overflow-hidden rounded-lg shadow-lg">
-                      {currentProjectData.type === "IoT/Smart Home" && (
-                        <div className="absolute top-3 xs:top-4 left-3 xs:left-4 px-2 xs:px-3 py-1 xs:py-1.5 bg-primary/90 backdrop-blur-sm text-secondary rounded-lg text-fluid-sm font-medium border border-secondary/20 z-10">
-                          Home Assistant Project
-                        </div>
+                  {/* Centered layout for all projects */}
+                  <m.div className="max-w-4xl xl:max-w-5xl mx-auto text-center px-4 sm:px-6" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, ease: [0.22,1,0.36,1] }}>
+                <h3 className="text-fluid-xl xs:text-fluid-2xl font-bold text-light mb-3 scroll-animate">
+                  {currentProjectData.title}
+                </h3>
+                <p className="text-fluid-base text-blue-400 font-medium mb-4">
+                  {currentProjectData.tagline}
+                </p>
+                <m.div className="bg-card/80 backdrop-blur-sm p-4 xs:p-6 rounded-xl mb-6 shadow-xl border border-tertiary/10 scroll-animate" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.06, duration: 0.3 }}>
+                  <p className="text-fluid-base text-tertiary leading-relaxed mb-4">{currentProjectData.description}</p>
+                  {/* Feature Preview - show first 3 features */}
+                  {currentProjectData.features.length > 0 && (
+                    <>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+                        {currentProjectData.features.slice(0, 3).map((feature, idx) => (
+                          <div key={idx} className="bg-primary/50 backdrop-blur-sm p-3 rounded-lg border border-secondary/20">
+                            <span className="text-sm text-secondary font-medium">{feature}</span>
+                          </div>
+                        ))}
+                      </div>
+                      {currentProjectData.features.length > 3 && (
+                        <p className="text-sm text-blue-400">
+                          +{currentProjectData.features.length - 3} more features
+                        </p>
                       )}
-                      <div className="aspect-w-16 aspect-h-9 overflow-hidden bg-card">
-                        {currentProjectData.coverImage && (
-                          <>
-                            {imgLoading && (
-                              <div className="w-full h-full animate-pulse bg-tertiary/10" />
-                            )}
-                            <img
-                              src={currentProjectData.coverImage}
-                              alt={currentProjectData.title}
-                              className={`w-full h-full object-cover transition-transform duration-300 ${imgLoading ? 'opacity-0' : 'opacity-100 hover:scale-105'}`}
-                              loading="lazy"
-                              onLoad={() => setImgLoading(false)}
-                            />
-                          </>
-                        )}
-                      </div>
-                      {/* Source link moved below action buttons for consistency */}
-                    </div>
-                    <button
-                      onClick={() => setSelectedProject(currentProjectData)}
-                      className="w-full py-2.5 xs:py-3 px-4 xs:px-6 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-lg text-fluid-base xs:text-fluid-lg font-semibold flex items-center justify-center gap-2 hover:scale-[1.02] transform touch-manipulation"
+                    </>
+                  )}
+                </m.div>
+                <div className="flex flex-wrap justify-center gap-2 xs:gap-3 sm:gap-4 mb-6 scroll-animate">
+                  {currentProjectData.technologies.map((tech) => (
+                    <span
+                      key={tech}
+                      className="text-fluid-sm text-secondary bg-secondary/10 px-2 xs:px-3 py-1.5 xs:py-2 rounded-full flex items-center gap-1.5 xs:gap-2"
                     >
-                      <span>View Project Showcase</span>
-                      <FaChevronRight className="w-3.5 h-3.5 xs:w-4 xs:h-4" />
-                    </button>
-                    {currentProjectData.sourceCode && (
-                      <a
-                        href={currentProjectData.sourceCode}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full py-2 xs:py-2.5 px-4 xs:px-6 bg-card border border-tertiary/25 text-secondary rounded-lg hover:bg-secondary/10 hover:border-secondary/40 transition-all duration-300 shadow-lg font-medium flex items-center justify-center gap-2 text-fluid-sm hover:scale-[1.02] transform"
-                      >
-                        <FaGithub className="w-4 h-4" />
-                        <span>View on GitHub</span>
-                      </a>
-                    )}
-                  </m.div>
+                      {techIcons[tech] && techIcons[tech]}
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                <m.div className="space-y-4 xs:space-y-6 max-w-2xl mx-auto" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.12, duration: 0.28 }}>
+                  <button
+                    onClick={() => setSelectedProject(currentProjectData)}
+                    className="w-full py-2.5 xs:py-3 px-4 xs:px-6 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-lg text-fluid-base xs:text-fluid-lg font-semibold flex items-center justify-center gap-2 hover:scale-[1.02] transform touch-manipulation"
+                  >
+                    <span>View Project Showcase</span>
+                    <FaChevronRight className="w-3.5 h-3.5 xs:w-4 xs:h-4" />
+                  </button>
+                  {currentProjectData.sourceCode && (
+                    <a
+                      href={currentProjectData.sourceCode}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full py-2 xs:py-2.5 px-4 xs:px-6 bg-card border border-tertiary/25 text-secondary rounded-lg hover:bg-secondary/10 hover:border-secondary/40 transition-all duration-300 shadow-lg font-medium flex items-center justify-center gap-2 text-fluid-sm hover:scale-[1.02] transform"
+                    >
+                      <FaGithub className="w-4 h-4" />
+                      <span>View on GitHub</span>
+                    </a>
+                  )}
                 </m.div>
-              ) : (
-                // Alternating layout for other projects
-                <m.div className="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-center" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
-                  <m.div className="md:text-left order-2 md:order-1" initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.3, delay: 0.05 }}>
-                    <h3 className="text-fluid-xl xs:text-fluid-2xl font-semibold text-light mb-4">
-                      {currentProjectData.title}
-                    </h3>
-                    <m.div className="bg-card p-4 xs:p-6 rounded-lg mb-4 xs:mb-6 shadow-lg" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }}>
-                      <p className="text-fluid-base text-tertiary leading-relaxed">{currentProjectData.description}</p>
-                    </m.div>
-                    <div className="flex flex-wrap gap-2 xs:gap-3 sm:gap-4 mb-4 xs:mb-6">
-                      {currentProjectData.technologies.map((tech) => (
-                        <span
-                          key={tech}
-                          className="text-fluid-sm text-secondary bg-secondary/10 px-2 xs:px-3 py-1.5 xs:py-2 rounded-full flex items-center gap-1.5 xs:gap-2"
-                        >
-                          {techIcons[tech] && techIcons[tech]}
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </m.div>
-                  <m.div className="order-1 md:order-2" initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.3, delay: 0.05 }}>
-                    <m.div className="relative overflow-hidden rounded-lg shadow-lg" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25 }}>
-                      <div className="aspect-w-16 aspect-h-9 overflow-hidden bg-card">
-                        {currentProjectData.coverImage && (
-                          <>
-                            {imgLoading && (
-                              <div className="w-full h-full animate-pulse bg-tertiary/10" />
-                            )}
-                            <img
-                              src={currentProjectData.coverImage}
-                              alt={currentProjectData.title}
-                              className={`w-full h-full object-cover transition-transform duration-300 ${imgLoading ? 'opacity-0' : 'opacity-100 hover:scale-105'}`}
-                              loading="lazy"
-                              onLoad={() => setImgLoading(false)}
-                            />
-                          </>
-                        )}
-                      </div>
-                      <m.div className="flex flex-col gap-2 xs:gap-3 mt-4" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.25, delay: 0.05 }}>
-                        <m.button
-                          onClick={() => setSelectedProject(currentProjectData)}
-                          className="w-full py-2.5 xs:py-3 px-4 xs:px-6 bg-blue-600 text-white rounded-lg shadow-lg text-fluid-base xs:text-fluid-lg font-semibold flex items-center justify-center gap-2 touch-manipulation"
-                          whileHover={{ 
-                            scale: 1.02,
-                            backgroundColor: "#2563eb"
-                          }}
-                          whileTap={{ scale: 0.98 }}
-                          transition={{
-                            type: "spring",
-                            stiffness: 400,
-                            damping: 10
-                          }}
-                        >
-                          <span>View Project Showcase</span>
-                          <m.div
-                            animate={{ x: [0, 4, 0] }}
-                            transition={{ 
-                              duration: 1.5,
-                              repeat: Infinity,
-                              ease: "easeInOut"
-                            }}
-                          >
-                            <FaChevronRight className="w-3.5 h-3.5 xs:w-4 xs:h-4" />
-                          </m.div>
-                        </m.button>
-                        {currentProjectData.sourceCode && (
-                          <a
-                            href={currentProjectData.sourceCode}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-full py-2 xs:py-2.5 px-4 xs:px-6 bg-card border border-tertiary/25 text-secondary rounded-lg hover:bg-secondary/10 hover:border-secondary/40 transition-all duration-300 shadow-lg font-medium flex items-center justify-center gap-2 text-fluid-sm hover:scale-[1.02] transform"
-                          >
-                            <FaGithub className="w-4 h-4" />
-                            <span>View on GitHub</span>
-                          </a>
-                        )}
-                      </m.div>
-                    </m.div>
-                  </m.div>
-                </m.div>
-              )}
+              </m.div>
                 </m.div>
               </AnimatePresence>
             </div>
