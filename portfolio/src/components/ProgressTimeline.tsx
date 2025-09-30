@@ -80,13 +80,13 @@ const ProgressTimeline = () => {
               title={s.label}
             >
               <m.div
-                className={`relative z-20 rounded-full bg-primary border border-secondary/40 ${ringClass}`}
+                className={`relative z-20 grid place-items-center rounded-full bg-primary border border-secondary/40 ${ringClass}`}
                 animate={{ width: size, height: size }}
                 transition={{ duration: 0.25, ease: 'easeOut' }}
                 style={{ width: size, height: size }}
               >
                 <m.span
-                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 block rounded-full bg-secondary"
+                  className="block rounded-full bg-secondary"
                   initial={{ scale: 0 }}
                   animate={{ scale: isPastOrCurrent ? 1 : 0 }}
                   transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}

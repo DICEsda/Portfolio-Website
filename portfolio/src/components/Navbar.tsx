@@ -52,14 +52,22 @@ const Navbar = () => {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled ? 'bg-primary/95 backdrop-blur-sm shadow-lg' : 'bg-transparent'
     }`}>
-      <div className="container mx-auto px-4 max-w-6xl">
-        <div className="flex items-center justify-between h-14 md:h-16">
-          <a href="#home" className="text-xl md:text-2xl font-bold text-light hover:text-secondary transition-colors">
-            YA
-          </a>
+      <div className="container mx-auto px-4 max-w-7xl">
+        <div className="flex items-center justify-between h-14 md:h-16 relative">
+          {/* Subtle centered To‑do (desktop only) */}
+          <div className="hidden md:flex absolute inset-0 items-center justify-center pointer-events-none">
+            <span className="text-xs text-tertiary border border-tertiary bg-primary rounded-md px-2.5 py-0.5">
+              To‑do: Galleries & live demos coming soon
+            </span>
+          </div>
+          <div className="flex-shrink-0">
+            <a href="#home" className="text-xl md:text-2xl font-bold text-light hover:text-secondary transition-colors">
+              YA
+            </a>
+          </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden md:flex items-center space-x-8 ml-auto">
             {navItems.map((item) => (
               item.isCTA ? (
                 <a
@@ -132,7 +140,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Navigation */}
-        {isMenuOpen && (
+  {isMenuOpen && (
           <div className="md:hidden bg-primary/95 backdrop-blur-sm border-t border-tertiary/20 shadow-lg">
             <div className="px-4 py-4 space-y-3">
               {navItems.map((item) => (

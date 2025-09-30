@@ -26,7 +26,6 @@ const About = () => {
     'Continuous integration and deployment (CI/CD) using GitHub Actions',
     'AI/LLM integrations using LangChain, CrewAI, and n8n',
     'Building general scalable and maintainable software architectures with a focus on clean design and long-term flexibility',
-
   ]
 
   const containerVariants = {
@@ -127,4 +126,4 @@ const About = () => {
   )
 }
 
-export default About 
+export default About

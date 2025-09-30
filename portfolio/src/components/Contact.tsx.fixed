@@ -28,7 +28,7 @@ const Contact = () => {
     show: { 
       opacity: 1, 
       y: 0,
-      transition: { duration: 0.4 }
+      transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] }
     }
   };
 
@@ -96,28 +96,29 @@ const Contact = () => {
 
   return (
     <section id="contact" className="h-screen flex items-center justify-center py-0">
-      <div className="container mx-auto px-4 sm:px-5 md:px-6 lg:px-8 max-w-3xl">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 max-w-7xl">
         <m.div
-          className="max-w-xl mx-auto"
+          className="max-w-5xl mx-auto"
           variants={containerVariants}
           initial="hidden"
           animate={isActive ? 'show' : 'hidden'}
         >
           {/* Header */}
-          <m.div variants={itemVariants} className="text-center mb-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-light mb-1.5">
+          <m.div variants={itemVariants} className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-light mb-6">
               Get In Touch
             </h2>
-            <p className="text-tertiary leading-relaxed text-sm">
+            <p className="text-tertiary text-lg leading-relaxed max-w-2xl mx-auto">
               Open to opportunities and collaborations. Have a question or just want to say hi?
               I'll get back to you as soon as I can.
             </p>
           </m.div>
 
-          {/* Single Combined Card */}
-          <m.div variants={itemVariants}>
-            <div className="bg-card p-4 md:p-5 rounded-2xl shadow-lg">
-              <form ref={form} onSubmit={sendEmail} className="space-y-3 md:space-y-4">
+          <div className="grid lg:grid-cols-3 gap-12">
+            {/* Contact Form */}
+            <m.div variants={itemVariants} className="lg:col-span-2">
+              <div className="bg-card px-10 py-12 md:px-12 md:py-14 rounded-xl shadow-xl border border-secondary/20">
+                <form ref={form} onSubmit={sendEmail} className="space-y-10">
                   {/* Honeypot field */}
                   <div className="hidden">
                     <label htmlFor="website">Website</label>
@@ -131,20 +132,17 @@ const Contact = () => {
                   </div>
 
                   {/* Name and Email Row */}
-      <div className="grid md:grid-cols-2 gap-3">
+                  <div className="grid md:grid-cols-2 gap-8">
                     <div>
-                      <label htmlFor="name" className="block text-light text-xs font-medium mb-1">
+                      <label htmlFor="name" className="block text-light text-sm font-medium mb-4">
                         Name
                       </label>
                       <input
                         type="text"
                         id="name"
                         name="name"
-                        autoComplete="name"
-                        aria-invalid={Boolean(errors.name)}
-                        aria-describedby={errors.name ? 'name-error' : undefined}
-        className={`w-full px-3 py-2 bg-primary/50 border rounded-lg text-light placeholder:text-tertiary/60 focus:outline-none focus:border-secondary focus:ring-2 focus:ring-secondary/40 transition-all duration-150 ${
-                          errors.name ? 'border-red-500 focus:ring-red-400/30' : 'border-tertiary/30'
+                        className={`w-full px-5 py-4 bg-primary/50 border rounded-lg focus:outline-none focus:border-secondary text-light transition-all duration-200 ${
+                          errors.name ? 'border-red-500' : 'border-tertiary/30'
                         }`}
                         required
                       />
@@ -154,9 +152,7 @@ const Contact = () => {
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}
-                            id="name-error"
-                            role="alert"
-                            className="mt-1 text-xs text-red-500"
+                            className="mt-3 text-sm text-red-500"
                           >
                             {errors.name}
                           </m.p>
@@ -165,18 +161,15 @@ const Contact = () => {
                     </div>
 
                     <div>
-                      <label htmlFor="email" className="block text-light text-xs font-medium mb-1">
+                      <label htmlFor="email" className="block text-light text-sm font-medium mb-4">
                         Email
                       </label>
                       <input
                         type="email"
                         id="email"
                         name="email"
-                        autoComplete="email"
-                        aria-invalid={Boolean(errors.email)}
-                        aria-describedby={errors.email ? 'email-error' : undefined}
-                        className={`w-full px-3.5 py-2.5 bg-primary/50 border rounded-lg text-light placeholder:text-tertiary/60 focus:outline-none focus:border-secondary focus:ring-2 focus:ring-secondary/40 transition-all duration-150 ${
-                          errors.email ? 'border-red-500 focus:ring-red-400/30' : 'border-tertiary/30'
+                        className={`w-full px-5 py-4 bg-primary/50 border rounded-lg focus:outline-none focus:border-secondary text-light transition-all duration-200 ${
+                          errors.email ? 'border-red-500' : 'border-tertiary/30'
                         }`}
                         required
                       />
@@ -186,9 +179,7 @@ const Contact = () => {
                             initial={{ opacity: 0, y: -10 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -10 }}
-                            id="email-error"
-                            role="alert"
-                            className="mt-1 text-xs text-red-500"
+                            className="mt-3 text-sm text-red-500"
                           >
                             {errors.email}
                           </m.p>
@@ -198,47 +189,43 @@ const Contact = () => {
                   </div>
 
                   {/* Company and Phone Row */}
-      <div className="grid md:grid-cols-2 gap-3">
+                  <div className="grid md:grid-cols-2 gap-8">
                     <div>
-                      <label htmlFor="company" className="block text-light text-xs font-medium mb-1">
+                      <label htmlFor="company" className="block text-light text-sm font-medium mb-4">
                         Company <span className="text-tertiary">(Optional)</span>
                       </label>
                       <input
                         type="text"
                         id="company"
                         name="company"
-                        autoComplete="organization"
-        className="w-full px-3 py-2 bg-primary/50 border border-tertiary/30 rounded-lg text-light placeholder:text-tertiary/60 focus:outline-none focus:border-secondary focus:ring-2 focus:ring-secondary/40 transition-all duration-150"
+                        className="w-full px-5 py-4 bg-primary/50 border border-tertiary/30 rounded-lg focus:outline-none focus:border-secondary text-light transition-all duration-200"
                       />
                     </div>
 
                     <div>
-                      <label htmlFor="phone" className="block text-light text-xs font-medium mb-1">
+                      <label htmlFor="phone" className="block text-light text-sm font-medium mb-4">
                         Phone <span className="text-tertiary">(Optional)</span>
                       </label>
                       <input
                         type="tel"
                         id="phone"
                         name="phone"
-                        autoComplete="tel"
-        className="w-full px-3 py-2 bg-primary/50 border border-tertiary/30 rounded-lg text-light placeholder:text-tertiary/60 focus:outline-none focus:border-secondary focus:ring-2 focus:ring-secondary/40 transition-all duration-150"
+                        className="w-full px-5 py-4 bg-primary/50 border border-tertiary/30 rounded-lg focus:outline-none focus:border-secondary text-light transition-all duration-200"
                       />
                     </div>
                   </div>
 
                   {/* Message */}
                   <div>
-                    <label htmlFor="message" className="block text-light text-xs font-medium mb-1">
+                    <label htmlFor="message" className="block text-light text-sm font-medium mb-4">
                       Message
                     </label>
                     <textarea
                       id="message"
                       name="message"
-                      rows={3}
-                      aria-invalid={Boolean(errors.message)}
-                      aria-describedby={errors.message ? 'message-error' : undefined}
-                      className={`w-full px-3 py-2.5 bg-primary/50 border rounded-lg text-light placeholder:text-tertiary/60 focus:outline-none focus:border-secondary focus:ring-2 focus:ring-secondary/40 transition-all duration-150 resize-none ${
-                        errors.message ? 'border-red-500 focus:ring-red-400/30' : 'border-tertiary/30'
+                      rows={6}
+                      className={`w-full px-5 py-4 bg-primary/50 border rounded-lg focus:outline-none focus:border-secondary text-light transition-all duration-200 resize-none ${
+                        errors.message ? 'border-red-500' : 'border-tertiary/30'
                       }`}
                       required
                     />
@@ -248,9 +235,7 @@ const Contact = () => {
                           initial={{ opacity: 0, y: -10 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -10 }}
-                          id="message-error"
-                          role="alert"
-                          className="mt-1 text-xs text-red-500"
+                          className="mt-3 text-sm text-red-500"
                         >
                           {errors.message}
                         </m.p>
@@ -259,11 +244,11 @@ const Contact = () => {
                   </div>
 
                   {/* Submit Button and Status */}
-          <div className="flex flex-col items-center space-y-2 pt-0.5">
+                  <div className="flex flex-col items-center space-y-6 pt-8">
                     <m.button
                       type="submit"
                       disabled={status === 'sending'}
-            className="w-full sm:w-auto bg-secondary text-white px-5 py-2.5 rounded-lg font-semibold hover:bg-secondary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-secondary/50"
+                      className="bg-secondary text-white px-10 py-4 rounded-lg font-medium hover:bg-secondary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-secondary/50"
                       whileHover={status !== 'sending' ? { scale: 1.02 } : {}}
                       whileTap={status !== 'sending' ? { scale: 0.98 } : {}}
                     >
@@ -277,8 +262,6 @@ const Contact = () => {
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: 10 }}
-                          role="status"
-                          aria-live="polite"
                           className="flex items-center space-x-2 text-green-500"
                         >
                           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -292,8 +275,6 @@ const Contact = () => {
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: 10 }}
-                          role="status"
-                          aria-live="assertive"
                           className="flex items-center space-x-2 text-red-500"
                         >
                           <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -305,89 +286,88 @@ const Contact = () => {
                     </AnimatePresence>
                   </div>
                 </form>
+              </div>
+            </m.div>
 
-                {/* Contact Information Section - Added inside the same card */}
-                <div className="mt-6 md:mt-8 pt-5 md:pt-6 border-t border-tertiary/15">
-                  <h3 className="text-lg md:text-xl font-semibold text-light mb-4 md:mb-5 text-center">Contact Information</h3>
-                  
-                  <div className="grid grid-cols-3 grid-rows-2 gap-x-4 gap-y-1 md:gap-y-1.5 place-items-center">
-                    {/* Row 1: Labels */}
-                    <p className="text-sm text-tertiary">Phone</p>
-                    <p className="text-sm text-tertiary">Email</p>
-                    <p className="text-sm text-tertiary">Location</p>
-
-                    {/* Row 2: Values */}
-                    <div
-                      role="button"
-                      tabIndex={0}
+            {/* Contact Info Sidebar */}
+            <m.div variants={itemVariants} className="lg:col-span-1">
+              <div className="bg-card px-8 py-10 md:px-10 md:py-12 rounded-xl shadow-xl border border-secondary/20 h-fit">
+                <h3 className="text-xl font-semibold text-light mb-8">Contact Information</h3>
+                
+                <div className="space-y-6">
+                  {/* Phone */}
+                  <div className="group">
+                    <p className="text-sm text-tertiary mb-4">Phone</p>
+                    <button
                       onClick={() => copyToClipboard('+4552560027', 'phone')}
-                      onKeyDown={(e) => e.key === 'Enter' && copyToClipboard('+4552560027', 'phone')}
-                      onMouseDown={(e) => e.preventDefault()}
-                      className="relative inline-flex items-center justify-center gap-1.5 text-light text-sm hover:text-secondary transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary/50 rounded leading-tight mb-3 md:mb-4"
-                      aria-label="Copy phone number"
+                      className="flex items-center space-x-3 w-full p-5 bg-primary/30 rounded-lg hover:bg-primary/50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-secondary/50"
                     >
-                      <svg className="w-4 h-4 shrink-0 translate-y-[1px]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                      <svg className="w-5 h-5 text-secondary" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                       </svg>
-                      <span>+45 52560027</span>
-          <AnimatePresence>
+                      <span className="text-light">+45 52560027</span>
+                      <AnimatePresence>
                         {copied === 'phone' && (
                           <m.span
-            initial={{ opacity: 0, y: -6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
-                            className="absolute top-full mt-2 left-1/2 -translate-x-1/2 text-xs text-secondary bg-secondary/20 px-2 py-1 rounded shadow"
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.8 }}
+                            className="ml-auto text-xs text-secondary bg-secondary/20 px-3 py-1 rounded"
                           >
                             Copied!
                           </m.span>
                         )}
                       </AnimatePresence>
-                    </div>
+                    </button>
+                  </div>
 
-                    <div
-                      role="button"
-                      tabIndex={0}
+                  {/* Email */}
+                  <div className="group">
+                    <p className="text-sm text-tertiary mb-4">Email</p>
+                    <button
                       onClick={() => copyToClipboard('Yahya24680@gmail.com', 'email')}
-                      onKeyDown={(e) => e.key === 'Enter' && copyToClipboard('Yahya24680@gmail.com', 'email')}
-                      onMouseDown={(e) => e.preventDefault()}
-                      className="relative inline-flex items-center justify-center gap-1.5 text-light text-sm hover:text-secondary transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-secondary/50 rounded leading-tight mb-3 md:mb-4"
-                      aria-label="Copy email address"
+                      className="flex items-center space-x-3 w-full p-5 bg-primary/30 rounded-lg hover:bg-primary/50 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-secondary/50"
                     >
-                      <svg className="w-4 h-4 shrink-0 translate-y-[1px]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                      <svg className="w-5 h-5 text-secondary" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
                         <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                       </svg>
-                      <span>Yahya24680@gmail.com</span>
-          <AnimatePresence>
+                      <span className="text-light">Yahya24680@gmail.com</span>
+                      <AnimatePresence>
                         {copied === 'email' && (
                           <m.span
-            initial={{ opacity: 0, y: -6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
-                            className="absolute top-full mt-2 left-1/2 -translate-x-1/2 text-xs text-secondary bg-secondary/20 px-2 py-1 rounded shadow"
-                          >x
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.8 }}
+                            className="ml-auto text-xs text-secondary bg-secondary/20 px-3 py-1 rounded"
+                          >
                             Copied!
                           </m.span>
                         )}
                       </AnimatePresence>
-                    </div>
+                    </button>
+                  </div>
 
-                    <div className="inline-flex items-center justify-center gap-1.5 text-light text-sm leading-tight mb-3 md:mb-4">
-                      <svg className="w-4 h-4 shrink-0 translate-y-[1px]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  {/* Location */}
+                  <div>
+                    <p className="text-sm text-tertiary mb-4">Location</p>
+                    <div className="flex items-center space-x-3 p-5 bg-primary/30 rounded-lg">
+                      <svg className="w-5 h-5 text-secondary" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                       </svg>
-                      <span>Denmark, Aarhus</span>
+                      <span className="text-light">Denmark</span>
                     </div>
                   </div>
+                </div>
 
-                  <div className="mt-5 pt-4 border-t border-tertiary/10">
-                    <p className="text-xs text-tertiary/10 text-center select-none font-light">
-                      Click phone or email to copy to clipboard
-                    </p>
-                  </div>
+                <div className="mt-12 pt-8 border-t border-tertiary/20">
+                  <p className="text-xs text-tertiary text-center">
+                    Click phone or email to copy to clipboard
+                  </p>
                 </div>
               </div>
             </m.div>
+          </div>
         </m.div>
       </div>
     </section>

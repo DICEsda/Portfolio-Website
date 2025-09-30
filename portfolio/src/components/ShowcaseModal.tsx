@@ -1,5 +1,7 @@
 import { m, AnimatePresence } from "framer-motion";
 import { createPortal } from "react-dom";
+import { useTheme } from "../context/ThemeContext";
+import { useEffect } from "react";
 
 interface Project {
   title: string;
@@ -31,6 +33,42 @@ interface ShowcaseModalProps {
 }
 
 export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) {
+  const { theme } = useTheme();
+
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    // Lock background scroll
+    const html = document.documentElement;
+    const prevBodyOverflow = document.body.style.overflow;
+    const prevHtmlOverflow = html.style.overflow;
+    const prevOverscroll = html.style.getPropertyValue('overscroll-behavior');
+    document.body.style.overflow = 'hidden';
+    html.style.overflow = 'hidden';
+    html.style.setProperty('overscroll-behavior', 'contain');
+
+    // Disable fullPage.js scrolling if available
+    const fp: any = (window as any).fullpage_api;
+    try {
+      fp?.setAllowScrolling?.(false);
+      fp?.setKeyboardScrolling?.(false);
+    } catch {}
+
+    return () => {
+      // Restore scroll settings
+      document.body.style.overflow = prevBodyOverflow;
+      html.style.overflow = prevHtmlOverflow;
+      if (prevOverscroll) {
+        html.style.setProperty('overscroll-behavior', prevOverscroll);
+      } else {
+        html.style.removeProperty('overscroll-behavior');
+      }
+      try {
+        fp?.setAllowScrolling?.(true);
+        fp?.setKeyboardScrolling?.(true);
+      } catch {}
+    };
+  }, []);
+
   const modal = (
     <AnimatePresence mode="wait">
       <m.div
@@ -42,56 +80,60 @@ export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) 
         onClick={onClose}
         role="dialog"
         aria-modal="true"
+  onWheelCapture={(e) => e.stopPropagation()}
+  onTouchMoveCapture={(e) => e.stopPropagation()}
       >
-        <div className="flex gap-6 max-w-[90vw] h-[85vh] items-start">
-          {/* Left side: Info Card */}
+        <div className="flex max-w-[90vw] h-[85vh] items-start relative">
+          {/* Close button - positioned within the modal container */}
+          <button
+            className="absolute -top-2 -right-2 z-50 w-10 h-10 flex items-center justify-center text-white hover:text-secondary transition-colors duration-200"
+            onClick={onClose}
+            aria-label="Close modal"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
+          {/* Info Card spans full width */}
           <m.div
-            className="bg-white rounded-2xl shadow-2xl w-[600px] p-8 relative overflow-y-auto h-full border border-gray-200 scrollbar-nice"
-            initial={{ scale: 0.95, x: -40, opacity: 0 }}
-            animate={{ scale: 1, x: 0, opacity: 1 }}
-            exit={{ scale: 0.95, x: -40, opacity: 0 }}
+            className={`${theme === 'dark' ? 'bg-card text-light' : 'bg-white text-gray-900'} rounded-2xl shadow-2xl w-[90vw] max-w-[1100px] p-8 relative overflow-y-auto h-full ${theme === 'dark' ? 'border border-tertiary/20' : 'border border-gray-200'} scrollbar-nice`}
+            initial={{ scale: 0.95, y: 10, opacity: 0 }}
+            animate={{ scale: 1, y: 0, opacity: 1 }}
+            exit={{ scale: 0.95, y: 10, opacity: 0 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
             onClick={(e) => e.stopPropagation()}
           >
-            <m.button
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl transition"
-              whileHover={{ scale: 1.2, rotate: 90 }}
-              onClick={onClose}
-              aria-label="Close"
-            >
-              &times;
-            </m.button>
-
             <m.h2
-              className="text-3xl font-heading font-bold mb-2"
+              className={`text-3xl font-heading font-bold mb-2 ${theme === 'dark' ? 'text-light' : 'text-gray-900'}`}
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.15 }}
             >
               {project.title}
             </m.h2>
-            <p className="text-blue-600 mb-4">{project.tagline}</p>
-            <p className="text-gray-700 mb-6">{project.description}</p>
+            <p className="text-secondary mb-4">{project.tagline}</p>
+            <p className={`mb-6 ${theme === 'dark' ? 'text-tertiary' : 'text-gray-700'}`}>{project.description}</p>
             
             <div className="space-y-6">
               {project.sections && project.sections.length > 0 && (
                 <div>
-                  <h3 className="font-semibold text-lg mb-2">Project Sections</h3>
+                  <h3 className={`font-semibold text-lg mb-2 ${theme === 'dark' ? 'text-light' : 'text-gray-900'}`}>Project Sections</h3>
                   <div className="space-y-3">
                     {project.sections.map((sec, i) => (
-                      <div key={i} className="border border-gray-200 rounded-lg p-3">
+                      <div key={i} className={`rounded-lg p-3 ${theme === 'dark' ? 'border border-tertiary/20 bg-primary/50' : 'border border-gray-200 bg-gray-50'}`}>
                         <div className="flex items-center justify-between mb-2">
-                          <h4 className="font-semibold">{sec.title}</h4>
+                          <h4 className={`font-semibold ${theme === 'dark' ? 'text-light' : 'text-gray-900'}`}>{sec.title}</h4>
                           {sec.sourceCode && (
-                            <a href={sec.sourceCode} target="_blank" rel="noopener noreferrer" className="text-blue-600 text-sm hover:underline">Source</a>
+                            <a href={sec.sourceCode} target="_blank" rel="noopener noreferrer" className="text-secondary text-sm hover:underline">Source</a>
                           )}
                         </div>
                         {sec.description && (
-                          <p className="text-gray-700 text-sm mb-2">{sec.description}</p>
+                          <p className={`text-sm mb-2 ${theme === 'dark' ? 'text-tertiary' : 'text-gray-700'}`}>{sec.description}</p>
                         )}
                         <div className="flex flex-wrap gap-2">
                           {sec.technologies.map((t, ti) => (
-                            <span key={ti} className="px-2 py-0.5 bg-blue-50 text-blue-600 rounded-full text-xs">{t}</span>
+                            <span key={ti} className={`px-2 py-0.5 rounded-full text-xs ${theme === 'dark' ? 'bg-secondary/20 text-secondary' : 'bg-blue-50 text-blue-600'}`}>{t}</span>
                           ))}
                         </div>
                       </div>
@@ -100,19 +142,19 @@ export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) 
                 </div>
               )}
               <div>
-                <h3 className="font-semibold text-lg mb-2">Key Features</h3>
+                <h3 className={`font-semibold text-lg mb-2 ${theme === 'dark' ? 'text-light' : 'text-gray-900'}`}>Key Features</h3>
                 <ul className="list-disc ml-6 space-y-1">
                   {project.features.map((f, i) => (
-                    <li key={i} className="text-gray-700">{f}</li>
+                    <li key={i} className={`${theme === 'dark' ? 'text-tertiary' : 'text-gray-700'}`}>{f}</li>
                   ))}
                 </ul>
               </div>
 
               <div>
-                <h3 className="font-semibold text-lg mb-2">Technologies</h3>
+                <h3 className={`font-semibold text-lg mb-2 ${theme === 'dark' ? 'text-light' : 'text-gray-900'}`}>Technologies</h3>
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech, i) => (
-                    <span key={i} className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm">
+                    <span key={i} className={`px-3 py-1 rounded-full text-sm ${theme === 'dark' ? 'bg-secondary/20 text-secondary' : 'bg-blue-50 text-blue-600'}`}>
                       {tech}
                     </span>
                   ))}
@@ -121,20 +163,20 @@ export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) 
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <h3 className="font-semibold mb-1">Project Type</h3>
-                  <p className="text-gray-700">{project.type}</p>
+                  <h3 className={`font-semibold mb-1 ${theme === 'dark' ? 'text-light' : 'text-gray-900'}`}>Project Type</h3>
+                  <p className={`${theme === 'dark' ? 'text-tertiary' : 'text-gray-700'}`}>{project.type}</p>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-1">Date Completed</h3>
-                  <p className="text-gray-700">{project.date}</p>
+                  <h3 className={`font-semibold mb-1 ${theme === 'dark' ? 'text-light' : 'text-gray-900'}`}>Date Completed</h3>
+                  <p className={`${theme === 'dark' ? 'text-tertiary' : 'text-gray-700'}`}>{project.date}</p>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-1">Role</h3>
-                  <p className="text-gray-700">{project.role}</p>
+                  <h3 className={`font-semibold mb-1 ${theme === 'dark' ? 'text-light' : 'text-gray-900'}`}>Role</h3>
+                  <p className={`${theme === 'dark' ? 'text-tertiary' : 'text-gray-700'}`}>{project.role}</p>
                 </div>
                 <div>
-                  <h3 className="font-semibold mb-1">Project Nature</h3>
-                  <p className="text-gray-700">{project.projectNature}</p>
+                  <h3 className={`font-semibold mb-1 ${theme === 'dark' ? 'text-light' : 'text-gray-900'}`}>Project Nature</h3>
+                  <p className={`${theme === 'dark' ? 'text-tertiary' : 'text-gray-700'}`}>{project.projectNature}</p>
                 </div>
               </div>
 
@@ -144,7 +186,7 @@ export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) 
                     href={project.liveDemo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+                    className="px-4 py-2 bg-secondary text-white rounded-lg hover:bg-secondary/90 transition"
                   >
                     Live Demo
                   </a>
@@ -154,7 +196,7 @@ export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) 
                     href={project.sourceCode}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition"
+                    className={`px-4 py-2 rounded-lg transition ${theme === 'dark' ? 'border border-tertiary/30 text-tertiary hover:bg-tertiary/10' : 'border border-gray-300 text-gray-700 hover:bg-gray-50'}`}
                   >
                     Source Code
                   </a>
@@ -162,100 +204,21 @@ export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) 
               </div>
 
               <div>
-                <h3 className="font-semibold text-lg mb-2">Challenges</h3>
-                <p className="text-gray-700">{project.challenges}</p>
+                <h3 className={`font-semibold text-lg mb-2 ${theme === 'dark' ? 'text-light' : 'text-gray-900'}`}>Challenges</h3>
+                <p className={`${theme === 'dark' ? 'text-tertiary' : 'text-gray-700'}`}>{project.challenges}</p>
               </div>
 
               <div>
-                <h3 className="font-semibold text-lg mb-2">Tags</h3>
+                <h3 className={`font-semibold text-lg mb-2 ${theme === 'dark' ? 'text-light' : 'text-gray-900'}`}>Tags</h3>
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((tag, i) => (
-                    <span key={i} className="px-3 py-1 bg-gray-50 text-gray-600 rounded-full text-sm">
+                    <span key={i} className={`px-3 py-1 rounded-full text-sm ${theme === 'dark' ? 'bg-primary/80 text-tertiary' : 'bg-gray-50 text-gray-600'}`}>
                       {tag}
                     </span>
                   ))}
                 </div>
               </div>
             </div>
-          </m.div>
-
-          {/* Right side: Floating Images */}
-          <m.div
-            className="w-[500px] space-y-4 h-full overflow-y-auto scrollbar-nice"
-            initial={{ scale: 0.95, x: 40, opacity: 0 }}
-            animate={{ scale: 1, x: 0, opacity: 1 }}
-            exit={{ scale: 0.95, x: 40, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <m.div
-              className="relative rounded-xl overflow-hidden shadow-lg"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-            >
-              <img
-                src={project.coverImage}
-                alt={project.title}
-                className="w-full h-auto object-cover"
-                loading="lazy"
-              />
-            </m.div>
-            
-            {project.gallery && project.gallery.length > 0 && (
-              <m.div 
-                className="grid grid-cols-2 gap-2"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-              >
-                {project.gallery.map((item, i) => {
-                  const isVideo = /\.(mp4|webm|ogg)$/i.test(item);
-                  const isImage = /\.(png|jpe?g|gif|svg|webp)$/i.test(item);
-                  const fileName = item.split("/").pop() || `asset-${i + 1}`;
-
-                  return (
-                    <m.div
-                      key={i}
-                      className="relative rounded-lg overflow-hidden shadow-md group"
-                      whileHover={{ scale: 1.03 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      {isImage ? (
-                        <img
-                          src={item}
-                          alt={`${project.title} asset ${i + 1}`}
-                          className="w-full h-32 object-cover"
-                          loading="lazy"
-                        />
-                      ) : isVideo ? (
-                        <video
-                          controls
-                          preload="metadata"
-                          src={item}
-                          className="w-full h-32 object-cover bg-black"
-                        />
-                      ) : (
-                        <a
-                          href={item}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center justify-center w-full h-32 bg-gray-100 text-gray-700 text-center px-3"
-                          title={fileName}
-                        >
-                          <span className="text-sm truncate">{fileName}</span>
-                        </a>
-                      )}
-                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                        <span className="text-white text-xs">
-                          {isVideo ? "Click to play" : isImage ? "Click to enlarge" : "Open file"}
-                        </span>
-                      </div>
-                    </m.div>
-                  );
-                })}
-              </m.div>
-            )}
           </m.div>
         </div>
       </m.div>

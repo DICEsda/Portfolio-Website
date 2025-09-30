@@ -3,7 +3,8 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
 import Projects from './components/Projects'
-import Contact from './components/Contact'
+// Explicit extension helps with bundler module resolution in strict setups
+import Contact from './components/Contact.tsx'
 import { useTheme } from './context/ThemeContext'
 import ProgressTimeline from './components/ProgressTimeline'
 import BottomPill from './components/BottomPill'
@@ -35,9 +36,9 @@ function App() {
           }
         }, 1500)
 
-        const mod = await import('fullpage.js')
-        // @ts-ignore - library may export default or function
-        const FullPage = (mod as any).default ?? mod
+  const mod = await import('fullpage.js')
+        // @ts-ignore - library may export default or function  
+        const FullPage = mod.default || mod
 
         // eslint-disable-next-line new-cap
         fp = new FullPage('#fullpage', {

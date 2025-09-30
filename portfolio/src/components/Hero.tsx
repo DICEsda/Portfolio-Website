@@ -8,7 +8,7 @@ const Hero = () => {
   };
   return (
   <section id="home" className="h-screen flex items-center justify-center">
-  <div className="container mx-auto px-6 sm:px-8 md:px-12 lg:px-16 max-w-6xl">
+  <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 max-w-7xl">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="max-w-3xl">
             <p className="text-secondary mb-4 scroll-animate">Hello! I'm</p>
