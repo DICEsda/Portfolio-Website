@@ -1,0 +1,39 @@
+@startuml
+package "cd: Paycheck Controllers: Løn beregning, sammenligning og PDF" {
+
+class PaychecksController {
+    - workShiftService : IDataAccessService<WorkShift>
+    - jobService : IDataAccessService<Job>
+    - supplementDetailsService : IDataAccessService<SupplementDetails>
+    + PayCheckController(_workShift IDAS<WorkShift>,_job IDAS<Job>,_supplementDetails IDAS<SupplementDetails>)
+    + GeneratePayCheckForMonth(companyName string, month int) : Task<IActionResult>
+    + GetTotalVacationPay(companyName string, year int) : Task<IActionResult>
+    - CalculateSalaryBeforeTaxAndTotalHours(timeperiod Expression<Func<WorkShift, bool>>, job Job)
+    - CalculateSupplementPayForWorkshift(workshift WorkShift, supplementDetails IEnumerable<SupplementDetails>) : decimal
+
+}
+class Paycheck {
+    + Tax : decimal
+    + SalaryBeforeTax : decimal
+    + SalaryAfterTax : decimal
+    + taxDeduction : decimal
+    + AMContribution : decimal
+    + WorkedHours : double
+}
+
+interface IDataAccessService<T> {
+    + GetAllAsync() : Task<IEnumerable<T>>
+    + GetByIdAsync(params object[] keyValues) : Task<T?>
+    + AddAsync(T entity) : Task
+    + UpdateAsync(T entity) : Task
+    + DeleteAsync(T entity) : Task
+    + GetFilteredAsync(Expression<Func<T, bool>> filter) : Task<IEnumerable<T>>
+    + GetFirstOrDefaultAsync(Expression<Func<T, bool>> filter) : Task<T>
+}
+
+
+
+PaychecksController "1" --> "3" IDataAccessService
+PaychecksController --> Paycheck
+@enduml
+}

@@ -1,0 +1,29 @@
+scene:
+  - name: Energy Saver
+    entities:
+      # Turn off non-essential devices
+      switch.tv_plug: off
+      switch.desk_plug: off
+      switch.livingroom_plug: off
+      
+      # Dim essential lights to minimum
+      light.tradfri_livingroom:
+        state: on
+        brightness: 30
+        rgb_color: [255, 200, 150]
+      
+      light.tradfri_hall:
+        state: on
+        brightness: 20
+        rgb_color: [255, 200, 150]
+      
+      # Turn off decorative lights
+      light.wled_desk: off
+      light.wled_shelf: off
+      light.wled_bedroom: off
+      
+      # Keep bedroom light very dim for safety
+      light.tradfri_bedroom:
+        state: on
+        brightness: 10
+        rgb_color: [255, 180, 100]

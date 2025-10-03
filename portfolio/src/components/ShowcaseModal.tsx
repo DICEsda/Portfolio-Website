@@ -18,7 +18,8 @@ interface Project {
   role: string;
   challenges: string;
   projectNature: string;
-  tags: string[];
+  tags?: string[];
+  need?: string;
   sections?: Array<{
     title: string;
     description?: string;
@@ -86,7 +87,7 @@ export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) 
         <div className="flex max-w-[90vw] h-[85vh] items-start relative">
           {/* Close button - positioned within the modal container */}
           <button
-            className="absolute -top-2 -right-2 z-50 w-10 h-10 flex items-center justify-center text-white hover:text-secondary transition-colors duration-200"
+            className={`absolute top-3 right-3 z-50 w-10 h-10 flex items-center justify-center rounded-full transition-colors duration-200 ${theme === 'dark' ? 'text-light hover:text-secondary' : 'text-gray-500 hover:text-secondary'}`}
             onClick={onClose}
             aria-label="Close modal"
           >
@@ -112,7 +113,20 @@ export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) 
             >
               {project.title}
             </m.h2>
-            <p className="text-secondary mb-4">{project.tagline}</p>
+            <div className="flex flex-wrap items-center gap-2 mb-3">
+              <p className="text-secondary">{project.tagline}</p>
+              <span className={`${theme === 'dark' ? 'bg-secondary/15 text-secondary border-secondary/25' : 'bg-blue-50 text-blue-700 border-blue-200'} text-xs px-2.5 py-1 rounded-full border font-semibold`}
+                title="Project nature">
+                {project.projectNature}
+              </span>
+            </div>
+
+            {project.need && (
+              <div className={`${theme === 'dark' ? 'bg-primary/60 border-tertiary/30' : 'bg-gray-50 border-gray-200'} border rounded-lg p-3 mb-4`}>
+                <h3 className={`text-sm font-semibold mb-1 ${theme === 'dark' ? 'text-light' : 'text-gray-900'}`}>Project need</h3>
+                <p className={`${theme === 'dark' ? 'text-tertiary' : 'text-gray-700'}`}>{project.need}</p>
+              </div>
+            )}
             <p className={`mb-6 ${theme === 'dark' ? 'text-tertiary' : 'text-gray-700'}`}>{project.description}</p>
             
             <div className="space-y-6">
@@ -129,7 +143,7 @@ export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) 
                           )}
                         </div>
                         {sec.description && (
-                          <p className={`text-sm mb-2 ${theme === 'dark' ? 'text-tertiary' : 'text-gray-700'}`}>{sec.description}</p>
+                          <p className={`text-sm mb-2 whitespace-pre-line ${theme === 'dark' ? 'text-tertiary' : 'text-gray-700'}`}>{sec.description}</p>
                         )}
                         <div className="flex flex-wrap gap-2">
                           {sec.technologies.map((t, ti) => (
@@ -141,13 +155,39 @@ export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) 
                   </div>
                 </div>
               )}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h3 className={`font-semibold text-lg mb-2 ${theme === 'dark' ? 'text-light' : 'text-gray-900'}`}>Key Features</h3>
+                  <ul className="list-disc ml-6 space-y-1">
+                    {project.features.map((f, i) => (
+                      <li key={i} className={`${theme === 'dark' ? 'text-tertiary' : 'text-gray-700'}`}>{f}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="md:flex md:items-center">
+                  <div className={`rounded-lg p-4 max-w-md w-full mx-auto ${theme === 'dark' ? 'border border-tertiary/20 bg-primary/50' : 'border border-gray-200 bg-gray-50'}`}>
+                    <h3 className={`font-semibold text-lg mb-2 ${theme === 'dark' ? 'text-light' : 'text-gray-900'}`}>Project Details</h3>
+                    <ul className="list-disc ml-6 space-y-1">
+                      <li className={`${theme === 'dark' ? 'text-tertiary' : 'text-gray-700'}`}>
+                        <span className={`${theme === 'dark' ? 'text-light' : 'text-gray-900'} font-medium`}>Project Type:</span> {project.type}
+                      </li>
+                      <li className={`${theme === 'dark' ? 'text-tertiary' : 'text-gray-700'}`}>
+                        <span className={`${theme === 'dark' ? 'text-light' : 'text-gray-900'} font-medium`}>Date:</span> {project.date}
+                      </li>
+                      <li className={`${theme === 'dark' ? 'text-tertiary' : 'text-gray-700'}`}>
+                        <span className={`${theme === 'dark' ? 'text-light' : 'text-gray-900'} font-medium`}>Role:</span> {project.role}
+                      </li>
+                      <li className={`${theme === 'dark' ? 'text-tertiary' : 'text-gray-700'}`}>
+                        <span className={`${theme === 'dark' ? 'text-light' : 'text-gray-900'} font-medium`}>Project Nature:</span> {project.projectNature}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
               <div>
-                <h3 className={`font-semibold text-lg mb-2 ${theme === 'dark' ? 'text-light' : 'text-gray-900'}`}>Key Features</h3>
-                <ul className="list-disc ml-6 space-y-1">
-                  {project.features.map((f, i) => (
-                    <li key={i} className={`${theme === 'dark' ? 'text-tertiary' : 'text-gray-700'}`}>{f}</li>
-                  ))}
-                </ul>
+                <h3 className={`font-semibold text-lg mb-2 ${theme === 'dark' ? 'text-light' : 'text-gray-900'}`}>Challenges</h3>
+                <p className={`${theme === 'dark' ? 'text-tertiary' : 'text-gray-700'}`}>{project.challenges}</p>
               </div>
 
               <div>
@@ -161,63 +201,20 @@ export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) 
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <h3 className={`font-semibold mb-1 ${theme === 'dark' ? 'text-light' : 'text-gray-900'}`}>Project Type</h3>
-                  <p className={`${theme === 'dark' ? 'text-tertiary' : 'text-gray-700'}`}>{project.type}</p>
-                </div>
-                <div>
-                  <h3 className={`font-semibold mb-1 ${theme === 'dark' ? 'text-light' : 'text-gray-900'}`}>Date Completed</h3>
-                  <p className={`${theme === 'dark' ? 'text-tertiary' : 'text-gray-700'}`}>{project.date}</p>
-                </div>
-                <div>
-                  <h3 className={`font-semibold mb-1 ${theme === 'dark' ? 'text-light' : 'text-gray-900'}`}>Role</h3>
-                  <p className={`${theme === 'dark' ? 'text-tertiary' : 'text-gray-700'}`}>{project.role}</p>
-                </div>
-                <div>
-                  <h3 className={`font-semibold mb-1 ${theme === 'dark' ? 'text-light' : 'text-gray-900'}`}>Project Nature</h3>
-                  <p className={`${theme === 'dark' ? 'text-tertiary' : 'text-gray-700'}`}>{project.projectNature}</p>
-                </div>
-              </div>
-
               <div className="flex gap-4">
-                {project.liveDemo && (
-                  <a
-                    href={project.liveDemo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-4 py-2 bg-secondary text-white rounded-lg hover:bg-secondary/90 transition"
-                  >
-                    Live Demo
-                  </a>
-                )}
                 {project.sourceCode && (
                   <a
                     href={project.sourceCode}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`px-4 py-2 rounded-lg transition ${theme === 'dark' ? 'border border-tertiary/30 text-tertiary hover:bg-tertiary/10' : 'border border-gray-300 text-gray-700 hover:bg-gray-50'}`}
+                    className="px-4 py-2 bg-secondary text-white rounded-lg hover:bg-secondary/90 transition"
                   >
                     Source Code
                   </a>
                 )}
               </div>
 
-              <div>
-                <h3 className={`font-semibold text-lg mb-2 ${theme === 'dark' ? 'text-light' : 'text-gray-900'}`}>Challenges</h3>
-                <p className={`${theme === 'dark' ? 'text-tertiary' : 'text-gray-700'}`}>{project.challenges}</p>
-              </div>
-
-              <div>
-                <h3 className={`font-semibold text-lg mb-2 ${theme === 'dark' ? 'text-light' : 'text-gray-900'}`}>Tags</h3>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag, i) => (
-                    <span key={i} className={`px-3 py-1 rounded-full text-sm ${theme === 'dark' ? 'bg-primary/80 text-tertiary' : 'bg-gray-50 text-gray-600'}`}>
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              {/* Tags removed by request */}
             </div>
           </m.div>
         </div>

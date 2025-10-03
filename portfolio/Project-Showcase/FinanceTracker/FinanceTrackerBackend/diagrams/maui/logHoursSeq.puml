@@ -1,0 +1,43 @@
+@startuml 
+actor User
+participant LogHoursPage
+participant LogHoursViewModel
+participant IWorkshiftService
+
+
+== Page Initialization ==
+User -> LogHoursPage : Opens Page
+activate LogHoursPage
+LogHoursPage -> LogHoursPage : OnAppearing()
+LogHoursPage -> LogHoursViewModel : InitializeCalendar()
+deactivate LogHoursPage
+
+activate LogHoursViewModel
+LogHoursViewModel -> IWorkshiftService : GetAllWorkShifts()
+activate IWorkshiftService
+IWorkshiftService --> LogHoursViewModel : List<WorkshiftDTO>
+deactivate IWorkshiftService
+
+loop For each workshift
+    LogHoursViewModel -> LogHoursViewModel : Add workshift to binded collection
+end loop
+deactivate LogHoursViewModel
+
+
+== Add Workshift ==
+User -> LogHoursPage : Select date and time interval
+User -> LogHoursPage : Click "Add workshift" Button
+activate LogHoursPage
+LogHoursPage -> LogHoursViewModel : AddWorkShiftCommand.Execute()
+deactivate LogHoursPage
+
+activate LogHoursViewModel
+LogHoursViewModel -> IWorkshiftService : AddWorkShift(WorkshiftDTO)
+activate IWorkshiftService
+IWorkshiftService --> LogHoursViewModel : WorkshiftDTO or null
+deactivate IWorkshiftService
+
+LogHoursViewModel -> LogHoursViewModel : Add workshift to binded collection
+deactivate LogHoursViewModel
+
+@enduml

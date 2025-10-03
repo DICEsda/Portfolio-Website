@@ -1,0 +1,55 @@
+@startuml
+
+title GET /Paychecks - Sequence Diagram
+
+participant "Frontend" as Frontend
+participant "PaychecksController" as PaychecksController
+
+participant "<<Database>>" as Database
+
+activate PaychecksController
+
+Frontend -> PaychecksController: GET /Paychecks\n{companyName, month}
+
+PaychecksController -> PaychecksController: Validate request body
+opt Invalid request body
+    PaychecksController -> Frontend: 400 bad request
+
+end
+
+PaychecksController -> Database: Query job by jobId and userId
+activate Database
+Database --> PaychecksController: job or null
+deactivate Database
+opt job not found
+    PaychecksController -> Frontend: 404 not found
+
+end
+
+PaychecksController -> PaychecksController: CalculateSalaryBeforeTaxAndTotalHours(timeperiod, job)
+activate PaychecksController
+PaychecksController -> Database: Query supplement details filtered by job
+activate Database
+Database --> PaychecksController: supplement details or null
+deactivate Database
+
+PaychecksController -> Database: Query workshifts filtered by timeperiod
+activate Database
+Database --> PaychecksController: workshifts or null
+deactivate Database
+
+
+loop for each workshift in workshifts
+    
+    PaychecksController -> PaychecksController: CalculateSupplementPayForWorkshift(workshift, supplementDetails)
+    activate PaychecksController
+    deactivate PaychecksController
+end
+
+deactivate PaychecksController
+PaychecksController -> Frontend: 200 OK, Paycheck
+
+deactivate PaychecksController
+
+
+@enduml

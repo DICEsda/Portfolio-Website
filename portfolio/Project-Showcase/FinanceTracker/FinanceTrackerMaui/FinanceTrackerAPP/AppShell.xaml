@@ -1,0 +1,62 @@
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:FinanceTracker.Views"
+       xmlns:style="clr-namespace:FinanceTracker.Resources.Styles"
+       xmlns:app="clr-namespace:FinanceTracker"
+       xmlns:services="clr-namespace:MyApp.Services"
+       Title="{Binding [AppTitle], Source={x:Static services:TranslationService.Instance}}"
+       x:Class="FinanceTracker.AppShell" 
+       FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Primary}}">
+
+    <TabBar>
+        <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
+    </TabBar>
+
+    <FlyoutItem Title="{Binding [Dashboard], Source={x:Static services:TranslationService.Instance}}" Icon="{FontImage FontFamily=FontAwesomeSolid, Color=Black,
+        Glyph={x:Static style:FontAwesomeSolid.Question}}">
+        <ShellContent Route="DashboardPage" ContentTemplate="{DataTemplate local:DashboardPage}">
+        </ShellContent>
+    </FlyoutItem>
+
+    <FlyoutItem Title="{Binding [RegisterTitle], Source={x:Static services:TranslationService.Instance}}" Icon="{FontImage FontFamily=FontAwesomeSolid, Color=Black,
+        Glyph={x:Static style:FontAwesomeSolid.AddressCard}}">
+        <ShellContent Route="RegisterPage" ContentTemplate="{DataTemplate local:RegisterPage}">
+        </ShellContent>
+    </FlyoutItem>
+
+    <FlyoutItem Title="{Binding [JobsTitle], Source={x:Static services:TranslationService.Instance}}" Icon="{FontImage FontFamily=FontAwesomeSolid, Color=Black, 
+        Glyph={x:Static style:FontAwesomeSolid.Home}}">
+        <ShellContent Route="JobsPage" ContentTemplate="{DataTemplate local:JobsPage}">
+        </ShellContent>
+    </FlyoutItem>
+    <FlyoutItem Title="{Binding [PaycheckTitle], Source={x:Static services:TranslationService.Instance}}" Icon="{FontImage FontFamily=FontAwesomeSolid, Color=Black, 
+        Glyph={x:Static style:FontAwesomeSolid.Home}}">
+        <ShellContent Route="PayCheckPage" ContentTemplate="{DataTemplate local:PayCheckPage}">
+        </ShellContent>
+    </FlyoutItem>
+
+    <FlyoutItem Title="{Binding [LogHoursTitle], Source={x:Static services:TranslationService.Instance}}">
+        <ShellContent Route="LogHoursPage" ContentTemplate="{DataTemplate local:LogHours}">
+        </ShellContent>
+    </FlyoutItem>
+
+    <FlyoutItem Title="{Binding [SubPayTitle], Source={x:Static services:TranslationService.Instance}}">
+        <ShellContent Route="SupplementDetails" ContentTemplate="{DataTemplate local:SupplementDetails}">
+        </ShellContent>
+    </FlyoutItem>
+
+    <FlyoutItem Title="{Binding [VacPayTitle], Source={x:Static services:TranslationService.Instance}}">
+        <ShellContent Route="VacationPay" ContentTemplate="{DataTemplate local:VacationPayPage}">
+            
+        </ShellContent>
+        
+    </FlyoutItem>
+
+    <MenuItem Text="{Binding [Logout], Source={x:Static services:TranslationService.Instance}}" Clicked="OnMenuItemClicked" 
+              IconImageSource="{FontImage FontFamily=FontAwesomeSolid, Color=Black, 
+        Glyph={x:Static style:FontAwesomeSolid.SignOutAlt}}">
+    </MenuItem>
+    
+    
+
+</Shell>

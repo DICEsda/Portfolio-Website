@@ -1,0 +1,13 @@
+{
+	"devices": {
+		"hallway light": "light.hallway",
+		"kitchen light": "light.kitchen",
+		"living room light": "light.living_room",
+		"bedroom light": "light.bedroom"
+	},
+	"areas": {
+		"hallway": "area.hallway",
+		"kitchen": "area.kitchen"
+	},
+	"presence_entity": "group.family"
+}

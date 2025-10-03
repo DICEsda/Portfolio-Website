@@ -1,0 +1,51 @@
+@startuml
+package "cd: PaycheckPage" {
+
+
+' UI Layer
+class PayCheckPage {
+}
+
+' ViewModel
+class PayCheckViewModel {
+    +PayCheckViewModel(IPayCheckService)
+    +SalaryCalculationForMonthCommand: ICommand
+    +SalaryBeforeTax: decimal
+    +AMContribution: decimal
+    +Tax: decimal
+    +SalaryAfterTax: decimal
+    +WorkedHours: double
+    + CompareCommand: ICommand
+    + GeneratePDFCommand: ICommand
+}
+
+' Service Interface
+interface IPayCheckService {
+    +SalaryEstimationForMonth(string, int): Task<PayCheckDTO>
+}
+
+' Service Implementation
+class PayCheckService {
+    -_httpClient: HttpClient
+    +SalaryEstimationForMonth(string, int): Task<PayCheckDTO>
+}
+
+' DTO
+class PayCheckDTO {
+    +SalaryBeforeTax: decimal
+    +AMContribution: decimal
+    +Tax: decimal
+    +SalaryAfterTax: decimal
+    +WorkedHours: double
+}
+
+' Relationships
+PayCheckPage --> PayCheckViewModel : binds to
+PayCheckViewModel --> IPayCheckService
+PayCheckService ..|> IPayCheckService
+PayCheckService --> PayCheckDTO
+PayCheckViewModel --> PayCheckDTO
+IPayCheckService --> PayCheckDTO
+
+@enduml
+}

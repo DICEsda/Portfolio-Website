@@ -1,0 +1,48 @@
+
+@startuml
+package "cd: Login" {
+
+
+' Interfaces
+interface IAuthenticationService {
+    + Login(LoginDTO loginDTO) Task<string?>
+}
+
+' DTO
+class LoginDTO {
+    + UserName string
+    + Password string
+}
+
+' Services
+class AuthenticationService {
+    - _httpClient HttpClient
+    + AuthenticationService(HttpClient)
+    + Login(LoginDTO) Task<string?>
+}
+
+' ViewModels
+class LoginViewModel {
+    - _authenticationService IAuthenticationService
+    + LoginViewModel(IAuthenticationService)
+    + email string [ObservableProperty]
+    + password string [ObservableProperty]
+    + Login() Task [RelayCommand]
+    + NavigateToRegisterPage() Task [RelayCommand]
+}
+
+' Views
+class LoginPage {
+}
+
+' Relationships
+LoginViewModel --> IAuthenticationService
+AuthenticationService ..|> IAuthenticationService
+LoginViewModel --> LoginDTO
+LoginPage --> LoginViewModel
+AuthenticationService --> LoginDTO
+IAuthenticationService --> LoginDTO
+
+
+@enduml
+}

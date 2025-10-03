@@ -1,0 +1,50 @@
+@startuml
+participant "User" as User
+participant "PayCheckPage" as Page
+participant "PayCheckViewModel" as ViewModel
+participant "IPayCheckService" as ServiceInterface
+participant "backend-server" as BackendServer
+
+== løn beregning ==
+
+User -> Page : Enter Company Name and Month
+User -> Page : Click "Generer løn-estimation" Button
+activate Page
+Page -> ViewModel : SalaryEstimationForMonth.Execute()
+deactivate Page
+activate ViewModel
+ViewModel -> ServiceInterface : SalaryCalculationForMonth(string, int)
+activate ServiceInterface
+ServiceInterface -> BackendServer : HTTP GET
+activate BackendServer
+BackendServer --> ServiceInterface : PayCheckDTO
+deactivate BackendServer
+ServiceInterface -> ViewModel : PayCheckDTO
+deactivate ServiceInterface
+ViewModel -> ViewModel : Set binded properties
+deactivate ViewModel
+
+...
+== sammenligning ==
+
+User -> Page : Enter actual paycheck info
+User -> Page : Click "Compare" Button
+activate Page
+Page -> ViewModel : Compare.Execute()
+deactivate Page
+activate ViewModel
+ViewModel -> ViewModel : Indicate valid or invalid paycheck
+deactivate ViewModel
+
+
+== Generer PDF ==
+
+User -> Page : Click "Generate PDF" Button
+activate Page
+Page -> ViewModel : GeneratePDF.Execute()
+deactivate Page
+activate ViewModel
+ViewModel -> ViewModel : Generate PDF
+deactivate ViewModel
+
+@enduml

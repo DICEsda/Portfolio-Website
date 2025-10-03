@@ -1,0 +1,27 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+    compatible = "brcm,bcm2835";
+
+    fragment@0 {
+        target-path = "/";
+        __overlay__ {
+            plat_drv: plat_drv@0 {
+                compatible = "mygpio,plat_drv";
+                status = "okay";
+
+                /* Define GPIOs for the driver */
+                gpios = <&gpio 18 1>, /* GPIO 18 for Servo */
+                        <&gpio 22 1>, /* GPIO 22 for Stepper Pin 1 */
+                        <&gpio 23 1>, /* GPIO 23 for Stepper Pin 2 */
+                        <&gpio 24 1>, /* GPIO 24 for Stepper Pin 3 */
+                        <&gpio 25 1>; /* GPIO 25 for Stepper Pin 4 */
+
+                /* Custom property */
+                mydevt-custom = <0x12345678>;
+            };
+        };
+    };
+};
+

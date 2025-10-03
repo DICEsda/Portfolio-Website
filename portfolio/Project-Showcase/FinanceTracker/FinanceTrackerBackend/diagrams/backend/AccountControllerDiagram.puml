@@ -1,0 +1,35 @@
+@startuml
+package "cd: Authentication Controller" {
+
+class AuthenticationController {
+    - _userManager : UserManager<TUser>
+    + AccountsController(userManager : UserManager<FinanceUser>)
+    + Register(input : RegisterDTO) : Task<ActionResult>
+    + Login(input : LoginDTO) : Task<ActionResult>
+}
+
+
+class UserManager<TUser> {
+    + CreateAsync(user : TUser, password : string) : Task<IdentityResult>
+    + FindByNameAsync(username : string) : Task<TUser>
+    + CheckPasswordAsync(user : TUser, password : string) : Task<bool>
+}
+
+
+
+class RegisterDTO {
+    + Email : string
+    + Password : string
+}
+
+class LoginDTO {
+    + Username : string
+    + Password : string
+}
+
+AuthenticationController --> UserManager
+AuthenticationController --> RegisterDTO
+AuthenticationController --> LoginDTO
+
+@enduml
+}

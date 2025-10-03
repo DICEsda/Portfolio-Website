@@ -1,0 +1,64 @@
+@startuml
+class AccountsController {
+    - _context : FinanceTrackerContext
+    - _logger : ILogger<AccountsController>
+    - _configuration : IConfiguration
+    - _userManager : UserManager<FinanceUser>
+    - _signInManager : SignInManager<FinanceUser>
+    + AccountsController(FinanceTrackerContext, ILogger<AccountsController>, IConfiguration, UserManager<FinanceUser>, SignInManager<FinanceUser>)
+    + Register(input : RegisterDTO) : Task<ActionResult>
+    + Login(input : LoginDTO) : Task<ActionResult>
+}
+
+class FinanceTrackerContext {
+    + FinanceTrackerContext(options : DbContextOptions<FinanceTrackerContext>)
+    + Users : DbSet<FinanceUser>
+    + WorkShifts : DbSet<WorkShift>
+    + Jobs : DbSet<Job>
+    + SupplementDetails : DbSet<SupplementDetails>
+}
+
+interface ILogger<T> {
+    + LogInformation(message : string, params object[] args) : void
+}
+
+interface IConfiguration {
+    // Add configuration-related methods if needed
+}
+
+class UserManager<TUser> {
+    + CreateAsync(user : TUser, password : string) : Task<IdentityResult>
+    + FindByNameAsync(username : string) : Task<TUser>
+    + CheckPasswordAsync(user : TUser, password : string) : Task<bool>
+}
+
+class SignInManager<TUser> {
+    // Add methods if needed
+}
+
+class FinanceUser {
+    + UserName : string
+    + Email : string
+    + Id : string
+}
+
+class RegisterDTO {
+    + Email : string
+    + Password : string
+}
+
+class LoginDTO {
+    + Username : string
+    + Password : string
+}
+
+AccountsController --> FinanceTrackerContext
+AccountsController --> ILogger
+AccountsController --> IConfiguration
+AccountsController --> UserManager
+AccountsController --> SignInManager
+AccountsController --> RegisterDTO
+AccountsController --> LoginDTO
+UserManager <|.. FinanceUser
+SignInManager <|.. FinanceUser
+@enduml

@@ -1,0 +1,43 @@
+scene:
+  - name: Bedtime
+    entities:
+      # Turn off all main power outlets
+      switch.livingroom_plug: off
+      switch.desk_plug: off
+      switch.tv_plug: off
+      
+      # Turn off all main lights
+      light.tradfri_livingroom: off
+      light.tradfri_hall: off
+      light.tradfri_desk: off
+      
+      # Turn off decorative/LED strips
+      light.wled_desk: off
+      light.wled_shelf: off
+      
+      # Bedroom light: warm, very dim for winding down
+      light.tradfri_bedroom:
+        state: on
+        brightness: 20
+        rgb_color: [255, 150, 80]
+      
+      light.wled_bedroom:
+        state: on
+        brightness: 30
+        rgb_color: [255, 100, 50]
+        effect: "Breathe"
+
+scene:
+  - name: Deep Sleep
+    entities:
+      # Everything off for complete darkness
+      switch.livingroom_plug: off
+      switch.desk_plug: off
+      switch.tv_plug: off
+      light.tradfri_livingroom: off
+      light.tradfri_hall: off
+      light.tradfri_desk: off
+      light.tradfri_bedroom: off
+      light.wled_desk: off
+      light.wled_shelf: off
+      light.wled_bedroom: off

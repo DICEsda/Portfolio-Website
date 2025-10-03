@@ -1,0 +1,43 @@
+@startuml
+class WorkshiftsController {
+    - _workShift : IDataAccessService<WorkShift>
+    - _user : IDataAccessService<FinanceUser>
+    + WorkshiftsController(IDataAccessService<WorkShift>, IDataAccessService<FinanceUser>)
+    + RegisterWorkShift(workshift : WorkShiftDTO) : Task<IActionResult>
+    + GetAllWorkShiftsForUser() : Task<IActionResult>
+}
+
+interface IDataAccessService<T> {
+    + GetAllAsync() : Task<IEnumerable<T>>
+    + GetByIdAsync(params object[] keyValues) : Task<T?>
+    + AddAsync(T entity) : Task
+    + UpdateAsync(T entity) : Task
+    + DeleteAsync(T entity) : Task
+    + GetFilteredAsync(Expression<Func<T, bool>> filter) : Task<IEnumerable<T>>
+    + GetFirstOrDefaultAsync(Expression<Func<T, bool>> filter) : Task<T>
+}
+
+class WorkShift {
+    + StartTime : DateTime
+    + EndTime : DateTime
+    + UserId : string
+    - User : FinanceUser <<JsonIgnore>>
+}
+
+class FinanceUser {
+    + Age : int
+    + Jobs : ICollection<Job>
+    + WorkShifts : ICollection<WorkShift>
+}
+
+class WorkShiftDTO {
+    + StartTime : DateTime
+    + EndTime : DateTime
+}
+
+WorkshiftsController --> IDataAccessService
+WorkshiftsController --> WorkShiftDTO
+IDataAccessService --> WorkShift
+IDataAccessService --> FinanceUser
+WorkShift --> FinanceUser
+@enduml

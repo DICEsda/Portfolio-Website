@@ -1,0 +1,51 @@
+@startuml
+class SupplementDetailsController {
+    - _jobService : IDataAccessService<Job>
+    - _supplementDetails : IDataAccessService<SupplementDetails>
+    + SupplementDetailsController(IDataAccessService<Job>, IDataAccessService<SupplementDetails>)
+    + RegisterSupplementPay(supplementDetailsDTO : List<SupplementDetailsDTO>, companyName : string) : Task<IActionResult>
+}
+
+interface IDataAccessService<T> {
+    + GetAllAsync() : Task<IEnumerable<T>>
+    + GetByIdAsync(params object[] keyValues) : Task<T?>
+    + AddAsync(T entity) : Task
+    + UpdateAsync(T entity) : Task
+    + DeleteAsync(T entity) : Task
+    + GetFilteredAsync(Expression<Func<T, bool>> filter) : Task<IEnumerable<T>>
+    + GetFirstOrDefaultAsync(Expression<Func<T, bool>> filter) : Task<T>
+}
+
+class SupplementDetails {
+    + Weekday : DayOfWeek
+    + Amount : decimal
+    + StartTime : DateTime
+    + EndTime : DateTime
+    + CompanyName : string
+    + Job : Job
+}
+
+class SupplementDetailsDTO {
+    + Weekday : DayOfWeek
+    + Amount : decimal
+    + StartTime : DateTime
+    + EndTime : DateTime
+}
+
+class Job {
+    + Title : string?
+    + TaxCard : string?
+    + EmploymentType : string?
+    + CompanyName : string
+    + HourlyRate : decimal
+    + UserId : string
+    - User : FinanceUser <<JsonIgnore>>
+}
+
+SupplementDetailsController --> IDataAccessService
+SupplementDetailsController --> SupplementDetailsDTO
+IDataAccessService --> SupplementDetails
+IDataAccessService --> Job
+SupplementDetails --> Job
+SupplementDetailsDTO --> SupplementDetails
+@enduml

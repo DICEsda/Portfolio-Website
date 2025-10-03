@@ -1,0 +1,29 @@
+@startuml
+participant PaychecksController
+participant CalculateSupplementPayForWorkshift
+
+PaychecksController -> CalculateSupplementPayForWorkshift : Calculate(workShift, supplementDetails)
+activate CalculateSupplementPayForWorkshift
+
+CalculateSupplementPayForWorkshift -> CalculateSupplementPayForWorkshift : Find matching supplementDay by DayOfWeek
+
+alt No matching supplementDay
+    CalculateSupplementPayForWorkshift --> PaychecksController : return 0
+    deactivate CalculateSupplementPayForWorkshift
+    return
+end
+
+CalculateSupplementPayForWorkshift -> CalculateSupplementPayForWorkshift : Determine overlap(start, end)
+
+alt No overlap
+    CalculateSupplementPayForWorkshift --> PaychecksController : return 0
+    deactivate CalculateSupplementPayForWorkshift
+    return
+end
+
+CalculateSupplementPayForWorkshift -> CalculateSupplementPayForWorkshift : Calculate hoursWorked
+CalculateSupplementPayForWorkshift -> CalculateSupplementPayForWorkshift : supplementPay = hoursWorked * Amount
+
+CalculateSupplementPayForWorkshift --> PaychecksController : return supplementPay
+deactivate CalculateSupplementPayForWorkshift
+@enduml

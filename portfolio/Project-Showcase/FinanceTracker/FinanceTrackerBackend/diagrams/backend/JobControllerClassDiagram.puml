@@ -1,0 +1,52 @@
+@startuml
+class JobsController {
+    - _job : IDataAccessService<Job>
+    - _user : IDataAccessService<FinanceUser>
+    + JobsController(IDataAccessService<Job>, IDataAccessService<FinanceUser>)
+    + RegisterJob(jobDto : JobDTO) : Task<ActionResult>
+    + UpdateJob(companyName : string, jobDto : JobDTO) : Task<ActionResult>
+    + GetAllJobsForUser() : Task<IActionResult>
+    + DeleteJob(companyName : string) : Task<IActionResult>
+}
+
+interface IDataAccessService<T> {
+    + GetAllAsync() : Task<IEnumerable<T>>
+    + GetByIdAsync(params object[] keyValues) : Task<T?>
+    + AddAsync(T entity) : Task
+    + UpdateAsync(T entity) : Task
+    + DeleteAsync(T entity) : Task
+    + GetFilteredAsync(Expression<Func<T, bool>> filter) : Task<IEnumerable<T>>
+    + GetFirstOrDefaultAsync(Expression<Func<T, bool>> filter) : Task<T>
+}
+
+class Job {
+    + Title : string?
+    + TaxCard : string?
+    + EmploymentType : string?
+    + CompanyName : string
+    + HourlyRate : decimal
+    + UserId : string
+    - User : FinanceUser <<JsonIgnore>>
+}
+
+class FinanceUser {
+    + Age : int
+    + Jobs : ICollection<Job>
+    + WorkShifts : ICollection<WorkShift>
+}
+
+class JobDTO {
+    + CompanyName : string
+    + HourlyRate : decimal
+    + EmploymentType : string
+    + TaxCard : string
+    + Title : string?
+}
+
+JobsController --> IDataAccessService
+JobsController --> JobDTO
+IDataAccessService --> Job
+IDataAccessService --> FinanceUser
+Job --> FinanceUser
+JobDTO --> Job
+@enduml

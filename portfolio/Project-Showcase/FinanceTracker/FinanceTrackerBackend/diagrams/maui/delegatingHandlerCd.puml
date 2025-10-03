@@ -1,0 +1,26 @@
+@startuml
+
+class HttpMessageHandler {
+    +SendAsync(request, cancellationToken): Task<HttpResponseMessage>
+}
+
+class DelegatingHandler {
+    -InnerHandler: HttpMessageHandler
+    +SendAsync(request, cancellationToken): Task<HttpResponseMessage>
+}
+
+class AuthHeaderHandler {
+    +SendAsync(request, cancellationToken): Task<HttpResponseMessage>
+}
+
+class HttpClient {
+    -handler: HttpMessageHandler
+    +SendAsync(request, cancellationToken): Task<HttpResponseMessage>
+}
+
+HttpMessageHandler <|-- DelegatingHandler
+DelegatingHandler <|-- AuthHeaderHandler
+
+HttpClient "1" o-- "1" HttpMessageHandler : uses
+
+@enduml

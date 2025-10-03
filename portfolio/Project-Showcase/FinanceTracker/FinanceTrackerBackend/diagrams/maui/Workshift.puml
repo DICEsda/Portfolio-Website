@@ -1,0 +1,47 @@
+@startuml
+title Workshift Feature - Class Diagram
+
+' UI Layer
+class LogHours {
+    +OnAppearing()
+    +BindingContext: LogHoursViewModel
+}
+
+' ViewModel
+class LogHoursViewModel {
+    -_workshiftService: IWorkshiftService
+    +Workshifts: ObservableCollection<WorkshiftDTO>
+    +Events: EventCollection
+    +SelectedDate: DateTime?
+    +StartTime: TimeSpan
+    +EndTime: TimeSpan
+    +InitializeCalendar()
+    +AddWorkshift()
+}
+
+' Service Interface
+interface IWorkshiftService {
+    +AddWorkShift(WorkshiftDTO): Task<WorkshiftDTO>
+    +GetAllWorkShifts(): Task<List<WorkshiftDTO>>
+}
+
+' Service Implementation
+class WorkshiftService {
+    -_httpClient: HttpClient
+    +AddWorkShift(WorkshiftDTO): Task<WorkshiftDTO>
+    +GetAllWorkShifts(): Task<List<WorkshiftDTO>>
+}
+
+' DTO
+class WorkshiftDTO {
+    +StartTime: DateTime
+    +EndTime: DateTime
+}
+
+' Relationships
+LogHours --> LogHoursViewModel : binds
+LogHoursViewModel --> IWorkshiftService : uses
+WorkshiftService ..|> IWorkshiftService
+WorkshiftService --> WorkshiftDTO
+
+@enduml

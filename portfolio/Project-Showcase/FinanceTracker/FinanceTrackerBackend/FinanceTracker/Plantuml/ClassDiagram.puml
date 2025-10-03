@@ -1,0 +1,41 @@
+@startuml
+skinparam classAttributeIconSize 0
+title Backend MVP
+
+class FinanceTrackerContext {
+    + DbSet<FinanceUser> Users
+    + DbSet<WorkShift> WorkShifts
+    + DbSet<Job> Jobs
+    + DbSet<SupplementDetails> SupplementDetails
+}
+
+interface IDataAccessService<T> {
+    + GetAllAsync() : Task<<IEnumerable<T>>>
+    + GetByIdAsync(params object[] keyValues) : Task<T?>
+    + AddAsync(T entity) : Task
+    + UpdateAsync(T entity) : Task
+    + DeleteAsync(T entity) : Task
+    + GetFilteredAsync(Expression<Func<T, bool>> filter) : Task<IEnumerable<T>>
+    + GetFirstOrDefaultAsync(Expression<Func<T, bool>> filter) : Task<T>
+}
+
+class DataAccessService<T> {
+    - FinanceTrackerContext _context
+    + GetAllAsync() : Task<<IEnumerable<T>>>
+    + GetByIdAsync(params object[] keyValues) : Task<T?>
+    + AddAsync(T entity) : Task
+    + UpdateAsync(T entity) : Task
+    + DeleteAsync(T entity) : Task
+    + GetFilteredAsync(Expression<Func<T, bool>> filter) : Task<IEnumerable<T>>
+    + GetFirstOrDefaultAsync(Expression<Func<T, bool>> filter) : Task<T>
+}
+
+class IdentityDbContext {
+}
+
+
+FinanceTrackerContext --|> IdentityDbContext 
+DataAccessService --> FinanceTrackerContext
+DataAccessService ..|> IDataAccessService 
+
+@enduml

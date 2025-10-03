@@ -1,0 +1,75 @@
+@startuml
+class PayCheckController {
+    - workShiftService : IDataAccessService<WorkShift>
+    - jobService : IDataAccessService<Job>
+    - supplementDetailsService : IDataAccessService<SupplementDetails>
+    + PayCheckController(IDataAccessService<WorkShift>, IDataAccessService<Job>, IDataAccessService<SupplementDetails>)
+    - CalculateSupplementPayForWorkshift(workshift WorkShift, supplementDetails IEnumerable<SupplementDetails>) : decimal
+    + GeneratePayCheckForMonth(companyName string, month int) : Task<IActionResult>
+    + GetTotalVacationPay(companyName string, year int) : Task<IActionResult>
+}
+
+class PayCheck {
+    + Tax : decimal
+    + HolidaySupplement : decimal
+    + PaycheckId : int
+    + WorkHours : double
+    + TaxDeducation : decimal
+    + AM_contribution : decimal
+    + Pension : decimal
+    + SalaryBeforeTax : decimal
+    + SalaryAfterTax : decimal
+    + VacationPay : decimal
+}
+
+interface IDataAccessService<T> {
+    + GetAllAsync() : Task<IEnumerable<T>>
+    + GetByIdAsync(params object[] keyValues) : Task<T?>
+    + AddAsync(T entity) : Task
+    + UpdateAsync(T entity) : Task
+    + DeleteAsync(T entity) : Task
+    + GetFilteredAsync(Expression<Func<T, bool>> filter) : Task<IEnumerable<T>>
+    + GetFirstOrDefaultAsync(Expression<Func<T, bool>> filter) : Task<T>
+}
+
+class FinanceUser {
+    + Age : int
+    + Jobs : ICollection<Job>
+    + WorkShifts : ICollection<WorkShift>
+}
+
+class WorkShift {
+    + StartTime : DateTime
+    + EndTime : DateTime
+    + UserId : string
+    - User : FinanceUser <<JsonIgnore>>
+}
+
+class Job {
+    + Title : string?
+    + TaxCard : string?
+    + EmploymentType : string?
+    + CompanyName : string
+    + HourlyRate : decimal
+    + UserId : string
+    - User : FinanceUser <<JsonIgnore>>
+}
+
+class SupplementDetails {
+    + Weekday : DayOfWeek
+    + Amount : decimal
+    + StartTime : DateTime
+    + EndTime : DateTime
+    + CompanyName : string
+    + Job : Job
+}
+
+PayCheckController --> IDataAccessService
+PayCheckController --> PayCheck
+IDataAccessService --> WorkShift
+IDataAccessService --> Job
+IDataAccessService --> SupplementDetails
+WorkShift <--> FinanceUser
+Job <--> FinanceUser
+SupplementDetails --> Job
+@enduml

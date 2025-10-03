@@ -1,0 +1,31 @@
+@startuml
+actor User
+participant LoginPage
+participant LoginViewModel
+participant IAuthenticationService
+participant AuthenticationService
+
+
+User -> LoginPage : Click "Login"
+LoginPage -> LoginViewModel : LoginCommand.Execute()
+
+activate LoginViewModel
+
+LoginViewModel -> IAuthenticationService : Login(loginDTO)
+activate IAuthenticationService
+
+IAuthenticationService -> AuthenticationService : Login(loginDTO)
+activate AuthenticationService
+
+AuthenticationService -> AuthenticationService : Call HttpClient.PostAsync(...)
+AuthenticationService --> IAuthenticationService : return JWT token (or null)
+deactivate AuthenticationService
+
+IAuthenticationService --> LoginViewModel : token or null
+deactivate IAuthenticationService
+
+LoginViewModel -> LoginViewModel : Navigate or indicate error
+
+deactivate LoginViewModel
+
+@enduml

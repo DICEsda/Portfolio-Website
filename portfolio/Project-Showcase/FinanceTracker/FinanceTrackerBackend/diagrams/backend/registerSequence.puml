@@ -1,0 +1,38 @@
+
+@startuml
+title Register Sequence Diagram
+participant "Frontend" as Frontend
+participant "AccountsController" as AccountsController
+participant "UserManager" as UserManager
+participant "<<Database>>" as Database
+
+activate Frontend
+Frontend -> AccountsController: /accounts/register
+activate AccountsController
+AccountsController -> AccountsController: Validate request body
+opt Invalid request body
+AccountsController -> Frontend: 400 bad request 
+end
+AccountsController -> UserManager: CreateAsync(user,password)
+activate UserManager
+UserManager -> Database: Insert user
+activate Database
+Database --> UserManager: user created
+deactivate Database
+UserManager --> AccountsController: result
+deactivate UserManager
+
+
+alt Success
+
+AccountsController -> Frontend: 201 created user
+...
+else Error creating user
+
+AccountsController -> Frontend: 500 internal server error
+deactivate AccountsController
+deactivate Frontend
+end
+
+
+@enduml

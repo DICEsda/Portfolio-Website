@@ -1,0 +1,45 @@
+# .github/workflows/ci.yml
+name: Build & Test (.NET)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
+
+      - name: Test
+        run: dotnet test --no-build --configuration Release --collect:"XPlat Code Coverage"
+
+      # -------  pin to a resolvable upload-artifact version  ------------------
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4            # or @v4.3.1 for a fixed patch
+        with:
+          name: test-results
+          path: '**/TestResults/*.trx'
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4            # same pin here
+        with:
+          name: code-coverage
+          path: '**/TestResults/**/coverage.cobertura.xml'

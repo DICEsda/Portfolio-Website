@@ -1,0 +1,52 @@
+
+
+class JobsPage{
+    + BindableObject BindingContext 
+}
+class JobsViewModel {
+    - IJobService _jobService
+    - AuthHeaderHandler _authHeaderHandler
+
+    + string Title
+    + string CompanyName
+    + string EmploymentType
+    + decimal HourlyRate
+    + string TaxCard
+    + ObservableCollection<JobDTO> Jobs
+
+    + JobsViewModel(IJobService jobService, AuthHeaderHandler authHeaderHandler)
+    + RegisterJob(): Task
+    + GetAllJobs(): Task
+    + DeleteJob(string companyName): Task
+    + UpdateJob(string companyName): Task
+}
+
+JobsPage --> JobsViewModel
+JobsViewModel --> IJobService
+
+
+interface IJobService {
+    + RegisterJobAsync(JobDTO jobDTO): Task<JobDTO>
+    + GetAllJobsAsync(): Task<List<JobDTO>>
+    + DeleteJobAsync(string companyName): Task
+    + UpdateJobAsync(JobDTO jobDTO, string companyName): Task<JobDTO>
+}
+class JobService {
+    - HttpClient _httpClient
+    + JobService(HttpClient httpClient)
+    + RegisterJobAsync(JobDTO jobDTO): Task<JobDTO>
+    + GetAllJobsAsync(): Task<List<JobDTO>>
+    + DeleteJobAsync(string companyName): Task
+    + UpdateJobAsync(JobDTO jobDTO, string companyName): Task<JobDTO>
+}
+class JobDTO {
+    + string CompanyName
+    + decimal HourlyRate
+    + string EmploymentType
+    + string TaxCard
+    + string Title
+}
+IJobService --> JobDTO
+JobsViewModel --> JobDTO
+JobService ..|> IJobService
+JobService --> JobDTO

@@ -1,0 +1,44 @@
+@startuml
+actor Client
+
+participant "PaychecksController" as Ctrl
+participant "IDataAccessService<Job>\n(JobService)" as JobSvc
+participant "IDataAccessService<SupplementDetails>\n(SupplementSvc)" as SuppSvc
+participant "IDataAccessService<WorkShift>\n(WorkShiftSvc)" as WkSvc
+
+Client -> Ctrl : HTTP GET /Paychecks/VacationPay\n?companyName=&year=
+activate Ctrl
+
+Ctrl -> Ctrl : Validate ModelState\nGet UserId from claims
+Ctrl -> JobSvc : GetByIdAsync(companyName, userId)
+activate JobSvc
+JobSvc --> Ctrl : Job
+deactivate JobSvc
+
+'—– compute salary before tax & total hours —–'
+Ctrl -> Ctrl : CalculateSalaryBeforeTaxAndTotalHours(predicate, job)
+activate Ctrl #CCE5FF
+    Ctrl -> SuppSvc : GetFilteredAsync(x => x.Job == job)
+    activate SuppSvc
+    SuppSvc --> Ctrl : SupplementDetails[]
+    deactivate SuppSvc
+
+    Ctrl -> WkSvc : GetFilteredAsync(predicate)
+    activate WkSvc
+    WkSvc --> Ctrl : WorkShift[]
+    deactivate WkSvc
+
+    loop for each workShift in workShifts
+        Ctrl -> Ctrl : CalculateSupplementPayForWorkshift(workShift,\n supplementDetails)\naccumulate totals
+    end
+
+    Ctrl --> Ctrl : returns (salaryBeforeTax,\n           totalWorkedHours)
+deactivate Ctrl #CCE5FF
+'———————————————————————————————'
+
+Ctrl -> Ctrl : vacationPay = salaryBeforeTax * 0.125
+Ctrl -> Ctrl : dto = new VacationPayDTO(vacationPay)
+
+Ctrl --> Client : 200 OK\nVacationPayDTO
+deactivate Ctrl
+@enduml

@@ -1,0 +1,36 @@
+@startuml
+top to bottom direction
+package "cd: Paycheck Controllers" {
+class JobsController {
+    +Register(JobDTO) : IActionResult
+    +Update(string, JobDTO) : IActionResult
+    +GetAll() : IActionResult
+    +Delete(string) : IActionResult
+}
+class PaychecksController {
+    +CaculateSalary(string, int) : IActionResult
+    +CaculateVacationPay(string, int) : IActionResult
+    -CalculateSalaryBeforeTaxAndTotalHours(Expression<Func<WorkShift, bool>>, Job) : Task<(decimal, TimeSpan)>
+    -CalculateSupplementPayForWorkshift(WorkShift, IEnumerable<SupplementDetails>) : decimal
+}
+class SupplementDetailsController {
+    +Register(List<SupplementDTO>, string) : IActionResult
+    +Get(int, string) : IActionResult
+    +Update(SupplementDTO, string) : IActionResult
+    +Delete(int, string) : IActionResult
+}
+class WorkshiftsController {
+    +Register(WorkShiftDTO) : IActionResult
+    +GetAll() : IActionResult
+    +Update(string, WorkShiftDTO) : IActionResult
+    +Delete(string) : IActionResult
+}
+
+interface IDataAccessService
+
+JobsController "1" --> "1..*" IDataAccessService
+PaychecksController "1" --> "1..*" IDataAccessService
+SupplementDetailsController "1" --> "1..*" IDataAccessService
+WorkshiftsController "1" --> "1..*" IDataAccessService
+}
+@enduml

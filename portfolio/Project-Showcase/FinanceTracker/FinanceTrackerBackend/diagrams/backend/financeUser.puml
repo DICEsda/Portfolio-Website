@@ -1,0 +1,16 @@
+@startuml
+
+
+
+
+class FinanceUser {     
++ ICollection<Job> Jobs
++ ICollection<WorkShift> WorkShifts
+}
+
+
+
+IdentityUser <|-- FinanceUser
+
+
+@enduml
