@@ -58,6 +58,9 @@ const Hero = () => {
             <img 
               src={heroImage} 
               alt="Yahya Ali" 
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
               className="w-full max-w-sm rounded-lg shadow-2xl animate-fade-in will-change-transform"
             />
           </div>

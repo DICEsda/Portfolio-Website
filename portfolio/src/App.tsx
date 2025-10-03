@@ -1,10 +1,10 @@
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, lazy, Suspense } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import About from './components/About'
-import Projects from './components/Projects'
+const About = lazy(() => import('./components/About'))
+const Projects = lazy(() => import('./components/Projects'))
 // Explicit extension helps with bundler module resolution in strict setups
-import Contact from './components/Contact.tsx'
+const Contact = lazy(() => import('./components/Contact.tsx'))
 import { useTheme } from './context/ThemeContext'
 import ProgressTimeline from './components/ProgressTimeline'
 import BottomPill from './components/BottomPill'
@@ -81,6 +81,18 @@ function App() {
 
     start()
 
+    // Idle prefetch of lazily loaded sections to improve subsequent navigation
+    const idle = (cb: () => void) => {
+      // @ts-ignore
+      const rif = window.requestIdleCallback || ((fn: any) => setTimeout(fn, 200));
+      rif(cb);
+    }
+    idle(() => {
+      import('./components/About');
+      import('./components/Projects');
+      import('./components/Contact.tsx');
+    })
+
     return () => {
       try { fp?.destroy?.('all') } catch { /* ignore */ }
       if (fallbackTimer) clearTimeout(fallbackTimer)
@@ -96,9 +108,21 @@ function App() {
       <Navbar />
       <div id="fullpage">
         <div className="section"><Hero /></div>
-        <div className="section"><About /></div>
-        <div className="section"><Projects /></div>
-        <div className="section"><Contact /></div>
+        <div className="section">
+          <Suspense fallback={<div className="h-screen flex items-center justify-center text-tertiary">Loading…</div>}>
+            <About />
+          </Suspense>
+        </div>
+        <div className="section">
+          <Suspense fallback={<div className="h-screen flex items-center justify-center text-tertiary">Loading…</div>}>
+            <Projects />
+          </Suspense>
+        </div>
+        <div className="section">
+          <Suspense fallback={<div className="h-screen flex items-center justify-center text-tertiary">Loading…</div>}>
+            <Contact />
+          </Suspense>
+        </div>
       </div>
       <BottomPill />
     </div>
