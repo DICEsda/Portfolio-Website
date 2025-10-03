@@ -73,7 +73,7 @@ export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) 
     <AnimatePresence mode="wait">
       <m.div
         key="modal"
-        className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/40 backdrop-blur p-4"
+        className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/40 backdrop-blur p-4 pt-20 pb-16"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -82,7 +82,7 @@ export default function ShowcaseModal({ project, onClose }: ShowcaseModalProps) 
         aria-modal="true"
   onWheelCapture={(e) => e.stopPropagation()}
   onTouchMoveCapture={(e) => e.stopPropagation()}
-      >
+  >
         <div className="flex max-w-[90vw] h-[85vh] items-start relative">
           {/* Close button - positioned within the modal container */}
           <button

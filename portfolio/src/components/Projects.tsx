@@ -58,7 +58,21 @@ const techIcons: { [key: string]: JSX.Element } = {
   'Material-UI': <FaLayerGroup className="text-current" />,
   'Redux': <FaSitemap className="text-current" />,
   '.NET MAUI': <FaLayerGroup className="text-current" />,
-  'C#': <FaCode className="text-current" />
+  'C#': <FaCode className="text-current" />,
+  '.NET Core 9': <FaLayerGroup className="text-current" />,
+  'Entity Framework': <FaDatabase className="text-current" />,
+  'SQLite': <FaDatabase className="text-current" />,
+  'OpenAI API': <FaBolt className="text-current" />,
+  'Google OAuth': <FaCloud className="text-current" />,
+  'JWT': <FaCode className="text-current" />,
+  'Framer Motion': <FaBolt className="text-current" />,
+  'Recharts': <FaLayerGroup className="text-current" />,
+  'React Native': <FaReact className="text-current" />,
+  'Expo': <FaReact className="text-current" />,
+  'JSON Server': <FaDatabase className="text-current" />,
+  'Home Assistant': <FaCloud className="text-current" />,
+  'YAML': <FaCode className="text-current" />,
+  'IoT': <FaCloud className="text-current" />
 };
 
 // Languages for special green styling
@@ -66,11 +80,6 @@ const languageSet = new Set<string>([
   'TypeScript', 'JavaScript', 'C#', 'C', 'C++', 'Java', 'Kotlin', 'Swift', 'Dart', 'Go', 'Rust', 'Python', 'PHP', 'YAML', 'SQL'
 ]);
 
-// Asset URLs (bundled by Vite) - ensure these files exist in the repo
-// Personal Tracker assets (existing)
-const ptCover = new URL('../../Project-Showcase/PersonalTracker/PersonalTrackerNative/assets/images/icon.png', import.meta.url).href;
-const ptReadme = new URL('../../Project-Showcase/PersonalTracker/README.md', import.meta.url).href;
-const ptPrd = new URL('../../Project-Showcase/PersonalTracker/ProductRequirementDocument.md', import.meta.url).href;
 // Semester Project 3 PDF (existing)
 const sp3Pdf = new URL('../../Project-Showcase/semester-projekt3/Semesterprojekt_3 endelig.pdf', import.meta.url).href;
 // Fallback cover image: reuse hero image from src assets
@@ -79,54 +88,96 @@ const fallbackCover = new URL('../assets/hero-image.png', import.meta.url).href;
 // Projects data hoisted to avoid recomputing
 const projects: Project[] = [
     {
-      title: "Personal Tracker — Suite",
-      tagline: "Native + Web app with .NET and Node backends",
-      description: "A multi-platform personal tracker consisting of a React web app, an Expo/React Native app, a .NET 9 backend with SQLite and Google Calendar integration, and a Node/Express food microservice. The suite tracks finances, training, prayer, knowledge, and integrates calendar events.",
+      title: "PersonalTracker: AI-Powered Life Analytics Platform",
+      tagline: "Full-Stack Web Application | React + .NET Core + AI Integration",
+      description: "A comprehensive personal analytics platform that transforms daily habits into actionable insights through AI-powered data analysis. Built as a sophisticated full-stack web application demonstrating expertise in modern software development practices, AI integration, and user experience design across fitness, mental health, finances, and personal reflection.",
       features: [
-        "Modular native and web frontends",
-        ".NET 9 backend with EF Core + SQLite",
-        "Google Calendar API integration",
-        "Node/Express food service",
-        "Dashboard metrics and graphs"
+        "🤖 AI-Powered Insights Engine with OpenAI GPT-3.5 Turbo integration",
+        "🔐 Advanced Authentication System with Google OAuth 2.0 + JWT",
+        "📊 Real-Time Analytics Dashboard with live calculations",
+        "💰 Financial Widget with net worth calculation and breakdown",
+        "🏃 Comprehensive Data Tracking (fitness, mood, finances, journal)",
+        "📱 Professional UI/UX with dark/light themes and smooth animations",
+        "🔄 RESTful API with 25+ endpoints and Entity Framework",
+        "📈 Pattern Recognition and Predictive Analytics"
       ],
-      technologies: ["React", "TypeScript", "Tailwind CSS", "Expo", "React Native", ".NET 9", "C#", "SQLite", "Express", "Node.js"],
-      coverImage: ptCover,
-      gallery: [ptPrd, ptReadme],
-      type: "Multi-platform App",
+      technologies: ["React", "TypeScript", "Tailwind CSS", ".NET Core 9", "C#", "Entity Framework", "SQLite", "OpenAI API", "Google OAuth", "JWT", "Framer Motion", "Recharts"],
+      coverImage: "",
+      gallery: [],
+      type: "AI-Powered Full-Stack Application",
       date: "2025",
-      role: "Full Stack Developer",
-      challenges: "Coordinating multiple frontends with separate backends, maintaining shared domain concepts, handling OAuth and Google Calendar API flows, and ensuring consistent UX across platforms.",
-      projectNature: "Personal Project",
-      tags: ["Full Stack", "React", "Expo", ".NET", "Node"],
-      sourceCode: "https://github.com/DICEsda/Portfolio-Website/tree/main/portfolio/Project-Showcase/PersonalTracker-main",
+      role: "Full Stack Developer + AI Integration Specialist",
+      challenges: "Implementing reliable AI service with intelligent fallback mechanisms, designing complex data relationships supporting multiple data types, building performant calculation engine for live financial metrics, seamless Google OAuth integration with secure token management, and ensuring consistent cross-platform UI experience.",
+      projectNature: "Personal Project (Portfolio-Ready)",
+      tags: ["AI Integration", "Full Stack", "React", ".NET Core", "OpenAI", "OAuth"],
+      sourceCode: "https://github.com/DICEsda/Portfolio-Website/tree/main/portfolio/Project-Showcase/PersonalTracker",
       sections: [
         {
-          title: "Native App (Expo)",
-          description: "Tabs for finances, knowledge, meditation, prayer, and training with themed UI and EPUB reading.",
-          technologies: ["Expo", "React Native", "TypeScript"],
-          sourceCode: "https://github.com/DICEsda/Portfolio-Website/tree/main/portfolio/Project-Showcase/PersonalTracker-main/PersonalTrackerNative"
+          title: "Frontend (React + TypeScript)",
+          description: "Modern React application with TypeScript, featuring reusable UI components with animations, API integration layer, Tailwind CSS with dark/light themes, mobile-first responsive design, and WCAG AA compliant accessibility.",
+          technologies: ["React", "TypeScript", "Tailwind CSS", "Framer Motion", "Vite", "Recharts"],
+          sourceCode: "https://github.com/DICEsda/Portfolio-Website/tree/main/portfolio/Project-Showcase/PersonalTracker/PersonalTrackerReact"
         },
         {
-          title: "Web App (React)",
-          description: "Dashboard grid, metric cards, graph modal, and Google Calendar integration.",
-          technologies: ["React", "TypeScript", "Vite", "Tailwind CSS"],
-          sourceCode: "https://github.com/DICEsda/Portfolio-Website/tree/main/portfolio/Project-Showcase/PersonalTracker-main/PersonalTrackerReact"
+          title: "Backend (.NET Core 9)",
+          description: "RESTful API with 25+ endpoints, Entity Framework models with complex relationships, Google OAuth + JWT authentication, business logic & AI integration services, and comprehensive error handling with logging.",
+          technologies: [".NET Core 9", "C#", "Entity Framework", "SQLite", "Google API", "JWT", "OpenAI API"],
+          sourceCode: "https://github.com/DICEsda/Portfolio-Website/tree/main/portfolio/Project-Showcase/PersonalTracker/PersonalTrackerBackend"
         },
         {
-          title: ".NET Backend",
-          description: "ASP.NET Core 9 with EF Core, SQLite, and Google Calendar service.",
-          technologies: [".NET 9", "C#", "EF Core", "SQLite", "Google API"],
-          sourceCode: "https://github.com/DICEsda/Portfolio-Website/tree/main/portfolio/Project-Showcase/PersonalTracker-main/PersonalTrackerBackend"
+          title: "AI Insights Engine",
+          description: "OpenAI GPT-3.5 Turbo integration for generating personalized insights, pattern recognition in mood/fitness/spending, predictive analytics with weekly summaries, and rule-based fallback system for reliability.",
+          technologies: ["OpenAI API", "GPT-3.5 Turbo", "C#", "Pattern Recognition"],
+          sourceCode: "https://github.com/DICEsda/Portfolio-Website/tree/main/portfolio/Project-Showcase/PersonalTracker/PersonalTrackerBackend/Services"
         },
         {
-          title: "Node Food Service",
-          description: "Express microservice with basic routes and static pages.",
-          technologies: ["Node.js", "Express"],
-          sourceCode: "https://github.com/DICEsda/Portfolio-Website/tree/main/portfolio/Project-Showcase/PersonalTracker-main/food-backend"
+          title: "Mobile App (React Native)",
+          description: "Cross-platform mobile application with Expo, featuring tabbed navigation for finances, knowledge, meditation, prayer, and training with themed UI and EPUB reading capabilities.",
+          technologies: ["React Native", "Expo", "TypeScript"],
+          sourceCode: "https://github.com/DICEsda/Portfolio-Website/tree/main/portfolio/Project-Showcase/PersonalTracker/PersonalTrackerNative"
         }
       ]
     },
     {
+      title: "Frontend Development Exam: Exam Management System",
+      tagline: "Cross-platform academic exam administration solution",
+      description: "A comprehensive exam management system built for the Frontend Development exam, featuring both React web application and .NET MAUI cross-platform mobile app. The system enables creating exams, managing students, conducting timed assessments, and tracking performance with bilingual support (Danish/English).",
+      features: [
+        "📝 Complete exam creation and management workflow",
+        "👥 Student registration and assignment to exams", 
+        "⏱️ Real-time exam timer with question randomization",
+        "📊 Grade recording and performance analytics",
+        "🌍 Bilingual interface (Danish/English)",
+        "📱 Cross-platform mobile app with native performance",
+        "🔄 REST API with JSON Server for data persistence",
+        "📈 Exam history and average grade calculations"
+      ],
+      technologies: ["React", "TypeScript", "Tailwind CSS", ".NET MAUI", "C#", "Framer Motion", "JSON Server"],
+      coverImage: "",
+      gallery: [],
+      type: "Academic Cross-Platform Application",
+      date: "2025",
+      role: "Frontend Developer",
+      challenges: "Implementing real-time exam functionality with accurate timers, ensuring data consistency between web and mobile platforms, creating intuitive UX for exam administration, and maintaining performance during timed assessments with multiple concurrent users.",
+      projectNature: "University Exam Project",
+      tags: ["Academic", "Cross-Platform", "React", ".NET MAUI", "Bilingual"],
+      sourceCode: "https://github.com/DICEsda/Portfolio-Website/tree/main/portfolio/Project-Showcase/Frontend%20Examen",
+      sections: [
+        {
+          title: "Web Application (React)",
+          description: "Modern React application with TypeScript and Tailwind CSS, featuring exam creation forms, student management, real-time exam interface with timer, and comprehensive analytics dashboard.",
+          technologies: ["React", "TypeScript", "Tailwind CSS", "Framer Motion", "JSON Server"],
+          sourceCode: "https://github.com/DICEsda/Portfolio-Website/tree/main/portfolio/Project-Showcase/Frontend%20Examen/Exam-React"
+        },
+        {
+          title: "Mobile App (.NET MAUI)",
+          description: "Cross-platform mobile application supporting iOS, Android, and Windows, with native performance for exam administration on mobile devices and offline capability for remote exam scenarios.",
+          technologies: [".NET MAUI", "C#", "XAML"],
+          sourceCode: "https://github.com/DICEsda/Portfolio-Website/tree/main/portfolio/Project-Showcase/Frontend%20Examen/ExamMaui"
+        }
+      ]
+    },
+      {
       title: "Home Assistant Automations",
       tagline: "Smart Home Automation Suite",
       description: "A comprehensive collection of Home Assistant automations that transform a regular house into an intelligent living space. Features various automation scripts for different scenarios, from security notifications to daily routines.",
@@ -139,6 +190,7 @@ const projects: Project[] = [
       ],
       technologies: ["Home Assistant", "YAML", "IoT", "WLED", "Automation"],
       coverImage: "",
+      gallery: [],
       type: "IoT/Smart Home",
       sourceCode: "https://github.com/DICEsda/HomeAssistant-automations",
       date: "2025",
@@ -334,11 +386,11 @@ function Projects() {
       <section 
         id="projects" 
         ref={sectionRef} 
-        className="h-screen flex items-center justify-center overflow-x-hidden"
+        className="h-screen flex items-center justify-center overflow-x-hidden pt-16"
   >
   <div className="container mx-auto px-2 xs:px-3 sm:px-4 max-w-7xl">
           <m.h2 
-            className={`text-3xl md:text-4xl font-bold mb-6 sm:mb-8 text-center transition-all duration-1000 text-light scroll-animate ${
+            className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 lg:mb-8 text-center transition-all duration-1000 text-light scroll-animate ${
               initialLoad ? 'opacity-0 scale-75' : 
               inView ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-5 scale-95'
             }`}
@@ -358,7 +410,7 @@ function Projects() {
             inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
           >
-            {/* Navigation Arrows */}
+            {/* Navigation Arrows - positioned within safe viewport bounds */}
             <button
               onClick={prevProject}
               className="absolute left-2 md:-left-16 top-1/2 transform -translate-y-1/2 z-10 text-tertiary hover:text-secondary transition-all duration-300 hover:scale-110 p-2"

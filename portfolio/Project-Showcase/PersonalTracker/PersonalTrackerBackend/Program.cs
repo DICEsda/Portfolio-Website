@@ -1,6 +1,9 @@
 using PersonalTrackerBackend.Services;
 using PersonalTrackerBackend.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,8 +30,30 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection") ?? 
                      "Data Source=Data/personaltracker.db"));
 
+// Add JWT Authentication
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.ASCII.GetBytes(builder.Configuration["Jwt:SecretKey"] ?? "YourSecretKeyHere")),
+            ValidateIssuer = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"] ?? "PersonalTracker",
+            ValidateAudience = true,
+            ValidAudience = builder.Configuration["Jwt:Audience"] ?? "PersonalTracker",
+            ValidateLifetime = true,
+            ClockSkew = TimeSpan.Zero
+        };
+    });
+
+builder.Services.AddAuthorization();
+
 // Register Services
 builder.Services.AddScoped<IGoogleCalendarService, GoogleCalendarService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IAIService, AIService>();
 builder.Services.AddScoped<DataService>();
 
 // Add Controllers
@@ -47,11 +72,18 @@ app.UseHttpsRedirection();
 // Use CORS
 app.UseCors("AllowReactApp");
 
-// Ensure database is created
+// Use Authentication and Authorization
+app.UseAuthentication();
+app.UseAuthorization();
+
+// Ensure database is created and seed sample data
 using (var scope = app.Services.CreateScope())
 {
     var dataService = scope.ServiceProvider.GetRequiredService<DataService>();
+    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    
     await dataService.EnsureDatabaseCreatedAsync();
+    await SeedData.SeedAsync(context);
 }
 
 // Map Controllers
