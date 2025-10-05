@@ -4,18 +4,8 @@
 :root {
   /* Light mode colors */
   --color-primary: #ffffff;
-  --color-secondary: #ff9966/* Scale entire website 15% larger for 24+ inch screens (1920px+) */
-@media (min-width: 1920px) {
-  body {
-    transform: scale(1.15);
-    transform-origin: center center;
-    overflow: hidden;
-  }
-  
-  html {
-    overflow: hidden;
-  }
-}-tertiary: #555555;
+  --color-secondary: #ff9966;
+  --color-tertiary: #555555;
   --color-light: #333333;
   --color-card: #f5f5f5;
   /* Fixed navbar height (responsive) used for scroll padding */
@@ -169,10 +159,10 @@ section {
 /* fullPage.js credit removal (watermark). Already set credits.enabled=false, but hide in case it still renders. */
 .fp-watermark { display: none !important; }
 
-/* Scale entire website 10% larger for 24+ inch screens (1920px+) */
+/* Scale entire website 15% larger for 24+ inch screens (1920px+) */
 @media (min-width: 1920px) {
   body {
-    transform: scale(1.1);
+    transform: scale(1.15);
     transform-origin: center center;
     overflow: hidden;
   }
