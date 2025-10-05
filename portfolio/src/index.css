@@ -162,17 +162,6 @@ section {
 /* Scale entire website 10% larger for 24+ inch screens (1920px+) */
 @media (min-width: 1920px) {
   body {
-    transform: scale(1.1);
-    transform-origin: top left;
-    width: 90.909%; /* Compensate for scaling: 100% / 1.1 = 90.909% */
-    height: 90.909%;
-  }
-  
-  /* Ensure fullPage.js container scales properly */
-  #fullpage {
-    transform: scale(1.1);
-    transform-origin: top left;
-    width: 90.909%;
-    height: 90.909%;
+    zoom: 1.1;
   }
 }

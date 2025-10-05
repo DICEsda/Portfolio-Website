@@ -20,7 +20,7 @@ const Hero = () => {
               An Aspiring Software Developer
             </h2>
             <p className="text-tertiary text-lg md:text-xl mb-8 max-w-2xl leading-relaxed scroll-animate">
-              I'm a passionate Computer Science student seeking internship opportunities in software development.
+              I'm a passionate Software Engineering student seeking internship opportunities in software development.
               With a strong foundation in modern technologies and a drive for learning, I'm eager to contribute to innovative projects
               and gain real-world experience.
             </p>
