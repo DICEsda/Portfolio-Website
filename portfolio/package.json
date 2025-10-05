@@ -20,7 +20,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.5.0",
-    "tailwindcss": "^4.1.13"
+  "tailwindcss": "^4.1.13",
+  "web-vitals": "^3.5.2"
   },
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.2",
