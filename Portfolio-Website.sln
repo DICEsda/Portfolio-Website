@@ -1,0 +1,75 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "portfolio", "portfolio", "{E159917B-5FEF-476A-9EBB-41D81277B887}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project-Showcase", "Project-Showcase", "{0FDCE946-75CA-70B5-5851-5D71DE5F5F29}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend Examen", "Frontend Examen", "{4EE230DC-FFF3-ACCF-56D4-E57A584BC7ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FED - Exam", "portfolio\Project-Showcase\Frontend Examen\ExamMaui\FED - Exam.csproj", "{1F049CB2-AEAB-1A5F-A6F7-0DA16C2B6194}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PersonalTracker", "PersonalTracker", "{868F423E-4ED7-1496-3667-9341D53411CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "backend", "portfolio\Project-Showcase\PersonalTracker\PersonalTrackerBackend\backend.csproj", "{E35C70CC-46AB-91EB-7F23-0D1A4A43E48A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FinanceTracker", "FinanceTracker", "{A171F0F1-A560-D820-DACB-9653EE60C400}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FinanceTrackerBackend", "FinanceTrackerBackend", "{1E56E2C5-9F6C-AD62-8E9C-AD50CE3079E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceTracker", "portfolio\Project-Showcase\FinanceTracker\FinanceTrackerBackend\FinanceTracker\FinanceTracker.csproj", "{CD58C674-9A0C-5ACA-1160-597E43707579}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceTracker.Test.Unit", "portfolio\Project-Showcase\FinanceTracker\FinanceTrackerBackend\FinanceTracker.Test.Unit\FinanceTracker.Test.Unit.csproj", "{45A69863-7B97-2D88-3151-16923B651A7D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FinanceTrackerMaui", "FinanceTrackerMaui", "{3D29DF85-2EBF-5FF1-DA6B-ED74D33921F1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinanceTracker", "portfolio\Project-Showcase\FinanceTracker\FinanceTrackerMaui\FinanceTrackerAPP\FinanceTracker.csproj", "{0EBAC8F6-18F7-3FC1-2E81-6992D0A306BF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1F049CB2-AEAB-1A5F-A6F7-0DA16C2B6194}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F049CB2-AEAB-1A5F-A6F7-0DA16C2B6194}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F049CB2-AEAB-1A5F-A6F7-0DA16C2B6194}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F049CB2-AEAB-1A5F-A6F7-0DA16C2B6194}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E35C70CC-46AB-91EB-7F23-0D1A4A43E48A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E35C70CC-46AB-91EB-7F23-0D1A4A43E48A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E35C70CC-46AB-91EB-7F23-0D1A4A43E48A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E35C70CC-46AB-91EB-7F23-0D1A4A43E48A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD58C674-9A0C-5ACA-1160-597E43707579}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD58C674-9A0C-5ACA-1160-597E43707579}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD58C674-9A0C-5ACA-1160-597E43707579}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD58C674-9A0C-5ACA-1160-597E43707579}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45A69863-7B97-2D88-3151-16923B651A7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45A69863-7B97-2D88-3151-16923B651A7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45A69863-7B97-2D88-3151-16923B651A7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45A69863-7B97-2D88-3151-16923B651A7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EBAC8F6-18F7-3FC1-2E81-6992D0A306BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EBAC8F6-18F7-3FC1-2E81-6992D0A306BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EBAC8F6-18F7-3FC1-2E81-6992D0A306BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EBAC8F6-18F7-3FC1-2E81-6992D0A306BF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0FDCE946-75CA-70B5-5851-5D71DE5F5F29} = {E159917B-5FEF-476A-9EBB-41D81277B887}
+		{4EE230DC-FFF3-ACCF-56D4-E57A584BC7ED} = {0FDCE946-75CA-70B5-5851-5D71DE5F5F29}
+		{1F049CB2-AEAB-1A5F-A6F7-0DA16C2B6194} = {4EE230DC-FFF3-ACCF-56D4-E57A584BC7ED}
+		{868F423E-4ED7-1496-3667-9341D53411CB} = {0FDCE946-75CA-70B5-5851-5D71DE5F5F29}
+		{E35C70CC-46AB-91EB-7F23-0D1A4A43E48A} = {868F423E-4ED7-1496-3667-9341D53411CB}
+		{A171F0F1-A560-D820-DACB-9653EE60C400} = {0FDCE946-75CA-70B5-5851-5D71DE5F5F29}
+		{1E56E2C5-9F6C-AD62-8E9C-AD50CE3079E5} = {A171F0F1-A560-D820-DACB-9653EE60C400}
+		{CD58C674-9A0C-5ACA-1160-597E43707579} = {1E56E2C5-9F6C-AD62-8E9C-AD50CE3079E5}
+		{45A69863-7B97-2D88-3151-16923B651A7D} = {1E56E2C5-9F6C-AD62-8E9C-AD50CE3079E5}
+		{3D29DF85-2EBF-5FF1-DA6B-ED74D33921F1} = {A171F0F1-A560-D820-DACB-9653EE60C400}
+		{0EBAC8F6-18F7-3FC1-2E81-6992D0A306BF} = {3D29DF85-2EBF-5FF1-DA6B-ED74D33921F1}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {51F8B805-0418-4424-8D21-6E9667F69CB5}
+	EndGlobalSection
+EndGlobal

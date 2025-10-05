@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\yahya\\Desktop\\PersonalTracker\\PersonalTrackerBackend\\backend.csproj": {}
+    "C:\\Users\\yahya\\Desktop\\test\\Portfolio-Website\\portfolio\\Project-Showcase\\PersonalTracker\\PersonalTrackerBackend\\backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\yahya\\Desktop\\PersonalTracker\\PersonalTrackerBackend\\backend.csproj": {
+    "C:\\Users\\yahya\\Desktop\\test\\Portfolio-Website\\portfolio\\Project-Showcase\\PersonalTracker\\PersonalTrackerBackend\\backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\yahya\\Desktop\\PersonalTracker\\PersonalTrackerBackend\\backend.csproj",
+        "projectUniqueName": "C:\\Users\\yahya\\Desktop\\test\\Portfolio-Website\\portfolio\\Project-Showcase\\PersonalTracker\\PersonalTrackerBackend\\backend.csproj",
         "projectName": "backend",
-        "projectPath": "C:\\Users\\yahya\\Desktop\\PersonalTracker\\PersonalTrackerBackend\\backend.csproj",
+        "projectPath": "C:\\Users\\yahya\\Desktop\\test\\Portfolio-Website\\portfolio\\Project-Showcase\\PersonalTracker\\PersonalTrackerBackend\\backend.csproj",
         "packagesPath": "C:\\Users\\yahya\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\yahya\\Desktop\\PersonalTracker\\PersonalTrackerBackend\\obj\\",
+        "outputPath": "C:\\Users\\yahya\\Desktop\\test\\Portfolio-Website\\portfolio\\Project-Showcase\\PersonalTracker\\PersonalTrackerBackend\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -59,6 +59,10 @@
               "target": "Package",
               "version": "[1.67.0.3444, )"
             },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
             "Microsoft.AspNetCore.Cors": {
               "target": "Package",
               "version": "[2.2.0, )"
@@ -76,6 +80,10 @@
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[9.0.6, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[8.1.0, )"
             }
           },
           "imports": [

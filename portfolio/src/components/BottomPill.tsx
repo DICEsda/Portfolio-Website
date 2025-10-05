@@ -52,7 +52,7 @@ const BottomPill = () => {
               <FaGithub className="w-5 h-5" />
             </a>
             <a
-              href="https://www.linkedin.com/in/Yahya-ali-72267916b/"
+              href="https://www.linkedin.com/in/jahye-ali-72267916b/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-tertiary hover:text-secondary transition-colors"

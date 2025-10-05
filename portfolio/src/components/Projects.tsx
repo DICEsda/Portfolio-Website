@@ -561,7 +561,7 @@ function Projects() {
             {/* Navigation Arrows - positioned within safe viewport bounds */}
             <button
               onClick={prevProject}
-              className="absolute left-2 md:-left-16 top-1/2 transform -translate-y-1/2 z-10 text-tertiary hover:text-secondary transition-all duration-300 hover:scale-110 p-2"
+              className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 text-tertiary hover:text-secondary transition-all duration-300 hover:scale-110 p-2"
               aria-label="Previous project"
             >
               <svg className="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -571,7 +571,7 @@ function Projects() {
             
             <button
               onClick={nextProject}
-              className="absolute right-2 md:-right-16 top-1/2 transform -translate-y-1/2 z-10 text-tertiary hover:text-secondary transition-all duration-300 hover:scale-110 p-2"
+              className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 text-tertiary hover:text-secondary transition-all duration-300 hover:scale-110 p-2"
               aria-label="Next project"
             >
               <svg className="w-6 h-6 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { m } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 
 type Section = {
   id: string
@@ -15,6 +15,7 @@ const sections: Section[] = [
 
 const ProgressTimeline = () => {
   const [active, setActive] = useState<string>('home')
+  const [isWide, setIsWide] = useState(() => typeof window !== 'undefined' ? window.innerWidth >= 1280 : true)
 
   // Listen to global fullPage.js page changes
   useEffect(() => {
@@ -39,17 +40,34 @@ const ProgressTimeline = () => {
     }
   }, [])
 
+  // Track viewport width to decide hide when sidebar present (same breakpoint logic as Navbar)
+  useEffect(() => {
+    const onResize = () => setIsWide(window.innerWidth >= 1280)
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
+
   // No container scroll progress; computed via fullPage index
 
   const total = sections.length
   const activeIdx = Math.max(0, sections.findIndex(s => s.id === active))
   const fillPercent = (activeIdx / Math.max(1, total - 1)) * 100
 
+  const sidebarActive = active !== 'home' && !isWide
+  const shouldShow = !sidebarActive
+
   return (
-    <div
-      className="hidden md:block fixed left-6 md:left-8 lg:left-12 top-1/2 -translate-y-1/2 z-30 pointer-events-none"
-      aria-hidden="true"
-    >
+    <AnimatePresence>
+      {shouldShow && (
+        <m.div
+          key="timeline"
+          initial={{ opacity: 0, x: -12 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -12 }}
+          transition={{ duration: 0.35, ease: [0.22,1,0.36,1] }}
+          className="hidden md:block fixed left-6 md:left-8 lg:left-12 top-1/2 -translate-y-1/2 z-30 pointer-events-none"
+          aria-hidden="true"
+        >
       <div className="relative h-64 md:h-72 lg:h-80 w-4 flex items-center justify-center opacity-90">
         {/* Track */}
         <div className="absolute left-1/2 -translate-x-1/2 w-[2px] h-full bg-secondary/25 rounded" />
@@ -105,7 +123,9 @@ const ProgressTimeline = () => {
           )
         })}
       </div>
-    </div>
+        </m.div>
+      )}
+    </AnimatePresence>
   )
 }
 

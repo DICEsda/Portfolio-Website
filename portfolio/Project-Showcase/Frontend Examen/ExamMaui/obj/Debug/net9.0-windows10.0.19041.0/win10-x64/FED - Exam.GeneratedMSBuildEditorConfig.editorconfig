@@ -15,7 +15,7 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = FED___Exam
-build_property.ProjectDir = C:\Users\yahya\Desktop\Portfolio-Website\portfolio\Project-Showcase\Frontend Examen\ExamMaui\
+build_property.ProjectDir = C:\Users\yahya\Desktop\test\Portfolio-Website\portfolio\Project-Showcase\Frontend Examen\ExamMaui\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.CsWinRTAotExportsEnabled = 
@@ -27,49 +27,49 @@ build_property.CsWinRTUseWindowsUIXamlProjections = false
 build_property.EffectiveAnalysisLevelStyle = 9.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/yahya/Desktop/Portfolio-Website/portfolio/Project-Showcase/Frontend Examen/ExamMaui/App.xaml]
+[C:/Users/yahya/Desktop/test/Portfolio-Website/portfolio/Project-Showcase/Frontend Examen/ExamMaui/App.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = FED___Exam.App.xaml
 build_metadata.AdditionalFiles.TargetPath = App.xaml
 build_metadata.AdditionalFiles.RelativePath = App.xaml
 
-[C:/Users/yahya/Desktop/Portfolio-Website/portfolio/Project-Showcase/Frontend Examen/ExamMaui/AppShell.xaml]
+[C:/Users/yahya/Desktop/test/Portfolio-Website/portfolio/Project-Showcase/Frontend Examen/ExamMaui/AppShell.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = FED___Exam.AppShell.xaml
 build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
 build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
 
-[C:/Users/yahya/Desktop/Portfolio-Website/portfolio/Project-Showcase/Frontend Examen/ExamMaui/Resources/Styles/Colors.xaml]
+[C:/Users/yahya/Desktop/test/Portfolio-Website/portfolio/Project-Showcase/Frontend Examen/ExamMaui/Resources/Styles/Colors.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = FED___Exam.Resources.Styles.Colors.xaml
 build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Colors.xaml
 build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Colors.xaml
 
-[C:/Users/yahya/Desktop/Portfolio-Website/portfolio/Project-Showcase/Frontend Examen/ExamMaui/Resources/Styles/Styles.xaml]
+[C:/Users/yahya/Desktop/test/Portfolio-Website/portfolio/Project-Showcase/Frontend Examen/ExamMaui/Resources/Styles/Styles.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = FED___Exam.Resources.Styles.Styles.xaml
 build_metadata.AdditionalFiles.TargetPath = Resources\Styles\Styles.xaml
 build_metadata.AdditionalFiles.RelativePath = Resources\Styles\Styles.xaml
 
-[C:/Users/yahya/Desktop/Portfolio-Website/portfolio/Project-Showcase/Frontend Examen/ExamMaui/Views/AddStudentPage.xaml]
+[C:/Users/yahya/Desktop/test/Portfolio-Website/portfolio/Project-Showcase/Frontend Examen/ExamMaui/Views/AddStudentPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = FED___Exam.Views.AddStudentPage.xaml
 build_metadata.AdditionalFiles.TargetPath = Views\AddStudentPage.xaml
 build_metadata.AdditionalFiles.RelativePath = Views\AddStudentPage.xaml
 
-[C:/Users/yahya/Desktop/Portfolio-Website/portfolio/Project-Showcase/Frontend Examen/ExamMaui/Views/ExamPage.xaml]
+[C:/Users/yahya/Desktop/test/Portfolio-Website/portfolio/Project-Showcase/Frontend Examen/ExamMaui/Views/ExamPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = FED___Exam.Views.ExamPage.xaml
 build_metadata.AdditionalFiles.TargetPath = Views\ExamPage.xaml
 build_metadata.AdditionalFiles.RelativePath = Views\ExamPage.xaml
 
-[C:/Users/yahya/Desktop/Portfolio-Website/portfolio/Project-Showcase/Frontend Examen/ExamMaui/Views/ExamSessionPage.xaml]
+[C:/Users/yahya/Desktop/test/Portfolio-Website/portfolio/Project-Showcase/Frontend Examen/ExamMaui/Views/ExamSessionPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = FED___Exam.Views.ExamSessionPage.xaml
 build_metadata.AdditionalFiles.TargetPath = Views\ExamSessionPage.xaml
 build_metadata.AdditionalFiles.RelativePath = Views\ExamSessionPage.xaml
 
-[C:/Users/yahya/Desktop/Portfolio-Website/portfolio/Project-Showcase/Frontend Examen/ExamMaui/Views/HistoryPage.xaml]
+[C:/Users/yahya/Desktop/test/Portfolio-Website/portfolio/Project-Showcase/Frontend Examen/ExamMaui/Views/HistoryPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = FED___Exam.Views.HistoryPage.xaml
 build_metadata.AdditionalFiles.TargetPath = Views\HistoryPage.xaml
