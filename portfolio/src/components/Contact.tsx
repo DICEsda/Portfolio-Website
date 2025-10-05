@@ -70,7 +70,7 @@ const Contact = () => {
 
     try {
       const { default: emailjs } = await import('@emailjs/browser');
-      await emailjs.sendForm('service_yxsbzwr', 'template_f1ovonq', form.current, {
+      await emailjs.sendForm('service_zcxdb79', 'template_f1ovonq', form.current, {
         publicKey: 'K-s_xFAcbcC3jPeW2',
       });
       setStatus('success');
@@ -99,7 +99,7 @@ const Contact = () => {
   
   return (
     <section id="contact" className="h-screen flex items-center justify-center py-0">
-      <div className="container mx-auto px-4 sm:px-5 md:px-6 lg:px-8 xl:px-10 2xl:px-12 max-w-6xl 2xl:max-w-7xl h-full flex items-center justify-center">
+      <div className="container mx-auto px-4 sm:px-5 md:px-6 lg:px-8 max-w-6xl h-full flex items-center justify-center">
         <m.div
           className="w-full"
           variants={containerVariants}
@@ -108,10 +108,10 @@ const Contact = () => {
         >
           {/* Header */}
           <m.div variants={itemVariants} className="text-center mb-4">
-            <h2 className="text-fluid-2xl md:text-fluid-3xl font-bold text-light mb-1.5">
+            <h2 className="text-2xl md:text-3xl font-bold text-light mb-1.5">
               Get In Touch
             </h2>
-            <p className="text-tertiary leading-relaxed text-fluid-sm md:text-fluid-base">
+            <p className="text-tertiary leading-relaxed text-sm">
               Open to opportunities and collaborations. Have a question or just want to say hi?
               I'll get back to you as soon as I can.
             </p>
@@ -120,10 +120,10 @@ const Contact = () => {
           {/* Layout: form centered horizontally; contact card floats to the right on large screens */}
           <div className="relative w-full">
             {/* Primary Card: Contact Form (centered horizontally) */}
-            <m.div variants={itemVariants} className="mx-auto w-full max-w-[560px] xl:max-w-[600px] 2xl:max-w-[680px]">
-              <div className="bg-card p-4 md:p-6 xl:p-7 2xl:p-8 rounded-2xl shadow-lg">
-                <h3 className="text-fluid-base lg:text-fluid-lg font-semibold text-light mb-4 hidden md:block">Message Form</h3>
-              <form ref={form} onSubmit={sendEmail} className="space-y-3 md:space-y-4 xl:space-y-5">
+            <m.div variants={itemVariants} className="mx-auto w-full max-w-[560px]">
+              <div className="bg-card p-4 md:p-6 rounded-2xl shadow-lg">
+                <h3 className="text-base lg:text-lg font-semibold text-light mb-4 hidden md:block">Message Form</h3>
+              <form ref={form} onSubmit={sendEmail} className="space-y-3 md:space-y-4">
                 {/* Honeypot field */}
                 <div className="hidden">
                   <label htmlFor="website">Website</label>
@@ -315,9 +315,9 @@ const Contact = () => {
           </m.div>
 
             {/* Secondary Card: Contact Information (pill style) */}
-            <m.div variants={itemVariants} className="mt-6 w-full max-w-sm mx-auto lg:mt-0 lg:absolute lg:top-1/2 lg:-translate-y-1/2 lg:-right-8 xl:-right-16 2xl:-right-20 lg:w-72 xl:w-80 2xl:w-84">
-              <div className="relative overflow-hidden rounded-2xl px-5 py-5 md:px-6 md:py-6 xl:px-7 xl:py-7 2xl:px-8 2xl:py-8 bg-primary/50 backdrop-blur-xl backdrop-saturate-150 flex flex-col gap-4 xl:gap-5 shadow-xl">
-                <h3 className="text-sm xl:text-base tracking-wide font-semibold text-tertiary/70 uppercase text-center">Contact</h3>
+            <m.div variants={itemVariants} className="mt-6 w-full max-w-sm mx-auto lg:mt-0 lg:absolute lg:top-1/2 lg:-translate-y-1/2 lg:-right-8 xl:-right-16 lg:w-72">
+              <div className="relative overflow-hidden rounded-2xl px-5 py-5 md:px-6 md:py-6 bg-primary/50 backdrop-blur-xl backdrop-saturate-150 flex flex-col gap-4 shadow-xl">
+                <h3 className="text-sm tracking-wide font-semibold text-tertiary/70 uppercase text-center">Contact</h3>
                 <ul className="space-y-2.5">
                   <li>
                     <button
