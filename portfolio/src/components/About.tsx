@@ -61,7 +61,7 @@ const About = () => {
   ]
 
   return (
-    <section id="about" className="h-screen flex items-center justify-center py-0">
+  <section className="h-screen flex items-center justify-center py-0" aria-label="About section">
       <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 max-w-7xl">
         <m.div
           className="text-center mb-10"

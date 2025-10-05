@@ -1,10 +1,9 @@
-import { useEffect, useState, useRef, lazy, Suspense } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-const About = lazy(() => import('./components/About'))
-const Projects = lazy(() => import('./components/Projects'))
-// Explicit extension helps with bundler module resolution in strict setups
-const Contact = lazy(() => import('./components/Contact.tsx'))
+import About from './components/About'
+import Projects from './components/Projects'
+import Contact from './components/Contact'
 import { useTheme } from './context/ThemeContext'
 import ProgressTimeline from './components/ProgressTimeline'
 import BottomPill from './components/BottomPill'
@@ -14,8 +13,35 @@ function App() {
   const { theme } = useTheme()
   const [loading, setLoading] = useState(true)
   const loaderHiddenRef = useRef(false)
+  const MIN_DESKTOP_WIDTH = 1366
+  const [isDesktop, setIsDesktop] = useState(() => typeof window !== 'undefined' ? window.innerWidth >= MIN_DESKTOP_WIDTH : true)
+  const fpRef = useRef<any>(null)
+
+  // Track viewport width and toggle desktop gate
+  useEffect(() => {
+    const onResize = () => {
+      const desktop = window.innerWidth >= MIN_DESKTOP_WIDTH
+      setIsDesktop(desktop)
+    }
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [])
 
   useEffect(() => {
+    if (!isDesktop) {
+      // If leaving desktop view, destroy fullPage instance and stop loader
+      try { fpRef.current?.destroy?.('all') } catch { /* ignore */ }
+      fpRef.current = null
+      if (!loaderHiddenRef.current) {
+        loaderHiddenRef.current = true
+        setLoading(false)
+      }
+      return
+    }
+
+    // Already initialized on a previous desktop render
+    if (fpRef.current) return
+
     let fp: any = null
     let fallbackTimer: any = null
 
@@ -28,18 +54,19 @@ function App() {
           return
         }
 
-        // Start a fallback timer in case fullpage afterLoad never fires
+        // Fallback timer in case afterLoad never fires
         fallbackTimer = setTimeout(() => {
           if (!loaderHiddenRef.current) {
             loaderHiddenRef.current = true
             setLoading(false)
           }
-        }, 1500)
+        }, 1600)
 
-  const mod = await import('fullpage.js')
-        // @ts-ignore - library may export default or function  
+        // Defer init to next frame so React has flushed full static content (no Suspense swaps)
+        await new Promise(requestAnimationFrame)
+        const mod = await import('fullpage.js')
+        // @ts-ignore - handle dual export style
         const FullPage = mod.default || mod
-
         // eslint-disable-next-line new-cap
         fp = new FullPage('#fullpage', {
           licenseKey: 'gplv3-license',
@@ -69,6 +96,7 @@ function App() {
             } catch {}
           }
         })
+        fpRef.current = fp
       } catch (err) {
         // On any init error, fail open by hiding loader soon
         if (!loaderHiddenRef.current) {
@@ -81,25 +109,26 @@ function App() {
 
     start()
 
-    // Idle prefetch of lazily loaded sections to improve subsequent navigation
-    const idle = (cb: () => void) => {
-      // @ts-ignore
-      const rif = window.requestIdleCallback || ((fn: any) => setTimeout(fn, 200));
-      rif(cb);
-    }
-    idle(() => {
-      import('./components/About');
-      import('./components/Projects');
-      import('./components/Contact.tsx');
-    })
-
     return () => {
       try { fp?.destroy?.('all') } catch { /* ignore */ }
       if (fallbackTimer) clearTimeout(fallbackTimer)
+      fpRef.current = null
     }
-  }, [])
+  }, [isDesktop])
 
   // Removed legacy scroll observers to avoid conflicts; animations are handled per-component.
+
+  if (!isDesktop) {
+    return (
+      <div className={`${theme} bg-primary min-h-screen flex items-center justify-center p-6 text-center`}>        
+        <div className="max-w-md space-y-4">
+          <h1 className="text-2xl font-bold text-light">Desktop Version Only (Work in Progress)</h1>
+          <p className="text-tertiary text-sm leading-relaxed">I'm currently optimizing the mobile experience. Please revisit on a laptop or desktop (≥ 1366px width) to view the portfolio.</p>
+          <p className="text-tertiary text-xs opacity-70">Resize your window or rotate your device if possible.</p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className={`${theme} bg-primary min-h-screen`}>
@@ -107,22 +136,10 @@ function App() {
   <ProgressTimeline />
       <Navbar />
       <div id="fullpage">
-        <div className="section"><Hero /></div>
-        <div className="section">
-          <Suspense fallback={<div className="h-screen flex items-center justify-center text-tertiary">Loading…</div>}>
-            <About />
-          </Suspense>
-        </div>
-        <div className="section">
-          <Suspense fallback={<div className="h-screen flex items-center justify-center text-tertiary">Loading…</div>}>
-            <Projects />
-          </Suspense>
-        </div>
-        <div className="section">
-          <Suspense fallback={<div className="h-screen flex items-center justify-center text-tertiary">Loading…</div>}>
-            <Contact />
-          </Suspense>
-        </div>
+  <div className="section"><Hero /></div>
+  <div className="section"><About /></div>
+  <div className="section"><Projects /></div>
+  <div className="section"><Contact /></div>
       </div>
       <BottomPill />
     </div>

@@ -1,4 +1,5 @@
 import heroImage from '../assets/hero-image.png';
+import cvFile from '../assets/Yahya-cv.pdf';
 
 const Hero = () => {
   const moveToProjects = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -7,7 +8,7 @@ const Hero = () => {
     if (api) api.moveTo('projects');
   };
   return (
-  <section id="home" className="h-screen flex items-center justify-center">
+  <section className="h-screen flex items-center justify-center" aria-label="Home section">
   <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 max-w-7xl">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div className="max-w-3xl">
@@ -32,8 +33,8 @@ const Hero = () => {
                 View Projects
               </a>
               <a
-                href={`${import.meta.env.BASE_URL}CV - Yahya Ali.pdf`}
-                download="CV - Yahya Ali.pdf"
+                href={cvFile}
+                download="Yahya-Ali-CV.pdf"
                 className="inline-flex items-center gap-2 bg-secondary text-white px-8 py-3 rounded-lg hover:bg-secondary/90 transition-all duration-300 font-medium shadow-lg hover:shadow-xl"
               >
                 <svg
@@ -59,8 +60,8 @@ const Hero = () => {
               src={heroImage} 
               alt="Yahya Ali" 
               loading="eager"
-              fetchPriority="high"
               decoding="async"
+              data-fetchpriority="high" /* hint only; avoids React + TS warning */
               className="w-full max-w-sm rounded-lg shadow-2xl animate-fade-in will-change-transform"
             />
           </div>

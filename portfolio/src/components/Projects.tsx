@@ -533,7 +533,6 @@ function Projects() {
   return (
     <>
       <section 
-        id="projects" 
         ref={sectionRef} 
         className="h-screen flex items-center justify-center overflow-x-hidden pt-16"
   >

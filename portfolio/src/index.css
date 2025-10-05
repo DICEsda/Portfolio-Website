@@ -155,3 +155,6 @@ section {
 .scrollbar-nice::-webkit-scrollbar-thumb:active {
   background-color: var(--color-secondary);
 }
+
+/* fullPage.js credit removal (watermark). Already set credits.enabled=false, but hide in case it still renders. */
+.fp-watermark { display: none !important; }
