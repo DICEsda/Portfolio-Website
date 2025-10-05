@@ -1,5 +1,7 @@
 {
-  "buildCommand": "npm run build",
+  "buildCommand": "cd portfolio && npm ci && npm run build",
   "outputDirectory": "portfolio/dist",
-  "framework": "vite"
+  "installCommand": "cd portfolio && npm ci",
+  "framework": "vite",
+  "rootDirectory": "portfolio"
 }
