@@ -7,6 +7,7 @@
     "lint": "cd portfolio && npm run lint"
   },
   "devDependencies": {
+    "@remix-run/dev": "^1.0.0",
     "gh-pages": "^6.3.0"
   }
 }
