@@ -1,7 +1,0 @@
-{
-  "rootDirectory": "portfolio",
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "framework": "vite",
-  "ignoreCommand": "echo 'Using all commits'"
-}
