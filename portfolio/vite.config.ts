@@ -1,10 +1,13 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
 import tailwindcss from '@tailwindcss/vite'
-// https://vite.dev/config/
+
+// Use GitHub Pages base path unless running on Vercel (or other generic host)
+const isVercel = process.env.VERCEL === '1'
+
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: '/Portfolio-Website/',
+  base: isVercel ? '/' : '/Portfolio-Website/',
   build: {
     rollupOptions: {
       output: {
