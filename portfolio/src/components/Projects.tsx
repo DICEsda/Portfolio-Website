@@ -537,6 +537,7 @@ function Projects() {
         className="h-screen flex items-center justify-center overflow-x-hidden pt-16"
   >
   <div className="container mx-auto px-2 xs:px-3 sm:px-4 max-w-7xl">
+    <div className="transform origin-top scale-[1.05]">
           <m.h2 
             className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 lg:mb-8 text-center transition-all duration-1000 text-light scroll-animate ${
               initialLoad ? 'opacity-0 scale-75' : 
@@ -698,6 +699,7 @@ function Projects() {
               </span>
             </div>
           </m.div>
+          </div>
         </div>
   </section>
       <AnimatePresence>

@@ -106,6 +106,7 @@ const Contact = () => {
           initial="hidden"
           animate={isActive ? 'show' : 'hidden'}
         >
+          <div className="transform origin-top scale-[1.05]">
           {/* Header */}
           <m.div variants={itemVariants} className="text-center mb-4">
             <h2 className="text-2xl md:text-3xl font-bold text-light mb-1.5">
@@ -392,6 +393,7 @@ const Contact = () => {
                 <p className="mt-1.5 pt-2 border-t border-white/10 text-[10px] text-center text-tertiary/50 tracking-wide select-none">Click to copy phone or email</p>
               </div>
             </m.div>
+          </div>
           </div>
         </m.div>
       </div>

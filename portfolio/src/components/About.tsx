@@ -64,6 +64,7 @@ const About = () => {
   <section className="h-screen flex items-center justify-center py-0" aria-label="About section">
     {/* Scaled down globally by 15% (0.85) using Tailwind arbitrary scale utility for broad browser support */}
     <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 max-w-7xl transform origin-center scale-[0.85]">
+      <div className="transform origin-top scale-[1.05]">
         <m.div
           className="text-center mb-10"
           variants={containerVariants}
@@ -124,6 +125,7 @@ const About = () => {
           </m.div>
         </m.div>
       </div>
+    </div>
     </section>
   )
 }
