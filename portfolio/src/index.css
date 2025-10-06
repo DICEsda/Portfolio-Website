@@ -159,23 +159,17 @@ section {
 /* fullPage.js credit removal (watermark). Already set credits.enabled=false, but hide in case it still renders. */
 .fp-watermark { display: none !important; }
 
-/* Scale entire website 15% larger for 24+ inch screens (1920px+) */
+/* Large desktop enhancement (>=1920px): increase base font-size & scale spacing softly without transforms */
 @media (min-width: 1920px) {
-  body {
-    transform: scale(1.15);
-    transform-origin: center center;
-    overflow: hidden;
-  }
-  
-  html {
-    overflow: hidden;
-  }
-  
-  /* Exclude fixed position elements from scaling */
-  nav, 
-  aside,
-  .fixed {
-    transform: scale(0.87) !important; /* Compensate for body scale: 1/1.15 ≈ 0.87 */
-    transform-origin: center center;
-  }
+  html { font-size: 17px; } /* ~6.25% bump (16 -> 17) */
+  body { letter-spacing: 0.1px; }
+  .text-sm { font-size: 0.915rem; }
+  .text-base { font-size: 1.025rem; }
+  .text-lg { font-size: 1.175rem; }
+  .text-xl { font-size: 1.275rem; }
+  .text-2xl { font-size: 1.575rem; }
+  .text-3xl { font-size: 1.95rem; }
+  .container { max-width: 1500px; }
+  /* Optional: slightly larger interactive targets */
+  button, a.btn, .rounded-full { -webkit-tap-highlight-color: transparent; }
 }
