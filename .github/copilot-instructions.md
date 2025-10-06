@@ -54,7 +54,7 @@ This repo contains a React + TypeScript portfolio app under `portfolio/` built w
 - Accessibility UX: small ARIA attributes are used in `Contact` and nav; follow those patterns when adding interactive elements.
 
 ## External Integrations
-- EmailJS: configured via `emailjs.sendForm('service_zcxdb79', 'template_f1ovonq', formRef.current, { publicKey: 'K-s_xFAcbcC3jPeW2' })`. Keep keys in code for now (no env wiring). Update IDs/keys if the EmailJS service/template changes.
+- EmailJS: configured via `emailjs.sendForm('service_yxsbzwr', 'template_f1ovonq', formRef.current, { publicKey: 'K-s_xFAcbcC3jPeW2' })`. Keep keys in code for now (no env wiring). Update IDs/keys if the EmailJS service/template changes.
 - GitHub Pages: deployment assumes the repo is `DICEsda/Portfolio-Website`; Vite `base` and `homepage` are aligned for that path.
 
 ## Adding/Modifying Features

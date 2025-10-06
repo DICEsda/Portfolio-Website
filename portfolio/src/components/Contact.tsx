@@ -70,7 +70,7 @@ const Contact = () => {
 
     try {
       const { default: emailjs } = await import('@emailjs/browser');
-      await emailjs.sendForm('service_zcxdb79', 'template_f1ovonq', form.current, {
+      await emailjs.sendForm('service_yxsbzwr', 'template_f1ovonq', form.current, {
         publicKey: 'K-s_xFAcbcC3jPeW2',
       });
       setStatus('success');
