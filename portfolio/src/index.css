@@ -170,4 +170,12 @@ section {
   html {
     overflow: hidden;
   }
+  
+  /* Exclude fixed position elements from scaling */
+  nav, 
+  aside,
+  .fixed {
+    transform: scale(0.87) !important; /* Compensate for body scale: 1/1.15 ≈ 0.87 */
+    transform-origin: center center;
+  }
 }
