@@ -53,7 +53,7 @@ const Footer = () => {
                 <FaLinkedin className="w-4 h-4" />
               </a>
               <a
-                href="https://www.facebook.com/profile.php?id=100077495904298"
+                href="https://www.facebook.com/profile.php?viewas=100000686899395&id=100077495904298"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-secondary/70 hover:text-secondary transition-colors"
